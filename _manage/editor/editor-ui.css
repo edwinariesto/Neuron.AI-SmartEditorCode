@@ -128,12 +128,16 @@ body.editor-page.dark-theme .neuron-glass-card {
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45), 0 4px 14px rgba(0, 0, 0, 0.3);
 }
 
-/* Header Card */
+/* Header Card (Sticky & Blurred) */
 .header-glass-card {
-  padding: 18px 28px !important;
-  margin-bottom: 20px;
+  padding: 16px 24px !important;
+  margin-bottom: 18px;
+  position: sticky;
+  top: 8px;
   z-index: 1050 !important;
   overflow: visible !important;
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
 }
 
 /* Brand Box */
@@ -342,14 +346,14 @@ body.editor-page.dark-theme .detection-dropdown-menu .dropdown-item.active {
   position: relative;
 }
 
-.toolbar-scroll-wrapper {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
+.toolbar-action-group {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
 }
 
-.toolbar-scroll-wrapper::-webkit-scrollbar {
-  display: none;
+.toolbar-btn-label {
+  display: inline;
 }
 
 .toolbar-item-btn {
@@ -419,28 +423,26 @@ body.editor-page.dark-theme .toolbar-separator {
 /* Output Tab Navigation */
 .output-nav-tabs {
   border-bottom: none;
-  gap: 6px;
+  gap: 4px;
   flex-wrap: nowrap !important;
-  overflow-x: auto !important;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
-
-.output-nav-tabs::-webkit-scrollbar {
-  display: none;
+  display: flex !important;
+  width: 100% !important;
 }
 
 .output-nav-tabs .nav-item {
-  flex-shrink: 0;
+  flex: 1 1 0 !important;
+  text-align: center;
 }
 
 .output-nav-tabs .nav-link {
+  width: 100%;
+  justify-content: center;
   color: var(--neuron-text-secondary);
   font-weight: 700;
   font-size: 0.88rem;
   border: none;
   border-bottom: 3px solid transparent;
-  padding: 8px 16px;
+  padding: 8px 12px;
   border-radius: 12px 12px 0 0;
   transition: all 0.2s ease;
   background: transparent;
@@ -527,10 +529,10 @@ body.editor-page.dark-theme .output-nav-tabs .nav-link:hover {
   transition: all 0.2s ease;
 }
 
-/* Symmetrical Header Badges */
+/* Symmetrical Header Badges (Anti-Overlap & Clean Line) */
 .editor-header-badge {
   height: 32px;
-  padding: 0 14px;
+  padding: 0 12px;
   border-radius: 20px;
   font-size: 0.82rem;
   font-weight: 600;
@@ -542,6 +544,10 @@ body.editor-page.dark-theme .output-nav-tabs .nav-link:hover {
   background: var(--neuron-pill-bg);
   border: 1.5px solid var(--neuron-pill-border);
   color: var(--neuron-text-secondary);
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  line-height: 1 !important;
+  overflow: hidden !important;
   transition: all 0.2s ease;
 }
 
@@ -613,50 +619,101 @@ body.editor-page.dark-theme .btn-close {
 
 @media (max-width: 768px) {
   .header-glass-card {
-    padding: 10px 12px !important;
+    padding: 8px 12px !important;
+    top: 4px !important;
+    margin-bottom: 12px !important;
+    flex-wrap: nowrap !important;
   }
   .brand-title {
-    font-size: 1.15rem !important;
+    font-size: 1.05rem !important;
   }
   #brandSubtitle {
-    font-size: 0.72rem !important;
+    display: none !important;
   }
   .glass-icon-box-orange {
-    width: 36px !important;
-    height: 36px !important;
-    border-radius: 12px !important;
+    width: 32px !important;
+    height: 32px !important;
+    border-radius: 10px !important;
+  }
+  .glass-icon-box-orange svg {
+    width: 18px !important;
+    height: 18px !important;
   }
   .detection-pill {
-    height: 34px !important;
-    padding: 0 10px !important;
-    font-size: 0.78rem !important;
-    gap: 6px !important;
+    height: 32px !important;
+    padding: 0 8px !important;
+    font-size: 0.76rem !important;
+    gap: 4px !important;
   }
   .flag-group-container {
-    height: 34px !important;
-    padding: 2px 6px !important;
-    gap: 4px !important;
+    height: 32px !important;
+    padding: 2px 4px !important;
+    gap: 3px !important;
   }
   .lang-flag-btn {
-    width: 26px !important;
-    height: 26px !important;
+    width: 22px !important;
+    height: 22px !important;
+  }
+  .lang-flag-btn svg {
+    width: 18px !important;
+    height: 18px !important;
   }
   .btn-theme-toggle {
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 0.85rem !important;
+  }
+
+  /* Toolbar: Icons Only on Mobile, No Scrollbar, Perfectly Sized */
+  .toolbar-glass-card {
+    padding: 5px 8px !important;
+    margin-bottom: 12px !important;
+  }
+  .toolbar-btn-label {
+    display: none !important;
+  }
+  .toolbar-item-btn {
     width: 34px !important;
     height: 34px !important;
-    font-size: 0.95rem !important;
+    min-width: 34px !important;
+    padding: 0 !important;
+    justify-content: center !important;
+    border-radius: 8px !important;
   }
+  .toolbar-item-btn i {
+    font-size: 1.05rem !important;
+    margin: 0 !important;
+  }
+  .toolbar-separator {
+    height: 16px !important;
+    margin: 0 2px !important;
+  }
+
+  /* Editor Header Badges: Clean, Inline, Anti-Overlap */
   .editor-header-badge {
     height: 26px !important;
-    padding: 0 8px !important;
+    padding: 0 6px !important;
     font-size: 0.72rem !important;
-    gap: 4px !important;
+    gap: 3px !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
   }
   .workspace-card-header {
-    padding: 10px 14px !important;
+    padding: 8px 10px !important;
   }
+
+  /* Output Tabs: Symmetrical 3-Column Split (No Cut-off) */
   .output-nav-tabs .nav-link {
-    padding: 6px 10px !important;
-    font-size: 0.78rem !important;
+    padding: 6px 2px !important;
+    font-size: 0.74rem !important;
+    gap: 3px !important;
+  }
+  .output-nav-tabs .nav-link i {
+    font-size: 0.82rem !important;
+    margin-right: 2px !important;
+  }
+
+  #editor, .terminal-window, .visualizer-window, .ai-debug-window {
+    height: 380px !important;
   }
 }

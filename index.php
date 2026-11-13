@@ -37,12 +37,12 @@
   <!-- MAIN CENTERED CONTAINER (SYMMETRICAL & PROPORTIONAL) -->
   <div class="editor-container">
 
-    <!-- 1. TOP HEADER BRAND & SETTINGS BAR (NO BACK BUTTON, HIGH Z-INDEX FOR DROPDOWN) -->
-    <header class="header-glass-card neuron-glass-card d-flex flex-wrap align-items-center justify-content-between gap-3">
+    <!-- 1. TOP HEADER BRAND & SETTINGS BAR (STICKY, SYMMETRICAL, ICONS ON MOBILE) -->
+    <header class="header-glass-card neuron-glass-card d-flex align-items-center justify-content-between flex-nowrap gap-2">
       <!-- Left: Logo & Brand Name (Simetris & Bersih) -->
-      <div class="d-flex align-items-center gap-3">
+      <div class="d-flex align-items-center gap-2 gap-sm-3 flex-shrink-0">
         <div class="glass-icon-box glass-icon-box-orange">
-          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#ea580c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ea580c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M9.5 2A4.5 4.5 0 0 0 5 6.5C5 7.3 5.2 8 5.6 8.6A4 4 0 0 0 4 12a4 4 0 0 0 1.2 2.8A4.5 4.5 0 0 0 9.5 19H10V2H9.5z"/>
             <path d="M7.5 6c.8.8.8 1.8 0 2.5"/>
             <path d="M6.2 12c1.2.4 1.2 1.6 0 2"/>
@@ -52,19 +52,19 @@
             <path d="M10.5 19v2.5h3V19"/>
           </svg>
         </div>
-        <div>
+        <div class="brand-text-block">
           <h1 class="brand-title m-0">NEURON<span>.AI</span></h1>
-          <div class="text-secondary small fw-medium" id="brandSubtitle">Editor & Debugger Kode Cerdas</div>
+          <div class="text-secondary small fw-medium d-none d-sm-block" id="brandSubtitle">Editor & Debugger Kode Cerdas</div>
         </div>
       </div>
 
-      <!-- Right: Auto-Detect Dropdown Pill, Circular Flag Switchers, Theme Toggle -->
-      <div class="d-flex flex-wrap align-items-center gap-3">
+      <!-- Right: Auto-Detect Dropdown Pill, Circular Flag Switchers, Theme Toggle (Never wrapping) -->
+      <div class="header-controls-group d-flex align-items-center gap-1.5 gap-sm-2 flex-nowrap ms-auto flex-shrink-0">
         <!-- Intelligent Auto-Detection Pill (Menu TIDAK terhalang, z-index 1065) -->
-        <div class="dropdown detection-pill-wrapper">
+        <div class="dropdown detection-pill-wrapper flex-shrink-0">
           <div class="detection-pill dropdown-toggle" id="detectorPill" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" title="Bahasa terdeteksi otomatis. Klik untuk mengganti secara manual jika perlu.">
             <span class="pulse-dot"></span>
-            <span class="text-secondary small d-none d-sm-inline" id="autoDetectLabel">Deteksi Otomatis:</span>
+            <span class="text-secondary small d-none d-md-inline" id="autoDetectLabel">Deteksi Otomatis:</span>
             <span class="fw-bold d-flex align-items-center" id="detectedLangBadge">
               <i class="bi bi-filetype-php me-1" id="detectedLangIcon" style="color: #ea580c;"></i>
               <span id="detectedLangText" style="color: #0f172a;">PHP</span>
@@ -90,7 +90,7 @@
         </div>
 
         <!-- Circular Flag Switchers: Indonesia & UK (English) -->
-        <div class="flag-group-container">
+        <div class="flag-group-container flex-shrink-0">
           <!-- Flag Indonesia (Circular SVG) -->
           <button type="button" class="lang-flag-btn active" id="flagBtnId" onclick="setEditorLanguage('Indonesia')" title="Bahasa Indonesia">
             <svg class="flex-shrink-0" width="22" height="22" viewBox="0 0 24 24" style="border-radius: 50%;">
@@ -115,56 +115,54 @@
         </div>
 
         <!-- Light / Dark Theme Switcher -->
-        <button type="button" class="btn-theme-toggle" id="themeToggleBtn" title="Ganti Tema Editor (Gelap / Terang)">
+        <button type="button" class="btn-theme-toggle flex-shrink-0" id="themeToggleBtn" title="Ganti Tema Editor (Gelap / Terang)">
           <i class="bi bi-moon-stars-fill text-primary" id="themeToggleIcon"></i>
         </button>
       </div>
     </header>
 
-    <!-- 2. ACTION TOOLBAR (SLEEK INLINE BAR WITH SEPARATORS) -->
+    <!-- 2. ACTION TOOLBAR (SEPARATED LEFT & RIGHT, NO SCROLLBAR, ICONS ONLY ON MOBILE, RESPONSIVE DYNAMIC SIZING) -->
     <div class="toolbar-glass-card neuron-glass-card mb-3 mb-md-4">
-      <div class="toolbar-scroll-wrapper d-flex align-items-center justify-content-between flex-nowrap w-100">
-        <!-- Left: Execution & AI Actions -->
-        <div class="d-flex align-items-center gap-1 flex-shrink-0">
+      <div class="d-flex align-items-center justify-content-between flex-nowrap w-100">
+        <!-- Left Group: Execution & AI Actions -->
+        <div class="toolbar-action-group toolbar-group-left d-flex align-items-center flex-nowrap">
           <!-- 1. Jalankan Kode -->
-          <button id="execBtn" type="button" class="toolbar-item-btn btn-action-run">
+          <button id="execBtn" type="button" class="toolbar-item-btn btn-action-run" title="Jalankan Kode (Ctrl+Enter)">
             <i class="bi bi-play-fill text-warning fs-5"></i>
-            <span id="btnExecuteText">Jalankan Kode</span>
+            <span class="toolbar-btn-label" id="btnExecuteText">Jalankan Kode</span>
           </button>
 
           <span class="toolbar-separator"></span>
 
           <!-- 2. AI Debug & Periksa -->
-          <button id="aiDebugBtn" type="button" class="toolbar-item-btn btn-action-debug">
+          <button id="aiDebugBtn" type="button" class="toolbar-item-btn btn-action-debug" title="AI Debug & Periksa Kode">
             <i class="bi bi-robot" style="color: #ea580c;"></i>
-            <span id="btnAiDebugText">AI Debug & Periksa</span>
+            <span class="toolbar-btn-label" id="btnAiDebugText">AI Debug & Periksa</span>
           </button>
 
           <span class="toolbar-separator"></span>
 
           <!-- 3. Template & Contoh -->
-          <button type="button" class="toolbar-item-btn btn-action-template" data-bs-toggle="modal" data-bs-target="#snippetModal">
+          <button type="button" class="toolbar-item-btn btn-action-template" data-bs-toggle="modal" data-bs-target="#snippetModal" title="Template & Contoh Kode">
             <i class="bi bi-file-earmark-code text-warning"></i>
-            <span id="btnSnippetsText">Template & Contoh</span>
+            <span class="toolbar-btn-label" id="btnSnippetsText">Template & Contoh</span>
           </button>
         </div>
 
-        <span class="toolbar-separator d-none d-lg-block mx-2"></span>
-
-        <!-- Right: Utilities (Salin, Unduh, Bersihkan, API Key) -->
-        <div class="d-flex align-items-center gap-1 flex-shrink-0 ms-auto">
+        <!-- Right Group: Utilities (Salin, Unduh, Bersihkan, API Key) -->
+        <div class="toolbar-action-group toolbar-group-right d-flex align-items-center flex-nowrap ms-auto">
           <!-- 4. Salin -->
-          <button id="copyBtn" type="button" class="toolbar-item-btn" title="Salin Kode">
+          <button id="copyBtn" type="button" class="toolbar-item-btn" title="Salin Kode ke Clipboard">
             <i class="bi bi-clipboard text-secondary"></i>
-            <span id="btnCopyText">Salin</span>
+            <span class="toolbar-btn-label" id="btnCopyText">Salin</span>
           </button>
 
           <span class="toolbar-separator"></span>
 
           <!-- 5. Unduh -->
-          <button id="dlBtn" type="button" class="toolbar-item-btn" title="Unduh Kode">
+          <button id="dlBtn" type="button" class="toolbar-item-btn" title="Unduh File Kode">
             <i class="bi bi-download text-secondary"></i>
-            <span id="btnDownloadText">Unduh</span>
+            <span class="toolbar-btn-label" id="btnDownloadText">Unduh</span>
           </button>
 
           <span class="toolbar-separator"></span>
@@ -172,7 +170,7 @@
           <!-- 6. Bersihkan -->
           <button id="clearBtn" type="button" class="toolbar-item-btn text-danger" title="Bersihkan Editor">
             <i class="bi bi-trash3 text-danger"></i>
-            <span id="btnClearText">Bersihkan</span>
+            <span class="toolbar-btn-label" id="btnClearText">Bersihkan</span>
           </button>
 
           <span class="toolbar-separator"></span>
@@ -180,7 +178,7 @@
           <!-- 7. API Key -->
           <button type="button" class="toolbar-item-btn" data-bs-toggle="modal" data-bs-target="#apiKeyModal" title="Pengaturan AI Provider & API Key">
             <i class="bi bi-key-fill text-warning"></i>
-            <span>API Key</span>
+            <span class="toolbar-btn-label">API Key</span>
           </button>
         </div>
       </div>
@@ -192,20 +190,20 @@
       <!-- LEFT COLUMN: ACE CODE EDITOR -->
       <div class="col-12 col-lg-6">
         <div class="workspace-card neuron-glass-card d-flex flex-column">
-          <!-- Editor Card Header -->
-          <div class="workspace-card-header d-flex align-items-center justify-content-between">
-            <div class="d-flex align-items-center gap-2">
+          <!-- Editor Card Header (Simetris & Rapi Tanpa Tumpang Tindih) -->
+          <div class="workspace-card-header d-flex align-items-center justify-content-between flex-nowrap gap-2">
+            <div class="d-flex align-items-center gap-2 flex-shrink-0">
               <span class="badge rounded-circle p-2 d-flex align-items-center justify-content-center" style="background: #ffedd5; color: #ea580c; width: 34px; height: 34px;">
                 <i class="bi bi-code-slash fs-6"></i>
               </span>
               <span class="fw-bold text-dark small" id="editorHeaderTitle">Editor Kode</span>
             </div>
-            <div class="d-flex align-items-center gap-3">
+            <div class="d-flex align-items-center gap-1.5 gap-sm-2 flex-nowrap ms-auto flex-shrink-0">
               <span class="editor-header-badge" id="charCountInfo">
-                <i class="bi bi-fonts text-secondary"></i> 0 Karakter
+                <i class="bi bi-fonts text-secondary flex-shrink-0"></i> <span id="charCountNum">0</span><span class="badge-unit d-none d-sm-inline ms-1">Karakter</span>
               </span>
               <span class="editor-header-badge" id="cursorPosInfo">
-                <i class="bi bi-cursor-fill text-secondary"></i> Baris 1, Kolom 1
+                <i class="bi bi-cursor-fill text-secondary flex-shrink-0"></i> <span class="d-none d-sm-inline">Baris </span><span id="cursorLineNum">1</span><span class="d-none d-sm-inline">, Kolom </span><span class="d-inline d-sm-none">:</span><span id="cursorColNum">1</span>
               </span>
             </div>
           </div>
@@ -220,31 +218,34 @@
       <!-- RIGHT COLUMN: MULTI-TAB OUTPUT & VISUALIZER -->
       <div class="col-12 col-lg-6">
         <div class="workspace-card neuron-glass-card d-flex flex-column">
-          <!-- Output Tab Navigation Header -->
-          <div class="workspace-card-header p-2 px-3">
-            <ul class="nav nav-tabs output-nav-tabs" id="outputTabNav" role="tablist">
+          <!-- Output Tab Navigation Header (Proporsional & Sejajar) -->
+          <div class="workspace-card-header p-2 px-2 px-sm-3">
+            <ul class="nav nav-tabs output-nav-tabs d-flex w-100 flex-nowrap" id="outputTabNav" role="tablist">
               <!-- Tab 1: Terminal Console -->
-              <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="tab-terminal-btn" data-bs-toggle="tab" data-bs-target="#tab-terminal" type="button" role="tab">
-                  <i class="bi bi-terminal me-1.5 text-success"></i>
-                  <span id="tabTerminalText">Konsol Terminal</span>
+              <li class="nav-item flex-fill text-center" role="presentation">
+                <button class="nav-link w-100 justify-content-center active" id="tab-terminal-btn" data-bs-toggle="tab" data-bs-target="#tab-terminal" type="button" role="tab">
+                  <i class="bi bi-terminal me-1 text-success"></i>
+                  <span class="d-none d-sm-inline" id="tabTerminalText">Konsol Terminal</span>
+                  <span class="d-inline d-sm-none">Konsol</span>
                 </button>
               </li>
 
               <!-- Tab 2: Visualisasi (Media & Data) -->
-              <li class="nav-item" role="presentation">
-                <button class="nav-link position-relative" id="tab-visual-btn" data-bs-toggle="tab" data-bs-target="#tab-visual" type="button" role="tab">
-                  <i class="bi bi-bar-chart-steps me-1.5 text-info"></i>
-                  <span id="tabVisualText">Visualisasi & Media</span>
-                  <span class="badge rounded-pill bg-danger ms-1.5 d-none font-monospace small" id="visualTabBadge" style="font-size: 0.65rem;">Tersedia</span>
+              <li class="nav-item flex-fill text-center" role="presentation">
+                <button class="nav-link w-100 justify-content-center position-relative" id="tab-visual-btn" data-bs-toggle="tab" data-bs-target="#tab-visual" type="button" role="tab">
+                  <i class="bi bi-bar-chart-steps me-1 text-info"></i>
+                  <span class="d-none d-sm-inline" id="tabVisualText">Visualisasi & Media</span>
+                  <span class="d-inline d-sm-none">Visual</span>
+                  <span class="badge rounded-pill bg-danger ms-1 d-none font-monospace small" id="visualTabBadge" style="font-size: 0.65rem;">•</span>
                 </button>
               </li>
 
               <!-- Tab 3: Hasil Evaluasi AI -->
-              <li class="nav-item" role="presentation">
-                <button class="nav-link" id="tab-aidebug-btn" data-bs-toggle="tab" data-bs-target="#tab-aidebug" type="button" role="tab">
-                  <i class="bi bi-cpu me-1.5 text-purple" style="color: #9333ea;"></i>
-                  <span id="tabAiDebugText">Hasil Evaluasi AI</span>
+              <li class="nav-item flex-fill text-center" role="presentation">
+                <button class="nav-link w-100 justify-content-center" id="tab-aidebug-btn" data-bs-toggle="tab" data-bs-target="#tab-aidebug" type="button" role="tab">
+                  <i class="bi bi-cpu me-1 text-purple" style="color: #9333ea;"></i>
+                  <span class="d-none d-sm-inline" id="tabAiDebugText">Hasil Evaluasi AI</span>
+                  <span class="d-inline d-sm-none">Evaluasi AI</span>
                 </button>
               </li>
             </ul>

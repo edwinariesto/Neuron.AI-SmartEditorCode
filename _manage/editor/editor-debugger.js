@@ -388,112 +388,126 @@
       }
 
       const wrap = document.createElement('div');
-      wrap.className = 'debug-results-box p-3 p-md-4 d-flex flex-column gap-3';
-
-      // Header summary badge
-      const headerCard = document.createElement('div');
-      headerCard.className = `p-3.5 p-md-4 rounded-4 border ${hasIssues ? 'border-danger-subtle bg-danger bg-opacity-10' : 'border-success-subtle bg-success bg-opacity-10'}`;
+      wrap.className = 'debug-results-box p-2.5 p-sm-3 p-md-4 d-flex flex-column gap-3';
 
       const modelBadgeHtml = isOnlineAi
-        ? `<span class="badge bg-white text-dark border border-secondary border-opacity-25 shadow-sm px-3 py-1.5 rounded-pill"><i class="bi bi-stars me-1" style="color: #ea580c;"></i> ${escapeHtml(model)} (Online AI)</span>`
-        : `<span class="badge bg-white text-dark border border-secondary border-opacity-25 shadow-sm px-3 py-1.5 rounded-pill"><i class="bi bi-shield-check me-1" style="color: #ea580c;"></i> ${escapeHtml(model)}</span>`;
+        ? `<span class="badge bg-white text-dark border border-secondary border-opacity-25 shadow-sm px-2.5 py-1.5 rounded-pill d-inline-flex align-items-center"><i class="bi bi-stars me-1" style="color: #ea580c;"></i> <span class="d-none d-sm-inline">${escapeHtml(model)} (Online AI)</span><span class="d-inline d-sm-none">AI Online</span></span>`
+        : `<span class="badge bg-white text-dark border border-secondary border-opacity-25 shadow-sm px-2.5 py-1.5 rounded-pill d-inline-flex align-items-center"><i class="bi bi-shield-check me-1" style="color: #ea580c;"></i> <span class="d-none d-sm-inline">${escapeHtml(model)}</span><span class="d-inline d-sm-none">Audit Lokal</span></span>`;
 
-      headerCard.innerHTML = `
-        <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-2">
-          <div class="d-flex align-items-center gap-2">
-            <span class="badge ${hasIssues ? 'bg-danger' : 'bg-success'} fs-6 py-2 px-3.5 rounded-pill">
-              <i class="bi ${hasIssues ? 'bi-exclamation-octagon-fill' : 'bi-check-circle-fill'} me-1"></i>
-              ${hasIssues ? (isEn ? `${issues.length || 1} Issue(s) Detected` : `${issues.length || 1} Bagian Perlu Diperbaiki`) : (isEn ? 'Code is Clean & Valid' : 'Kode Bersih & Benar')}
+      if (!hasIssues) {
+        // TAMPILAN BERSIH & SEMPURNA (100% Simetris, Elegan, Tanpa Box Perbaikan Kosong)
+        const successCard = document.createElement('div');
+        successCard.className = 'p-3.5 p-md-4 rounded-4 border border-success-subtle bg-success bg-opacity-10 text-center d-flex flex-column align-items-center justify-content-center shadow-sm';
+        successCard.innerHTML = `
+          <div class="d-flex align-items-center justify-content-between w-100 flex-wrap gap-2 mb-3 pb-2.5 border-bottom border-success border-opacity-20">
+            <span class="badge bg-success py-1.5 px-3 rounded-pill fw-semibold shadow-sm d-inline-flex align-items-center" style="font-size: 0.84rem;">
+              <i class="bi bi-check-circle-fill me-1.5"></i> ${isEn ? 'Code is Clean & Valid' : 'Kode Bersih & Benar'}
             </span>
-            ${explanation.where ? `<span class="badge bg-white text-dark border border-secondary border-opacity-25 px-2.5 py-1.5 rounded-pill font-monospace">${escapeHtml(explanation.where)}</span>` : ''}
+            ${modelBadgeHtml}
           </div>
-          ${modelBadgeHtml}
-        </div>
-        <p class="mb-1 fw-semibold small" style="color: var(--neuron-text-primary); line-height: 1.6; padding: 2px 4px;">
-          ${escapeHtml(explanation.cause || (hasIssues ? 'Ditemukan beberapa bagian kode yang perlu diperbaiki.' : 'Semua baris kode telah diperiksa dan tidak ditemukan kesalahan fatal.'))}
-        </p>
-        ${explanation.fix ? `
-          <div class="mt-3 pt-3 border-top border-secondary border-opacity-25">
-            <div class="d-flex align-items-center gap-2 mb-2">
-              <i class="bi bi-lightbulb-fill text-warning"></i>
-              <strong style="color: #ea580c; font-size: 0.9rem;">${isEn ? 'Key Fix Suggestion:' : 'Saran Perbaikan Utama:'}</strong>
-            </div>
-            <div class="fix-code-box p-3 p-md-3.5 rounded-4" style="background: #090d16; border: 1.5px solid rgba(234, 88, 12, 0.45); box-shadow: 0 4px 14px rgba(0,0,0,0.25);">
-              <code class="d-block font-monospace" style="color: #fde047; font-size: 0.9rem; line-height: 1.65; white-space: pre-wrap; word-break: break-word; padding: 4px 8px;">${escapeHtml(explanation.fix)}</code>
-            </div>
+          <div class="my-2 d-inline-flex p-3 rounded-circle bg-success bg-opacity-15 text-success">
+            <i class="bi bi-shield-check display-5" style="color: #10b981;"></i>
           </div>
-        ` : ''}
-      `;
-      wrap.appendChild(headerCard);
-
-      // 2. Itemized issues list
-      if (issues.length > 0) {
-        const listHeader = document.createElement('div');
-        listHeader.className = 'd-flex align-items-center justify-content-between flex-wrap gap-2 text-secondary small fw-bold text-uppercase mt-2';
-        listHeader.innerHTML = `
-          <span><i class="bi bi-list-check me-1" style="color: #ea580c;"></i> ${isEn ? 'Line-by-Line Breakdown' : 'Rincian Kesalahan Per Baris'}</span>
-          ${!isOnlineAi ? `<button class="btn btn-sm btn-outline-warning py-1 px-3 rounded-pill" data-bs-toggle="modal" data-bs-target="#apiKeyModal"><i class="bi bi-key-fill me-1"></i> ${isEn ? 'Connect AI Key' : 'Hubungkan API Key AI'}</button>` : ''}
+          <h5 class="fw-bold mb-1.5 text-dark" style="font-size: 1.15rem;">
+            ${isEn ? 'Excellent! No Syntax Bugs Found.' : 'Luar Biasa! Tidak Ditemukan Bug Sintaks.'}
+          </h5>
+          <p class="small m-0 text-secondary" style="max-width: 440px; line-height: 1.6;">
+            ${escapeHtml(explanation.cause || (isEn ? 'Your code complies with language grammar rules and is ready to run.' : 'Kode Anda sudah sesuai kaidah bahasa pemrograman dan siap dijalankan dengan lancar.'))}
+          </p>
         `;
-        wrap.appendChild(listHeader);
-
-        issues.forEach((it, idx) => {
-          const itemCard = document.createElement('div');
-          itemCard.className = 'issue-item-card p-3.5 p-md-4 rounded-4 shadow-sm mb-3';
-
-          const lineNo = it.line || (idx + 1);
-
-          itemCard.innerHTML = `
-            <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-2">
-              <button type="button" class="btn btn-sm btn-outline-danger py-1 px-3 rounded-pill font-monospace fw-bold line-jump-btn" data-line="${lineNo}" title="${isEn ? 'Jump to Line' : 'Lompat ke Baris ini'}">
-                <i class="bi bi-arrow-right-circle me-1"></i> ${isEn ? `Line ${lineNo}` : `Baris ${lineNo}`}
-              </button>
-              ${it.where ? `<span class="small font-monospace px-2 py-1 rounded bg-secondary bg-opacity-10" style="color: var(--neuron-text-secondary);">${escapeHtml(it.where)}</span>` : ''}
+        wrap.appendChild(successCard);
+      } else {
+        // TAMPILAN ERROR DITEMUKAN (Simetris, Terstruktur, Jelas)
+        const headerCard = document.createElement('div');
+        headerCard.className = 'p-3.5 p-md-4 rounded-4 border border-danger-subtle bg-danger bg-opacity-10 shadow-sm';
+        headerCard.innerHTML = `
+          <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-2">
+            <div class="d-flex align-items-center gap-2">
+              <span class="badge bg-danger py-1.5 px-3 rounded-pill fw-semibold shadow-sm" style="font-size: 0.84rem;">
+                <i class="bi bi-exclamation-octagon-fill me-1.5"></i>
+                ${isEn ? `${issues.length || 1} Issue(s) Detected` : `${issues.length || 1} Bagian Perlu Diperbaiki`}
+              </span>
+              ${explanation.where && !/tidak ada/i.test(explanation.where) ? `<span class="badge bg-white text-dark border border-secondary border-opacity-25 px-2.5 py-1 rounded-pill font-monospace small">${escapeHtml(explanation.where)}</span>` : ''}
             </div>
-            <div class="small my-2" style="color: var(--neuron-text-primary); line-height: 1.6; padding: 0 2px;">
-              <i class="bi bi-info-circle-fill text-danger me-1"></i> ${escapeHtml(it.cause || '')}
-            </div>
-            ${it.fix ? `
-              <div class="item-fix-box p-3 rounded-4 d-flex align-items-center justify-content-between gap-3 mt-2" style="background: #090d16; border: 1.5px solid rgba(234, 88, 12, 0.4); box-shadow: 0 3px 10px rgba(0,0,0,0.2);">
-                <code class="small font-monospace flex-grow-1" style="color: #4ade80; font-size: 0.88rem; line-height: 1.65; white-space: pre-wrap; word-break: break-word; padding: 4px 8px;">${escapeHtml(it.fix)}</code>
-                <button type="button" class="btn btn-sm btn-outline-success px-3 py-1.5 rounded-pill copy-fix-btn flex-shrink-0 d-flex align-items-center gap-1.5" data-fix="${escapeHtml(it.fix)}" title="${isEn ? 'Copy Fix' : 'Salin Perbaikan'}">
-                  <i class="bi bi-clipboard"></i> <span class="d-none d-sm-inline small">${isEn ? 'Copy' : 'Salin'}</span>
-                </button>
+            ${modelBadgeHtml}
+          </div>
+          <p class="mb-0 fw-semibold small mt-2" style="color: var(--neuron-text-primary); line-height: 1.6;">
+            ${escapeHtml(explanation.cause || (isEn ? 'Found several code segments that need correction.' : 'Ditemukan beberapa bagian kode yang perlu diperbaiki.'))}
+          </p>
+          ${explanation.fix && !/tidak ada perbaikan/i.test(explanation.fix) ? `
+            <div class="mt-3 pt-3 border-top border-secondary border-opacity-25">
+              <div class="d-flex align-items-center gap-2 mb-2">
+                <i class="bi bi-lightbulb-fill text-warning"></i>
+                <strong style="color: #ea580c; font-size: 0.88rem;">${isEn ? 'Key Fix Suggestion:' : 'Saran Perbaikan Utama:'}</strong>
               </div>
-            ` : ''}
-          `;
-
-          // Handle Jump to line in Ace
-          const jumpBtn = itemCard.querySelector('.line-jump-btn');
-          if (jumpBtn && this.editorInstance) {
-            jumpBtn.onclick = () => {
-              const targetRow = Math.max(0, parseInt(lineNo, 10) - 1);
-              this.editorInstance.gotoLine(targetRow + 1, 0, true);
-              this.editorInstance.focus();
-            };
-          }
-
-          // Handle Copy fix
-          const copyBtn = itemCard.querySelector('.copy-fix-btn');
-          if (copyBtn) {
-            copyBtn.onclick = () => {
-              const fixCode = copyBtn.getAttribute('data-fix');
-              navigator.clipboard.writeText(fixCode);
-              copyBtn.innerHTML = '<i class="bi bi-check2"></i>';
-              setTimeout(() => { copyBtn.innerHTML = '<i class="bi bi-clipboard"></i>'; }, 1500);
-            };
-          }
-
-          wrap.appendChild(itemCard);
-        });
-      } else if (!hasIssues) {
-        const successBox = document.createElement('div');
-        successBox.className = 'text-center p-4 text-success';
-        successBox.innerHTML = `
-          <i class="bi bi-shield-check display-4 mb-2 d-inline-block" style="color: #10b981;"></i>
-          <h6 class="fw-bold mb-1">${isEn ? 'Excellent! No Syntax Bugs Found.' : 'Luar Biasa! Tidak Ditemukan Bug Sintaks.'}</h6>
-          <p class="small m-0" style="color: var(--neuron-text-secondary);">${isEn ? 'The code follows standard grammar rules and is ready to run.' : 'Kode sudah sesuai kaidah penulisan dan siap dijalankan dengan lancar.'}</p>
+              <div class="fix-code-box p-3 p-md-3.5 rounded-4">
+                <code class="d-block font-monospace" style="color: #fde047; font-size: 0.88rem; line-height: 1.65; white-space: pre-wrap; word-break: break-word;">${escapeHtml(explanation.fix)}</code>
+              </div>
+            </div>
+          ` : ''}
         `;
-        wrap.appendChild(successBox);
+        wrap.appendChild(headerCard);
+
+        // 2. Itemized issues list
+        if (issues.length > 0) {
+          const listHeader = document.createElement('div');
+          listHeader.className = 'd-flex align-items-center justify-content-between flex-wrap gap-2 text-secondary small fw-bold text-uppercase mt-2 px-1';
+          listHeader.innerHTML = `
+            <span><i class="bi bi-list-check me-1" style="color: #ea580c;"></i> ${isEn ? 'Line-by-Line Breakdown' : 'Rincian Kesalahan Per Baris'}</span>
+            ${!isOnlineAi ? `<button class="btn btn-sm btn-outline-warning py-1 px-3 rounded-pill" data-bs-toggle="modal" data-bs-target="#apiKeyModal"><i class="bi bi-key-fill me-1"></i> ${isEn ? 'Connect AI Key' : 'Hubungkan API Key AI'}</button>` : ''}
+          `;
+          wrap.appendChild(listHeader);
+
+          issues.forEach((it, idx) => {
+            const itemCard = document.createElement('div');
+            itemCard.className = 'issue-item-card p-3 p-md-3.5 rounded-4 shadow-sm mb-2';
+
+            const lineNo = it.line || (idx + 1);
+
+            itemCard.innerHTML = `
+              <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-2">
+                <button type="button" class="btn btn-sm btn-outline-danger py-1 px-3 rounded-pill font-monospace fw-bold line-jump-btn d-inline-flex align-items-center gap-1" data-line="${lineNo}" title="${isEn ? 'Jump to Line' : 'Lompat ke Baris ini'}">
+                  <i class="bi bi-arrow-right-circle"></i> ${isEn ? `Line ${lineNo}` : `Baris ${lineNo}`}
+                </button>
+                ${it.where ? `<span class="small font-monospace px-2.5 py-1 rounded-pill bg-secondary bg-opacity-10" style="color: var(--neuron-text-secondary); font-size: 0.78rem;">${escapeHtml(it.where)}</span>` : ''}
+              </div>
+              <div class="small my-2" style="color: var(--neuron-text-primary); line-height: 1.6;">
+                <i class="bi bi-info-circle-fill text-danger me-1"></i> ${escapeHtml(it.cause || '')}
+              </div>
+              ${it.fix ? `
+                <div class="item-fix-box p-3 rounded-4 d-flex align-items-center justify-content-between gap-3 mt-2">
+                  <code class="small font-monospace flex-grow-1" style="color: #4ade80; font-size: 0.86rem; line-height: 1.6; white-space: pre-wrap; word-break: break-word;">${escapeHtml(it.fix)}</code>
+                  <button type="button" class="btn btn-sm btn-outline-success px-3 py-1.5 rounded-pill copy-fix-btn flex-shrink-0 d-inline-flex align-items-center gap-1.5" data-fix="${escapeHtml(it.fix)}" title="${isEn ? 'Copy Fix' : 'Salin Perbaikan'}">
+                    <i class="bi bi-clipboard"></i> <span class="d-none d-sm-inline small">${isEn ? 'Copy' : 'Salin'}</span>
+                  </button>
+                </div>
+              ` : ''}
+            `;
+
+            // Handle Jump to line in Ace
+            const jumpBtn = itemCard.querySelector('.line-jump-btn');
+            if (jumpBtn && this.editorInstance) {
+              jumpBtn.onclick = () => {
+                const targetRow = Math.max(0, parseInt(lineNo, 10) - 1);
+                this.editorInstance.gotoLine(targetRow + 1, 0, true);
+                this.editorInstance.focus();
+              };
+            }
+
+            // Handle Copy fix
+            const copyBtn = itemCard.querySelector('.copy-fix-btn');
+            if (copyBtn) {
+              copyBtn.onclick = () => {
+                const fixCode = copyBtn.getAttribute('data-fix');
+                navigator.clipboard.writeText(fixCode);
+                copyBtn.innerHTML = '<i class="bi bi-check2"></i>';
+                setTimeout(() => { copyBtn.innerHTML = '<i class="bi bi-clipboard"></i>'; }, 1500);
+              };
+            }
+
+            wrap.appendChild(itemCard);
+          });
+        }
       }
 
       this.container.appendChild(wrap);

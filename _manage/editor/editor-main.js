@@ -520,23 +520,23 @@ SELECT * FROM users;`
         enableLiveAutocompletion: true
       });
 
-      // Update cursor position
+      // Update cursor position (Rapi, Sejajar, & Anti-Tumpang-Tindih pada Mobile)
       this.editor.selection.on('changeCursor', () => {
         const pos = this.editor.getCursorPosition();
         const el = document.getElementById('cursorPosInfo');
         if (el) {
-          const dict = this.getDict();
-          el.innerHTML = `<i class="bi bi-cursor-fill me-1 text-secondary"></i> ${dict.lineCol.replace('%l', pos.row + 1).replace('%c', pos.column + 1)}`;
+          const isEn = (localStorage.getItem('neuron_ai_lang') === 'English');
+          el.innerHTML = `<i class="bi bi-cursor-fill me-1 text-secondary flex-shrink-0"></i><span class="d-none d-sm-inline">${isEn ? 'Line ' : 'Baris '}</span><span>${pos.row + 1}</span><span class="d-none d-sm-inline">, ${isEn ? 'Col ' : 'Kolom '}</span><span class="d-inline d-sm-none">:</span><span>${pos.column + 1}</span>`;
         }
       });
 
-      // Update char count & trigger auto-detect
+      // Update char count & trigger auto-detect (Rapi, Sejajar, & Anti-Tumpang-Tindih pada Mobile)
       this.editor.session.on('change', () => {
         const val = this.editor.getValue();
         const charEl = document.getElementById('charCountInfo');
         if (charEl) {
-          const dict = this.getDict();
-          charEl.innerHTML = `<i class="bi bi-fonts me-1 text-secondary"></i> ${dict.charCount.replace('%n', val.length)}`;
+          const isEn = (localStorage.getItem('neuron_ai_lang') === 'English');
+          charEl.innerHTML = `<i class="bi bi-fonts me-1 text-secondary flex-shrink-0"></i><span>${val.length}</span><span class="badge-unit d-none d-sm-inline ms-1">${isEn ? 'Chars' : 'Karakter'}</span>`;
         }
         NeuronDetector.analyze(val);
       });
