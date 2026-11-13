@@ -127,54 +127,82 @@ body.editor-page.dark-theme .neuron-glass-card {
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45), 0 4px 14px rgba(0, 0, 0, 0.3);
 }
 
-/* Header Card (Sticky & Blurred) */
+/* =========================================================================
+   HEADER NAVBAR STICKY DEEP NAVY / BLACK GLASS (60-30-10 RULE: #0F172A + #F8FAFC + #F97316)
+   ========================================================================= */
 .header-glass-card {
-  padding: 16px 24px !important;
+  background: rgba(15, 23, 42, 0.94) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.3), 0 2px 10px rgba(0, 0, 0, 0.18) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border-radius: 22px !important;
+  padding: 14px 24px !important;
   margin-bottom: 18px;
   position: sticky;
   top: 8px;
   z-index: 1050 !important;
   overflow: visible !important;
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  transition: all 0.3s ease;
 }
 
-/* Brand Box */
+body.editor-page.dark-theme .header-glass-card {
+  background: rgba(10, 15, 29, 0.96) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 4px 14px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Brand Box in Dark Header */
 .brand-title {
-  color: var(--neuron-text-primary) !important;
+  color: #f8fafc !important;
   font-weight: 800;
-  letter-spacing: -0.5px;
-  font-size: 1.45rem;
+  letter-spacing: -0.3px;
+  font-size: 1.35rem;
+  line-height: 1.1;
 }
 
 .brand-title span {
-  color: var(--neuron-orange) !important;
+  color: #f97316 !important;
 }
 
+#brandSubtitle {
+  color: #94a3b8 !important;
+  font-size: 0.76rem !important;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+/* Circular Logo Box in Dark Header */
 .glass-icon-box-orange {
-  width: 44px !important;
-  height: 44px !important;
-  min-width: 44px !important;
-  max-width: 44px !important;
-  min-height: 44px !important;
-  max-height: 44px !important;
+  width: 42px !important;
+  height: 42px !important;
+  min-width: 42px !important;
+  max-width: 42px !important;
+  min-height: 42px !important;
+  max-height: 42px !important;
   aspect-ratio: 1 / 1 !important;
   border-radius: 50% !important; /* Bulat sempurna (Circular) */
-  background: var(--neuron-orange-light) !important;
-  border: 1.5px solid rgba(234, 88, 12, 0.35) !important;
-  box-shadow: 0 4px 14px rgba(234, 88, 12, 0.15) !important;
+  background: rgba(249, 115, 22, 0.14) !important;
+  border: 1.5px solid rgba(249, 115, 22, 0.4) !important;
+  box-shadow: 0 2px 10px rgba(249, 115, 22, 0.2) !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
   flex-shrink: 0 !important;
 }
 
-body.editor-page.dark-theme .glass-icon-box-orange {
-  background: rgba(234, 88, 12, 0.2) !important;
-  border-color: rgba(249, 115, 22, 0.5) !important;
+.glass-icon-box-orange svg {
+  stroke: #f97316 !important;
 }
 
-/* Detection Pill with Dropdown Menu */
+body.editor-page.dark-theme .glass-icon-box-orange {
+  background: rgba(249, 115, 22, 0.18) !important;
+  border-color: rgba(249, 115, 22, 0.5) !important;
+  box-shadow: 0 4px 14px rgba(249, 115, 22, 0.28) !important;
+}
+
+/* Detection Pill in Dark Header */
 .detection-pill-wrapper {
   position: relative;
   z-index: 1055 !important;
@@ -182,9 +210,9 @@ body.editor-page.dark-theme .glass-icon-box-orange {
 
 .detection-pill {
   height: 42px;
-  background: var(--neuron-pill-bg);
-  border: 1.5px solid var(--neuron-pill-border);
-  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
+  background: rgba(30, 41, 59, 0.85) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2) !important;
   padding: 0 16px;
   border-radius: 50px;
   font-size: 0.88rem;
@@ -192,15 +220,15 @@ body.editor-page.dark-theme .glass-icon-box-orange {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  color: var(--neuron-pill-text);
+  color: #f8fafc !important;
   cursor: pointer;
   transition: all 0.25s ease;
   user-select: none;
 }
 
 .detection-pill:hover {
-  border-color: var(--neuron-orange);
-  box-shadow: 0 4px 16px var(--neuron-orange-glow);
+  border-color: #f97316 !important;
+  box-shadow: 0 4px 16px rgba(249, 115, 22, 0.3) !important;
   transform: translateY(-1px);
 }
 
@@ -219,29 +247,43 @@ body.editor-page.dark-theme .glass-icon-box-orange {
   100% { transform: scale(0.9); opacity: 0.7; }
 }
 
-/* Dropdown Menu */
+#autoDetectLabel {
+  color: #94a3b8 !important;
+}
+
+#detectedLangText {
+  color: #f8fafc !important;
+}
+
+/* Dropdown Menu in Dark Header */
 .detection-dropdown-menu {
   position: absolute !important;
   z-index: 1065 !important;
-  background: var(--neuron-pill-bg) !important;
-  border: 1.5px solid var(--neuron-pill-border) !important;
+  background: rgba(15, 23, 42, 0.98) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.14) !important;
   border-radius: 18px !important;
-  box-shadow: 0 20px 48px rgba(15, 23, 42, 0.2), 0 4px 16px rgba(15, 23, 42, 0.1) !important;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.55), 0 4px 16px rgba(0, 0, 0, 0.3) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
   padding: 10px !important;
   min-width: 250px;
   margin-top: 10px !important;
 }
 
 .detection-dropdown-menu .dropdown-header {
-  color: var(--neuron-text-secondary);
+  color: #94a3b8 !important;
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.5px;
   padding: 6px 12px;
 }
 
+.detection-dropdown-menu .dropdown-divider {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
 .detection-dropdown-menu .dropdown-item {
-  color: var(--neuron-text-primary);
+  color: #f8fafc !important;
   border-radius: 10px;
   font-size: 0.88rem;
   font-weight: 600;
@@ -252,33 +294,23 @@ body.editor-page.dark-theme .glass-icon-box-orange {
 }
 
 .detection-dropdown-menu .dropdown-item:hover {
-  background: var(--neuron-orange-soft);
-  color: var(--neuron-orange-dark);
+  background: rgba(249, 115, 22, 0.18) !important;
+  color: #f97316 !important;
   transform: translateX(3px);
 }
 
-body.editor-page.dark-theme .detection-dropdown-menu .dropdown-item:hover {
-  background: rgba(234, 88, 12, 0.18);
-  color: var(--neuron-orange);
-}
-
 .detection-dropdown-menu .dropdown-item.active {
-  background: var(--neuron-orange-light) !important;
-  color: var(--neuron-orange-dark) !important;
+  background: rgba(249, 115, 22, 0.25) !important;
+  color: #f97316 !important;
   font-weight: 700;
 }
 
-body.editor-page.dark-theme .detection-dropdown-menu .dropdown-item.active {
-  background: rgba(234, 88, 12, 0.25) !important;
-  color: var(--neuron-orange) !important;
-}
-
-/* Flag Buttons */
+/* Flag Group in Dark Header */
 .flag-group-container {
   height: 42px;
-  background: var(--neuron-pill-bg);
-  border: 1.5px solid var(--neuron-pill-border);
-  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
+  background: rgba(30, 41, 59, 0.85) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2) !important;
   padding: 3px 8px;
   border-radius: 50px;
   display: inline-flex;
@@ -306,20 +338,20 @@ body.editor-page.dark-theme .detection-dropdown-menu .dropdown-item.active {
 }
 
 .lang-flag-btn.active {
-  border-color: var(--neuron-orange);
-  box-shadow: 0 0 12px var(--neuron-orange-glow);
+  border-color: #f97316 !important;
+  box-shadow: 0 0 12px rgba(249, 115, 22, 0.5) !important;
   transform: scale(1.08);
 }
 
-/* Theme Toggle Button */
+/* Theme Toggle Button in Dark Header */
 .btn-theme-toggle {
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  background: var(--neuron-pill-bg);
-  border: 1.5px solid var(--neuron-pill-border);
-  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
-  color: var(--neuron-text-primary);
+  background: rgba(30, 41, 59, 0.85) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2) !important;
+  color: #38bdf8 !important;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -329,9 +361,13 @@ body.editor-page.dark-theme .detection-dropdown-menu .dropdown-item.active {
 }
 
 .btn-theme-toggle:hover {
-  border-color: var(--neuron-orange);
-  color: var(--neuron-orange);
+  border-color: #f97316 !important;
+  color: #f97316 !important;
   transform: translateY(-1px);
+}
+
+body.editor-page.dark-theme .btn-theme-toggle {
+  color: #fbbf24 !important;
 }
 
 /* Toolbar Card */

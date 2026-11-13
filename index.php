@@ -41,8 +41,8 @@
     <header class="header-glass-card neuron-glass-card d-flex align-items-center justify-content-between flex-nowrap gap-2">
       <!-- Left: Logo & Brand Name (Simetris & Bersih) -->
       <div class="brand-header-left d-flex align-items-center gap-2 gap-sm-3">
-        <div class="glass-icon-box glass-icon-box-orange rounded-circle">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ea580c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <div class="glass-icon-box glass-icon-box-orange rounded-circle shadow-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M9.5 2A4.5 4.5 0 0 0 5 6.5C5 7.3 5.2 8 5.6 8.6A4 4 0 0 0 4 12a4 4 0 0 0 1.2 2.8A4.5 4.5 0 0 0 9.5 19H10V2H9.5z"/>
             <path d="M7.5 6c.8.8.8 1.8 0 2.5"/>
             <path d="M6.2 12c1.2.4 1.2 1.6 0 2"/>
@@ -53,8 +53,8 @@
           </svg>
         </div>
         <div class="brand-text-block">
-          <h1 class="brand-title m-0">NEURON<span>.AI</span></h1>
-          <div class="text-secondary small fw-medium d-none d-sm-block" id="brandSubtitle">Editor & Debugger Kode Cerdas</div>
+          <h1 class="brand-title m-0 tracking-wide">NEURON<span>.AI</span></h1>
+          <small class="fw-medium d-none d-md-block mt-0.5" id="brandSubtitle">Tutor Coding & Peningkat Beban Kognitif berbasis Generative A.I</small>
         </div>
       </div>
 
@@ -66,8 +66,8 @@
             <span class="pulse-dot"></span>
             <span class="text-secondary small d-none d-md-inline" id="autoDetectLabel">Deteksi Otomatis:</span>
             <span class="fw-bold d-flex align-items-center" id="detectedLangBadge">
-              <i class="bi bi-filetype-php me-1" id="detectedLangIcon" style="color: #ea580c;"></i>
-              <span id="detectedLangText" style="color: #0f172a;">PHP</span>
+              <i class="bi bi-filetype-php me-1" id="detectedLangIcon" style="color: #f97316;"></i>
+              <span id="detectedLangText">PHP</span>
             </span>
           </div>
           <ul class="dropdown-menu dropdown-menu-end detection-dropdown-menu" aria-labelledby="detectorPill">
@@ -116,7 +116,7 @@
 
         <!-- Light / Dark Theme Switcher -->
         <button type="button" class="btn-theme-toggle" id="themeToggleBtn" title="Ganti Tema Editor (Gelap / Terang)">
-          <i class="bi bi-moon-stars-fill text-primary" id="themeToggleIcon"></i>
+          <i class="bi bi-moon-stars-fill text-info" id="themeToggleIcon"></i>
         </button>
       </div>
     </header>

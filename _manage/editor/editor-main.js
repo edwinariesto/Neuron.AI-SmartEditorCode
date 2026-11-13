@@ -450,7 +450,7 @@ SELECT * FROM users;`
   // i18n Dictionary
   const i18n = {
     Indonesia: {
-      brandSub: 'Editor & Debugger Kode Cerdas',
+      brandSub: 'Tutor Coding & Peningkat Beban Kognitif berbasis Generative A.I',
       btnRun: 'Jalankan Kode',
       btnAiDebug: 'AI Debug & Periksa',
       btnSnippets: 'Template & Contoh',
@@ -490,7 +490,7 @@ SELECT * FROM users;`
       terminalReadyMsg: '[Neuron.AI Runner Siap] Tulis kode Anda di sebelah kiri, lalu klik "Jalankan Kode" untuk melihat output.'
     },
     English: {
-      brandSub: 'Smart Code Editor & Debugger',
+      brandSub: 'Coding Tutor & Cognitive Load Booster powered by Generative A.I',
       btnRun: 'Run Code',
       btnAiDebug: 'AI Debug & Audit',
       btnSnippets: 'Templates & Snippets',
@@ -825,7 +825,7 @@ SELECT * FROM users;`
 
       const icon = document.getElementById('themeToggleIcon');
       if (icon) {
-        icon.className = isDark ? 'bi bi-sun-fill text-warning' : 'bi bi-moon-stars-fill text-dark';
+        icon.className = isDark ? 'bi bi-sun-fill text-warning' : 'bi bi-moon-stars-fill text-info';
       }
 
       const themeBtn = document.getElementById('themeToggleBtn');
