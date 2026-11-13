@@ -487,7 +487,12 @@ SELECT * FROM users;`
       placeholderOpenAI: 'Tempel OpenAI Key (sk-proj-...)',
       placeholderClaude: 'Tempel Claude Key (sk-ant-...)',
       placeholderDeepSeek: 'Tempel DeepSeek Key (sk-...)',
-      terminalReadyMsg: '[Neuron.AI Runner Siap] Tulis kode Anda di sebelah kiri, lalu klik "Jalankan Kode" untuk melihat output.'
+      terminalReadyMsg: '[Neuron.AI Runner Siap] Tulis kode Anda di sebelah kiri, lalu klik "Jalankan Kode" untuk melihat output.',
+      bnavAiDebug: 'Cek AI',
+      bnavSnippets: 'Template',
+      bnavRun: 'RUN',
+      bnavDownload: 'Unduh',
+      bnavApiKey: 'API Key'
     },
     English: {
       brandSub: 'Coding Tutor & Cognitive Load Booster powered by Generative A.I',
@@ -527,7 +532,12 @@ SELECT * FROM users;`
       placeholderOpenAI: 'Paste OpenAI Key (sk-proj-...)',
       placeholderClaude: 'Paste Claude Key (sk-ant-...)',
       placeholderDeepSeek: 'Paste DeepSeek Key (sk-...)',
-      terminalReadyMsg: '[Neuron.AI Runner Ready] Write your code on the left, then click "Run Code" to view execution output.'
+      terminalReadyMsg: '[Neuron.AI Runner Ready] Write your code on the left, then click "Run Code" to view execution output.',
+      bnavAiDebug: 'AI Audit',
+      bnavSnippets: 'Templates',
+      bnavRun: 'RUN',
+      bnavDownload: 'Download',
+      bnavApiKey: 'API Key'
     }
   };
 
@@ -683,6 +693,33 @@ SELECT * FROM users;`
           NeuronDetector.resetToAuto(this.editor.getValue());
         };
       }
+
+      // Floating Bottom Navigation Actions (Tablet & Mobile < 992px)
+      const bnavRunBtn = document.getElementById('bnavRunBtn');
+      if (bnavRunBtn) {
+        bnavRunBtn.onclick = () => this.handleRun();
+      }
+
+      const bnavAiBtn = document.getElementById('bnavAiBtn');
+      if (bnavAiBtn) {
+        bnavAiBtn.onclick = () => this.handleAiDebug();
+      }
+
+      const bnavDlBtn = document.getElementById('bnavDlBtn');
+      if (bnavDlBtn) {
+        bnavDlBtn.onclick = () => this.handleDownload();
+      }
+
+      // Sync active tab to bottom nav
+      ['tab-terminal-btn', 'tab-visual-btn', 'tab-aidebug-btn'].forEach(id => {
+        const tabEl = document.getElementById(id);
+        if (tabEl) {
+          tabEl.addEventListener('shown.bs.tab', () => {
+            const bAi = document.getElementById('bnavAiBtn');
+            if (bAi) bAi.classList.toggle('active', id === 'tab-aidebug-btn');
+          });
+        }
+      });
     }
 
     async handleRun() {
@@ -703,6 +740,17 @@ SELECT * FROM users;`
       if (runBtn) {
         runBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span> Menjalankan...';
         runBtn.disabled = true;
+      }
+
+      // Update Floating Bottom Nav Run Button
+      const bnavRunBtn = document.getElementById('bnavRunBtn');
+      const bnavRunIcon = document.getElementById('bnavRunIcon');
+      if (bnavRunBtn) {
+        bnavRunBtn.disabled = true;
+        if (bnavRunIcon) {
+          bnavRunIcon.className = 'spinner-border spinner-border-sm text-light';
+          bnavRunIcon.style.margin = '0';
+        }
       }
 
       try {
@@ -733,6 +781,13 @@ SELECT * FROM users;`
         if (runBtn) {
           runBtn.innerHTML = origHtml;
           runBtn.disabled = false;
+        }
+        if (bnavRunBtn) {
+          bnavRunBtn.disabled = false;
+          if (bnavRunIcon) {
+            bnavRunIcon.className = 'bi bi-play-fill';
+            bnavRunIcon.style.marginLeft = '2px';
+          }
         }
       }
     }
@@ -806,6 +861,8 @@ SELECT * FROM users;`
         const bsTab = bootstrap.Tab.getOrCreateInstance(tabBtn);
         bsTab.show();
       }
+      const bAi = document.getElementById('bnavAiBtn');
+      if (bAi) bAi.classList.toggle('active', tabBtnId === 'tab-aidebug-btn');
     }
 
     setTheme(themeName) {
@@ -1190,6 +1247,13 @@ SELECT * FROM users;`
       if (storedBox) storedBox.innerHTML = `<i class="bi bi-shield-lock-fill text-success me-1"></i> ${dict.lblApiKeyStored}`;
       setText('clearApiKeyModalBtnText', dict.clearApiKeyBtnText);
       setText('saveApiKeyModalBtnText', dict.saveApiKeyBtnText);
+
+      // Floating Bottom Navigation Labels
+      setText('bottomNavAiLabel', dict.bnavAiDebug);
+      setText('bottomNavSnippetsLabel', dict.bnavSnippets);
+      setText('bottomNavRunLabel', dict.bnavRun);
+      setText('bottomNavDlLabel', dict.bnavDownload);
+      setText('bottomNavApiKeyLabel', dict.bnavApiKey);
 
       // Update provider portal & status
       if (typeof this.updateApiKeyModalUI === 'function') {

@@ -521,6 +521,41 @@
     </div>
   </div>
 
+  <!-- FLOATING CURVED BOTTOM NAVIGATION DOCK (TABLET & MOBILE < 992px) -->
+  <nav class="floating-bottom-nav d-lg-none" id="editorBottomNav" aria-label="Editor Mobile Navigation">
+    <!-- 1. Cek AI / Evaluasi AI -->
+    <a href="javascript:void(0)" class="bottom-nav-item" id="bnavAiBtn" title="Cek AI / Evaluasi Kode">
+      <i class="bi bi-robot"></i>
+      <span id="bottomNavAiLabel">Cek AI</span>
+    </a>
+
+    <!-- 2. Template / Contoh Kode -->
+    <a href="javascript:void(0)" class="bottom-nav-item" id="bnavSnippetsBtn" data-bs-toggle="modal" data-bs-target="#snippetModal" title="Template & Contoh Kode">
+      <i class="bi bi-file-earmark-code"></i>
+      <span id="bottomNavSnippetsLabel">Template</span>
+    </a>
+
+    <!-- 3. Bulatan Besar Tengah: RUN (Jalankan Kode) -->
+    <div class="bottom-nav-action-wrapper">
+      <button type="button" class="bottom-nav-action-btn" id="bnavRunBtn" title="Jalankan Kode (Run)">
+        <i class="bi bi-play-fill" id="bnavRunIcon" style="margin-left: 2px;"></i>
+      </button>
+      <span class="bottom-nav-action-label" id="bottomNavRunLabel">RUN</span>
+    </div>
+
+    <!-- 4. Unduh File Kode -->
+    <a href="javascript:void(0)" class="bottom-nav-item" id="bnavDlBtn" title="Unduh File Kode">
+      <i class="bi bi-download"></i>
+      <span id="bottomNavDlLabel">Unduh</span>
+    </a>
+
+    <!-- 5. Pengaturan API Key AI -->
+    <a href="javascript:void(0)" class="bottom-nav-item" id="bnavApiKeyBtn" data-bs-toggle="modal" data-bs-target="#apiKeyModal" title="Pengaturan AI Provider & API Key">
+      <i class="bi bi-key-fill"></i>
+      <span id="bottomNavApiKeyLabel">API Key</span>
+    </a>
+  </nav>
+
   <!-- Background Network Animation Canvas Script (Light Mode Friendly) -->
   <script>
     (function() {
