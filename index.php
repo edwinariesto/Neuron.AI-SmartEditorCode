@@ -218,34 +218,34 @@
       <!-- RIGHT COLUMN: MULTI-TAB OUTPUT & VISUALIZER -->
       <div class="col-12 col-lg-6">
         <div class="workspace-card neuron-glass-card d-flex flex-column">
-          <!-- Output Tab Navigation Header (Proporsional & Sejajar) -->
+          <!-- Output Tab Navigation Header: ALL 3 TABS ALWAYS VISIBLE (TOTAL 3 TABS, 100% RESPONSIVE) -->
           <div class="workspace-card-header p-2 px-2 px-sm-3">
             <ul class="nav nav-tabs output-nav-tabs d-flex w-100 flex-nowrap" id="outputTabNav" role="tablist">
               <!-- Tab 1: Terminal Console -->
-              <li class="nav-item flex-fill text-center" role="presentation">
-                <button class="nav-link w-100 justify-content-center active" id="tab-terminal-btn" data-bs-toggle="tab" data-bs-target="#tab-terminal" type="button" role="tab">
-                  <i class="bi bi-terminal me-1 text-success"></i>
-                  <span class="d-none d-sm-inline" id="tabTerminalText">Konsol Terminal</span>
-                  <span class="d-inline d-sm-none">Konsol</span>
+              <li class="nav-item flex-fill text-center" role="presentation" style="flex: 1 1 0; min-width: 0; max-width: 33.333%;">
+                <button class="nav-link w-100 justify-content-center active text-truncate" id="tab-terminal-btn" data-bs-toggle="tab" data-bs-target="#tab-terminal" type="button" role="tab" title="Konsol Terminal">
+                  <i class="bi bi-terminal me-1 text-success flex-shrink-0"></i>
+                  <span class="d-none d-md-inline" id="tabTerminalText">Konsol Terminal</span>
+                  <span class="d-inline d-md-none">Konsol</span>
                 </button>
               </li>
 
               <!-- Tab 2: Visualisasi (Media & Data) -->
-              <li class="nav-item flex-fill text-center" role="presentation">
-                <button class="nav-link w-100 justify-content-center position-relative" id="tab-visual-btn" data-bs-toggle="tab" data-bs-target="#tab-visual" type="button" role="tab">
-                  <i class="bi bi-bar-chart-steps me-1 text-info"></i>
-                  <span class="d-none d-sm-inline" id="tabVisualText">Visualisasi & Media</span>
-                  <span class="d-inline d-sm-none">Visual</span>
-                  <span class="badge rounded-pill bg-danger ms-1 d-none font-monospace small" id="visualTabBadge" style="font-size: 0.65rem;">•</span>
+              <li class="nav-item flex-fill text-center" role="presentation" style="flex: 1 1 0; min-width: 0; max-width: 33.333%;">
+                <button class="nav-link w-100 justify-content-center position-relative text-truncate" id="tab-visual-btn" data-bs-toggle="tab" data-bs-target="#tab-visual" type="button" role="tab" title="Visualisasi & Media">
+                  <i class="bi bi-bar-chart-steps me-1 text-info flex-shrink-0"></i>
+                  <span class="d-none d-md-inline" id="tabVisualText">Visualisasi & Media</span>
+                  <span class="d-inline d-md-none">Visual</span>
+                  <span class="badge rounded-circle bg-danger ms-1 d-none" id="visualTabBadge" style="width: 7px; height: 7px; padding: 0; display: inline-block; vertical-align: middle;"></span>
                 </button>
               </li>
 
               <!-- Tab 3: Hasil Evaluasi AI -->
-              <li class="nav-item flex-fill text-center" role="presentation">
-                <button class="nav-link w-100 justify-content-center" id="tab-aidebug-btn" data-bs-toggle="tab" data-bs-target="#tab-aidebug" type="button" role="tab">
-                  <i class="bi bi-cpu me-1 text-purple" style="color: #9333ea;"></i>
-                  <span class="d-none d-sm-inline" id="tabAiDebugText">Hasil Evaluasi AI</span>
-                  <span class="d-inline d-sm-none">Evaluasi AI</span>
+              <li class="nav-item flex-fill text-center" role="presentation" style="flex: 1 1 0; min-width: 0; max-width: 33.333%;">
+                <button class="nav-link w-100 justify-content-center text-truncate" id="tab-aidebug-btn" data-bs-toggle="tab" data-bs-target="#tab-aidebug" type="button" role="tab" title="Hasil Evaluasi AI">
+                  <i class="bi bi-cpu me-1 text-purple flex-shrink-0" style="color: #9333ea;"></i>
+                  <span class="d-none d-md-inline" id="tabAiDebugText">Hasil Evaluasi AI</span>
+                  <span class="d-inline d-md-none">Evaluasi AI</span>
                 </button>
               </li>
             </ul>

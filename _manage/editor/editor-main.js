@@ -555,6 +555,15 @@ SELECT * FROM users;`
         this.editor.session.setMode(langInfo.aceMode);
         this.updateDetectorBadge(langInfo, source);
       });
+
+      // Hide visual dot badge when tab is activated
+      const visualTabBtn = document.getElementById('tab-visual-btn');
+      if (visualTabBtn) {
+        visualTabBtn.addEventListener('shown.bs.tab', () => {
+          const badge = document.getElementById('visualTabBadge');
+          if (badge) badge.classList.add('d-none');
+        });
+      }
     }
 
     updateDetectorBadge(langInfo, source) {
@@ -741,7 +750,7 @@ SELECT * FROM users;`
       const badge = document.getElementById('visualTabBadge');
 
       if (badge) {
-        badge.textContent = label || 'Tersedia';
+        badge.title = label || 'Visualisasi Tersedia';
         badge.classList.remove('d-none');
       }
 

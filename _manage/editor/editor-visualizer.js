@@ -103,17 +103,27 @@
       this.currentMode = 'image';
 
       const wrap = document.createElement('div');
-      wrap.className = 'visual-media-box p-3 text-center d-flex flex-column align-items-center justify-content-center h-100';
+      wrap.className = 'visual-media-box p-2 text-center d-flex flex-column align-items-center justify-content-center h-100';
 
       wrap.innerHTML = `
-        <div class="visual-toolbar mb-3 d-flex align-items-center gap-2 bg-white shadow-sm px-3 py-1.5 rounded-pill border border-secondary border-opacity-25">
-          <span class="badge bg-primary bg-opacity-90 px-2.5 py-1.5 rounded-pill"><i class="bi bi-image me-1"></i> ${caption}</span>
-          <button class="btn btn-sm btn-outline-secondary border-0" id="visZoomIn" title="Perbesar"><i class="bi bi-zoom-in"></i></button>
-          <button class="btn btn-sm btn-outline-secondary border-0" id="visZoomOut" title="Perkecil"><i class="bi bi-zoom-out"></i></button>
-          <button class="btn btn-sm btn-outline-secondary border-0" id="visZoomReset" title="Reset"><i class="bi bi-arrow-counterclockwise"></i></button>
-          <a href="${src}" download="neuron-visual.png" class="btn btn-sm btn-outline-secondary border-0" title="Unduh"><i class="bi bi-download"></i></a>
+        <div class="visual-toolbar mb-2 d-flex align-items-center justify-content-between flex-nowrap w-100 px-2.5 py-1.5 rounded-4" style="background: var(--neuron-pill-bg); border: 1.5px solid var(--neuron-pill-border); box-shadow: 0 2px 8px rgba(0,0,0,0.04); min-width: 0;">
+          <div class="d-flex align-items-center gap-1.5 flex-shrink-0">
+            <span class="badge bg-warning text-dark fw-bold px-2.5 py-1 rounded-pill d-inline-flex align-items-center" style="font-size: 0.78rem;">
+              <i class="bi bi-image me-1"></i> <span class="d-none d-sm-inline">${caption}</span><span class="d-inline d-sm-none">Citra</span>
+            </span>
+          </div>
+
+          <div class="visual-btn-group d-flex align-items-center flex-nowrap ms-auto flex-shrink-0">
+            <button class="vis-tool-btn" id="visZoomIn" title="Perbesar"><i class="bi bi-zoom-in"></i></button>
+            <span class="vis-tool-separator"></span>
+            <button class="vis-tool-btn" id="visZoomOut" title="Perkecil"><i class="bi bi-zoom-out"></i></button>
+            <span class="vis-tool-separator"></span>
+            <button class="vis-tool-btn" id="visZoomReset" title="Reset"><i class="bi bi-arrow-counterclockwise"></i></button>
+            <span class="vis-tool-separator"></span>
+            <a href="${src}" download="neuron-visual.png" class="vis-tool-btn text-decoration-none" title="Unduh"><i class="bi bi-download"></i></a>
+          </div>
         </div>
-        <div class="visual-image-wrapper overflow-auto w-100 d-flex align-items-center justify-content-center p-3 bg-white rounded-4 border border-secondary border-opacity-25 shadow-sm" style="max-height: 480px;">
+        <div class="visual-image-wrapper overflow-auto w-100 d-flex align-items-center justify-content-center p-3 bg-white rounded-4 border border-secondary border-opacity-25 shadow-sm flex-grow-1" style="max-height: 480px;">
           <img id="visTargetImg" src="${src}" alt="Hasil Visual" class="img-fluid rounded-3 shadow-sm transition-all" style="max-height: 420px; object-fit: contain; transform: scale(1);" />
         </div>
       `;
@@ -140,14 +150,20 @@
       this.currentMode = 'svg';
 
       const wrap = document.createElement('div');
-      wrap.className = 'visual-media-box p-3 text-center d-flex flex-column align-items-center justify-content-center h-100';
+      wrap.className = 'visual-media-box p-2 text-center d-flex flex-column align-items-center justify-content-center h-100';
 
       wrap.innerHTML = `
-        <div class="visual-toolbar mb-3 d-flex align-items-center gap-2 bg-white shadow-sm px-3 py-1.5 rounded-pill border border-secondary border-opacity-25">
-          <span class="badge bg-success bg-opacity-90 px-2.5 py-1.5 rounded-pill"><i class="bi bi-bezier2 me-1"></i> Vektor Grafis SVG</span>
-          <button class="btn btn-sm btn-outline-secondary border-0" id="visSvgCopy" title="Salin SVG"><i class="bi bi-clipboard"></i></button>
+        <div class="visual-toolbar mb-2 d-flex align-items-center justify-content-between flex-nowrap w-100 px-2.5 py-1.5 rounded-4" style="background: var(--neuron-pill-bg); border: 1.5px solid var(--neuron-pill-border); box-shadow: 0 2px 8px rgba(0,0,0,0.04); min-width: 0;">
+          <div class="d-flex align-items-center gap-1.5 flex-shrink-0">
+            <span class="badge bg-success text-white fw-bold px-2.5 py-1 rounded-pill d-inline-flex align-items-center" style="font-size: 0.78rem;">
+              <i class="bi bi-bezier2 me-1"></i> <span class="d-none d-sm-inline">Vektor Grafis SVG</span><span class="d-inline d-sm-none">SVG</span>
+            </span>
+          </div>
+          <div class="visual-btn-group d-flex align-items-center flex-nowrap ms-auto flex-shrink-0">
+            <button class="vis-tool-btn" id="visSvgCopy" title="Salin SVG"><i class="bi bi-clipboard"></i> <span class="d-none d-sm-inline">Salin</span></button>
+          </div>
         </div>
-        <div class="visual-svg-stage p-3 rounded-4 bg-white border border-secondary border-opacity-25 shadow-sm w-100 d-flex align-items-center justify-content-center" style="min-height: 320px;">
+        <div class="visual-svg-stage p-3 rounded-4 bg-white border border-secondary border-opacity-25 shadow-sm w-100 d-flex align-items-center justify-content-center flex-grow-1" style="min-height: 320px;">
           ${svgCode}
         </div>
       `;
@@ -168,17 +184,27 @@
 
       const keys = Object.keys(data[0] || {});
       const wrap = document.createElement('div');
-      wrap.className = 'visual-table-box p-3 d-flex flex-column h-100';
+      wrap.className = 'visual-table-box p-2 d-flex flex-column h-100';
 
       wrap.innerHTML = `
-        <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-3">
-          <div class="d-flex align-items-center gap-2">
-            <span class="badge bg-warning text-dark fw-bold px-3 py-1.5 rounded-pill"><i class="bi bi-table me-1"></i> Data Terstruktur</span>
-            <span class="badge bg-light text-secondary border border-secondary border-opacity-25 px-2.5 py-1.5 rounded-pill">${data.length} Baris Data</span>
+        <div class="visual-toolbar mb-2 d-flex align-items-center justify-content-between flex-nowrap w-100 px-2.5 py-1.5 rounded-4" style="background: var(--neuron-pill-bg); border: 1.5px solid var(--neuron-pill-border); box-shadow: 0 2px 8px rgba(0,0,0,0.04); min-width: 0;">
+          <div class="d-flex align-items-center gap-1.5 flex-shrink-0">
+            <span class="badge bg-warning text-dark fw-bold px-2.5 py-1 rounded-pill d-inline-flex align-items-center" style="font-size: 0.78rem;">
+              <i class="bi bi-table me-1"></i> <span class="d-none d-sm-inline">Tabel Data</span><span class="d-inline d-sm-none">Tabel</span>
+            </span>
+            <span class="badge bg-light text-secondary border px-2 py-0.5 rounded-pill small d-none d-sm-inline" style="font-size: 0.72rem;">${data.length} Baris</span>
           </div>
-          <div class="d-flex align-items-center gap-2">
-            <input type="text" id="visTableSearch" class="form-control form-control-sm bg-white text-dark border-secondary border-opacity-50 rounded-pill px-3" placeholder="Cari data..." style="max-width: 180px;" />
-            <button class="btn btn-sm btn-outline-secondary rounded-pill px-3" id="visExportCsv" title="Export CSV"><i class="bi bi-file-earmark-spreadsheet me-1 text-success"></i> CSV</button>
+
+          <!-- Unified Group with Separator Pembatas -->
+          <div class="visual-btn-group d-flex align-items-center flex-nowrap ms-auto flex-shrink-0">
+            <div class="d-flex align-items-center px-1">
+              <i class="bi bi-search text-secondary small me-1"></i>
+              <input type="text" id="visTableSearch" class="form-control form-control-sm border-0 bg-transparent p-0 text-dark" placeholder="Cari..." style="max-width: 90px; font-size: 0.78rem; box-shadow: none;" />
+            </div>
+            <span class="vis-tool-separator"></span>
+            <button class="vis-tool-btn text-success" id="visExportCsv" title="Export CSV">
+              <i class="bi bi-file-earmark-spreadsheet"></i> <span class="d-none d-sm-inline">CSV</span>
+            </button>
           </div>
         </div>
         <div class="table-responsive rounded-4 border border-secondary border-opacity-25 bg-white flex-grow-1 shadow-sm" style="max-height: 420px;">
@@ -238,17 +264,32 @@
       wrap.className = 'visual-html-box d-flex flex-column h-100 p-2';
 
       wrap.innerHTML = `
-        <div class="visual-toolbar mb-2 d-flex flex-wrap align-items-center justify-content-between gap-2 px-3 py-2 rounded-4" style="background: var(--neuron-pill-bg); border: 1.5px solid var(--neuron-pill-border); box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
-          <div class="d-flex align-items-center gap-2">
-            <span class="badge bg-warning text-dark fw-bold px-2.5 py-1.5 rounded-pill"><i class="bi bi-browser-chrome me-1"></i> Live Web Preview</span>
-            <div class="btn-group btn-group-sm rounded-pill overflow-hidden shadow-sm" role="group" aria-label="Device Switcher">
-              <button class="btn btn-sm btn-primary active text-white px-2.5 py-1" id="visDevDesktop" title="Pratinjau Layar Penuh Desktop"><i class="bi bi-display me-1"></i> Desktop</button>
-              <button class="btn btn-sm btn-outline-secondary px-2.5 py-1" id="visDevTablet" title="Pratinjau Tablet (768px)"><i class="bi bi-tablet me-1"></i> Tablet</button>
-              <button class="btn btn-sm btn-outline-secondary px-2.5 py-1" id="visDevMobile" title="Pratinjau Ponsel Mobile (375px)"><i class="bi bi-phone me-1"></i> Mobile</button>
-            </div>
-            <span class="small font-monospace text-secondary d-none d-md-inline" id="visDevSizeLabel">(100% Layar Penuh)</span>
+        <div class="visual-toolbar mb-2 d-flex align-items-center justify-content-between flex-nowrap w-100 px-2.5 py-1.5 rounded-4" style="background: var(--neuron-pill-bg); border: 1.5px solid var(--neuron-pill-border); box-shadow: 0 2px 8px rgba(0,0,0,0.04); min-width: 0;">
+          <!-- Left: Label -->
+          <div class="d-flex align-items-center gap-1.5 flex-shrink-0">
+            <span class="badge bg-warning text-dark fw-bold px-2.5 py-1 rounded-pill d-inline-flex align-items-center" style="font-size: 0.78rem;">
+              <i class="bi bi-browser-chrome me-1"></i> <span class="d-none d-sm-inline">Web Preview</span><span class="d-inline d-sm-none">Web</span>
+            </span>
           </div>
-          <button class="btn btn-sm btn-outline-secondary rounded-pill px-3 py-1" id="visReloadIframe" title="Muat Ulang Pratinjau"><i class="bi bi-arrow-clockwise me-1"></i> Refresh</button>
+
+          <!-- Right: Unified Button Group with Separator Pembatas -->
+          <div class="visual-btn-group d-flex align-items-center flex-nowrap ms-auto flex-shrink-0">
+            <button class="vis-tool-btn active" id="visDevDesktop" title="Desktop 100%">
+              <i class="bi bi-display"></i> <span class="d-none d-md-inline">Desktop</span>
+            </button>
+            <span class="vis-tool-separator"></span>
+            <button class="vis-tool-btn" id="visDevTablet" title="Tablet 720px">
+              <i class="bi bi-tablet"></i> <span class="d-none d-md-inline">Tablet</span>
+            </button>
+            <span class="vis-tool-separator"></span>
+            <button class="vis-tool-btn" id="visDevMobile" title="Mobile 375px">
+              <i class="bi bi-phone"></i> <span class="d-none d-md-inline">Mobile</span>
+            </button>
+            <span class="vis-tool-separator"></span>
+            <button class="vis-tool-btn" id="visReloadIframe" title="Muat Ulang / Refresh">
+              <i class="bi bi-arrow-clockwise"></i> <span class="d-none d-md-inline">Refresh</span>
+            </button>
+          </div>
         </div>
         <div class="iframe-container flex-grow-1 d-flex align-items-center justify-content-center p-2 rounded-4 overflow-auto" style="min-height: 440px; background: rgba(15, 23, 42, 0.05);">
           <iframe id="visPreviewIframe" class="border-0 shadow-sm" sandbox="allow-scripts allow-modals allow-same-origin" style="width: 100%; height: 100%; min-height: 420px; background: #ffffff; transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1); border-radius: 12px;"></iframe>
@@ -258,7 +299,6 @@
       this.container.appendChild(wrap);
 
       const iframe = wrap.querySelector('#visPreviewIframe');
-      const sizeLabel = wrap.querySelector('#visDevSizeLabel');
       const setContent = () => {
         iframe.srcdoc = html;
       };
@@ -272,28 +312,24 @@
 
       const setActiveDev = (activeBtn, mode) => {
         [btnDesk, btnTab, btnMob].forEach(b => {
-          b.classList.remove('btn-primary', 'active', 'text-white');
-          b.classList.add('btn-outline-secondary');
+          b.classList.remove('active');
         });
-        activeBtn.classList.remove('btn-outline-secondary');
-        activeBtn.classList.add('btn-primary', 'active', 'text-white');
+        activeBtn.classList.add('active');
 
         if (mode === 'mobile') {
           iframe.style.width = '375px';
-          iframe.style.maxWidth = '375px';
+          iframe.style.maxWidth = '100%';
           iframe.style.height = '520px';
-          iframe.style.border = '10px solid #0f172a';
-          iframe.style.borderRadius = '32px';
-          iframe.style.boxShadow = '0 16px 45px rgba(0, 0, 0, 0.35)';
-          if (sizeLabel) sizeLabel.textContent = '(375px x 520px — Mobile Device)';
+          iframe.style.border = '8px solid #0f172a';
+          iframe.style.borderRadius = '28px';
+          iframe.style.boxShadow = '0 16px 40px rgba(0, 0, 0, 0.35)';
         } else if (mode === 'tablet') {
           iframe.style.width = '720px';
           iframe.style.maxWidth = '100%';
           iframe.style.height = '520px';
-          iframe.style.border = '8px solid #1e293b';
-          iframe.style.borderRadius = '20px';
-          iframe.style.boxShadow = '0 14px 40px rgba(0, 0, 0, 0.3)';
-          if (sizeLabel) sizeLabel.textContent = '(720px x 520px — Tablet Device)';
+          iframe.style.border = '6px solid #1e293b';
+          iframe.style.borderRadius = '18px';
+          iframe.style.boxShadow = '0 14px 35px rgba(0, 0, 0, 0.25)';
         } else {
           // desktop
           iframe.style.width = '100%';
@@ -302,7 +338,6 @@
           iframe.style.border = 'none';
           iframe.style.borderRadius = '12px';
           iframe.style.boxShadow = 'none';
-          if (sizeLabel) sizeLabel.textContent = '(100% Layar Penuh Desktop)';
         }
       };
 
