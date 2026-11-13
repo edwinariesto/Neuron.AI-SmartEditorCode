@@ -1,0 +1,662 @@
+/**
+ * Neuron.AI — Soft Light & Dark Glassmorphism Editor UI Styling
+ * File: _manage/editor/editor-ui.css
+ * Follows the official 3-color palette: Orange, Hitam (Black/Slate), Putih (White)
+ */
+
+:root {
+  /* Default: Soft Light Theme */
+  --neuron-bg: #f8fafc;
+  --neuron-card-bg: rgba(255, 255, 255, 0.94);
+  --neuron-card-border: rgba(203, 213, 225, 0.7);
+  --neuron-text-primary: #0f172a;
+  --neuron-text-secondary: #64748b;
+  --neuron-header-bg: #ffffff;
+  --neuron-header-border: rgba(203, 213, 225, 0.65);
+  --neuron-input-bg: #ffffff;
+  --neuron-input-border: rgba(203, 213, 225, 0.85);
+  --neuron-pill-bg: #ffffff;
+  --neuron-pill-text: #0f172a;
+  --neuron-pill-border: rgba(203, 213, 225, 0.85);
+  --neuron-tab-bg: #f8fafc;
+  --neuron-tab-active-bg: #fff7ed;
+  --neuron-tab-active-border: #ea580c;
+  --neuron-tab-active-text: #ea580c;
+  --neuron-terminal-bg: #0f172a;
+  --neuron-terminal-text: #f8fafc;
+  --neuron-visual-bg: #f8fafc;
+  --neuron-debug-bg: #f8fafc;
+  --neuron-debug-card-bg: #ffffff;
+  --neuron-debug-card-border: rgba(203, 213, 225, 0.7);
+  --neuron-debug-card-text: #0f172a;
+  --neuron-modal-bg: #ffffff;
+  --neuron-modal-border: rgba(203, 213, 225, 0.85);
+  --neuron-modal-text: #0f172a;
+  --neuron-btn-group-bg: rgba(15, 23, 42, 0.05);
+
+  /* Primary Palette: Orange, Hitam, Putih */
+  --neuron-orange: #f97316;
+  --neuron-orange-dark: #ea580c;
+  --neuron-orange-light: #ffedd5;
+  --neuron-orange-soft: #fff7ed;
+  --neuron-orange-glow: rgba(249, 115, 22, 0.28);
+  --neuron-black: #0f172a;
+  --neuron-black-soft: #1e293b;
+  --neuron-white: #ffffff;
+  --neuron-green: #10b981;
+}
+
+/* Full Body Dark Theme */
+body.editor-page.dark-theme {
+  --neuron-bg: #090d16;
+  --neuron-card-bg: rgba(15, 23, 42, 0.88);
+  --neuron-card-border: rgba(51, 65, 85, 0.7);
+  --neuron-text-primary: #f8fafc;
+  --neuron-text-secondary: #94a3b8;
+  --neuron-header-bg: rgba(17, 24, 39, 0.95);
+  --neuron-header-border: rgba(51, 65, 85, 0.8);
+  --neuron-input-bg: #1e293b;
+  --neuron-input-border: rgba(71, 85, 105, 0.8);
+  --neuron-pill-bg: #1e293b;
+  --neuron-pill-text: #f8fafc;
+  --neuron-pill-border: rgba(71, 85, 105, 0.8);
+  --neuron-tab-bg: #0f172a;
+  --neuron-tab-active-bg: rgba(234, 88, 12, 0.18);
+  --neuron-tab-active-border: #f97316;
+  --neuron-tab-active-text: #f97316;
+  --neuron-terminal-bg: #060911;
+  --neuron-terminal-text: #f8fafc;
+  --neuron-visual-bg: #0b1120;
+  --neuron-debug-bg: #0b1120;
+  --neuron-debug-card-bg: #131c2e;
+  --neuron-debug-card-border: rgba(51, 65, 85, 0.8);
+  --neuron-debug-card-text: #f8fafc;
+  --neuron-modal-bg: #0f172a;
+  --neuron-modal-border: rgba(51, 65, 85, 0.9);
+  --neuron-modal-text: #f8fafc;
+  --neuron-btn-group-bg: rgba(255, 255, 255, 0.06);
+
+  --neuron-orange-glow: rgba(249, 115, 22, 0.38);
+}
+
+body.editor-page {
+  background-color: var(--neuron-bg);
+  color: var(--neuron-text-primary);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Page Layout Container: Wide, Spacious & Symmetrical */
+.editor-container {
+  max-width: 96%;
+  width: 96%;
+  margin: 0 auto;
+  padding: 20px 14px;
+}
+
+@media (min-width: 1800px) {
+  .editor-container {
+    max-width: 96%;
+    width: 96%;
+  }
+}
+
+@media (max-width: 991px) {
+  .editor-container {
+    max-width: 98%;
+    width: 98%;
+    padding: 12px 6px;
+  }
+}
+
+/* Glass Card */
+.neuron-glass-card {
+  background: var(--neuron-card-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1.5px solid var(--neuron-card-border);
+  border-radius: 24px;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.05), 0 4px 12px rgba(15, 23, 42, 0.03);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+body.editor-page.dark-theme .neuron-glass-card {
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45), 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+
+/* Header Card */
+.header-glass-card {
+  padding: 18px 28px !important;
+  margin-bottom: 20px;
+  z-index: 1050 !important;
+  overflow: visible !important;
+}
+
+/* Brand Box */
+.brand-title {
+  color: var(--neuron-text-primary) !important;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  font-size: 1.45rem;
+}
+
+.brand-title span {
+  color: var(--neuron-orange) !important;
+}
+
+.glass-icon-box-orange {
+  width: 48px !important;
+  height: 48px !important;
+  border-radius: 16px !important;
+  background: var(--neuron-orange-light) !important;
+  border: 1.5px solid rgba(234, 88, 12, 0.35) !important;
+  box-shadow: 0 4px 14px rgba(234, 88, 12, 0.15) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
+}
+
+body.editor-page.dark-theme .glass-icon-box-orange {
+  background: rgba(234, 88, 12, 0.2) !important;
+  border-color: rgba(249, 115, 22, 0.5) !important;
+}
+
+/* Detection Pill with Dropdown Menu */
+.detection-pill-wrapper {
+  position: relative;
+  z-index: 1055 !important;
+}
+
+.detection-pill {
+  height: 42px;
+  background: var(--neuron-pill-bg);
+  border: 1.5px solid var(--neuron-pill-border);
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
+  padding: 0 16px;
+  border-radius: 50px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--neuron-pill-text);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  user-select: none;
+}
+
+.detection-pill:hover {
+  border-color: var(--neuron-orange);
+  box-shadow: 0 4px 16px var(--neuron-orange-glow);
+  transform: translateY(-1px);
+}
+
+.detection-pill .pulse-dot {
+  width: 9px;
+  height: 9px;
+  background-color: var(--neuron-green);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--neuron-green);
+  animation: pulseDotAnim 2s infinite ease-in-out;
+}
+
+@keyframes pulseDotAnim {
+  0% { transform: scale(0.9); opacity: 0.7; }
+  50% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(0.9); opacity: 0.7; }
+}
+
+/* Dropdown Menu */
+.detection-dropdown-menu {
+  position: absolute !important;
+  z-index: 1065 !important;
+  background: var(--neuron-pill-bg) !important;
+  border: 1.5px solid var(--neuron-pill-border) !important;
+  border-radius: 18px !important;
+  box-shadow: 0 20px 48px rgba(15, 23, 42, 0.2), 0 4px 16px rgba(15, 23, 42, 0.1) !important;
+  padding: 10px !important;
+  min-width: 250px;
+  margin-top: 10px !important;
+}
+
+.detection-dropdown-menu .dropdown-header {
+  color: var(--neuron-text-secondary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 6px 12px;
+}
+
+.detection-dropdown-menu .dropdown-item {
+  color: var(--neuron-text-primary);
+  border-radius: 10px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 8px 14px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+}
+
+.detection-dropdown-menu .dropdown-item:hover {
+  background: var(--neuron-orange-soft);
+  color: var(--neuron-orange-dark);
+  transform: translateX(3px);
+}
+
+body.editor-page.dark-theme .detection-dropdown-menu .dropdown-item:hover {
+  background: rgba(234, 88, 12, 0.18);
+  color: var(--neuron-orange);
+}
+
+.detection-dropdown-menu .dropdown-item.active {
+  background: var(--neuron-orange-light) !important;
+  color: var(--neuron-orange-dark) !important;
+  font-weight: 700;
+}
+
+body.editor-page.dark-theme .detection-dropdown-menu .dropdown-item.active {
+  background: rgba(234, 88, 12, 0.25) !important;
+  color: var(--neuron-orange) !important;
+}
+
+/* Flag Buttons */
+.flag-group-container {
+  height: 42px;
+  background: var(--neuron-pill-bg);
+  border: 1.5px solid var(--neuron-pill-border);
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
+  padding: 3px 8px;
+  border-radius: 50px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.lang-flag-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: transparent;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0;
+  overflow: hidden;
+}
+
+.lang-flag-btn:hover {
+  transform: scale(1.1);
+}
+
+.lang-flag-btn.active {
+  border-color: var(--neuron-orange);
+  box-shadow: 0 0 12px var(--neuron-orange-glow);
+  transform: scale(1.08);
+}
+
+/* Theme Toggle Button */
+.btn-theme-toggle {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--neuron-pill-bg);
+  border: 1.5px solid var(--neuron-pill-border);
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
+  color: var(--neuron-text-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.btn-theme-toggle:hover {
+  border-color: var(--neuron-orange);
+  color: var(--neuron-orange);
+  transform: translateY(-1px);
+}
+
+/* Toolbar Card */
+.toolbar-glass-card {
+  padding: 14px 24px !important;
+  margin-bottom: 20px;
+  z-index: 10 !important;
+  position: relative;
+}
+
+/* Toolbar Card & Sleek Inline Action Items */
+.toolbar-glass-card {
+  padding: 8px 18px !important;
+  margin-bottom: 20px;
+  z-index: 10 !important;
+  position: relative;
+}
+
+.toolbar-scroll-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.toolbar-scroll-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.toolbar-item-btn {
+  background: transparent;
+  border: none;
+  color: var(--neuron-text-primary);
+  font-weight: 600;
+  font-size: 0.88rem;
+  padding: 7px 13px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.toolbar-item-btn:hover {
+  background: rgba(234, 88, 12, 0.08);
+  color: var(--neuron-orange);
+  transform: translateY(-1px);
+}
+
+body.editor-page.dark-theme .toolbar-item-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--neuron-orange);
+}
+
+.toolbar-separator {
+  width: 1px;
+  height: 20px;
+  background: rgba(148, 163, 184, 0.35);
+  margin: 0 4px;
+  flex-shrink: 0;
+  align-self: center;
+}
+
+body.editor-page.dark-theme .toolbar-separator {
+  background: rgba(100, 116, 139, 0.4);
+}
+
+/* Main Workspace Cards */
+.workspace-card {
+  border-radius: 24px;
+  overflow: hidden;
+  height: 100%;
+}
+
+.workspace-card-header {
+  background: var(--neuron-header-bg);
+  border-bottom: 1.5px solid var(--neuron-header-border);
+  padding: 14px 22px;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+/* Ace Editor */
+#editor {
+  width: 100%;
+  height: 560px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13.5px;
+  line-height: 1.55;
+  border-radius: 0 0 24px 24px;
+}
+
+/* Output Tab Navigation */
+.output-nav-tabs {
+  border-bottom: none;
+  gap: 6px;
+  flex-wrap: nowrap !important;
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.output-nav-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.output-nav-tabs .nav-item {
+  flex-shrink: 0;
+}
+
+.output-nav-tabs .nav-link {
+  color: var(--neuron-text-secondary);
+  font-weight: 700;
+  font-size: 0.88rem;
+  border: none;
+  border-bottom: 3px solid transparent;
+  padding: 8px 16px;
+  border-radius: 12px 12px 0 0;
+  transition: all 0.2s ease;
+  background: transparent;
+  white-space: nowrap !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.output-nav-tabs .nav-link:hover {
+  color: var(--neuron-text-primary);
+  background: var(--neuron-orange-soft);
+}
+
+body.editor-page.dark-theme .output-nav-tabs .nav-link:hover {
+  background: rgba(234, 88, 12, 0.12);
+}
+
+.output-nav-tabs .nav-link.active {
+  color: var(--neuron-tab-active-text) !important;
+  background: var(--neuron-tab-active-bg) !important;
+  border-bottom: 3px solid var(--neuron-tab-active-border) !important;
+}
+
+/* Terminal Console View */
+.terminal-window {
+  background: var(--neuron-terminal-bg);
+  border-radius: 0 0 24px 24px;
+  height: 560px;
+  overflow-y: auto;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13.5px;
+  padding: 22px 24px;
+  color: var(--neuron-terminal-text);
+  transition: background 0.3s ease;
+}
+
+.terminal-line {
+  margin-bottom: 5px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.terminal-line.out-ok {
+  color: #4ade80;
+}
+
+.terminal-line.out-err {
+  color: #f87171;
+}
+
+.terminal-line.out-meta {
+  color: #38bdf8;
+  font-size: 0.82rem;
+  border-top: 1px dashed rgba(255, 255, 255, 0.15);
+  margin-top: 10px;
+  padding-top: 8px;
+}
+
+/* Visualizer Window */
+.visualizer-window {
+  background: var(--neuron-visual-bg);
+  border-radius: 0 0 24px 24px;
+  height: 560px;
+  overflow-y: auto;
+  padding: 20px 24px;
+  transition: background 0.3s ease;
+}
+
+/* Debugger Output Window */
+.ai-debug-window {
+  background: var(--neuron-debug-bg);
+  border-radius: 0 0 24px 24px;
+  height: 560px;
+  overflow-y: auto;
+  padding: 22px 24px;
+  transition: background 0.3s ease;
+}
+
+.debug-results-box .issue-item-card {
+  background: var(--neuron-debug-card-bg) !important;
+  border: 1.5px solid var(--neuron-debug-card-border) !important;
+  color: var(--neuron-debug-card-text) !important;
+  transition: all 0.2s ease;
+}
+
+/* Symmetrical Header Badges */
+.editor-header-badge {
+  height: 32px;
+  padding: 0 14px;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  font-family: 'JetBrains Mono', monospace;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: var(--neuron-pill-bg);
+  border: 1.5px solid var(--neuron-pill-border);
+  color: var(--neuron-text-secondary);
+  transition: all 0.2s ease;
+}
+
+/* Spacious Dark Code Fix Boxes */
+.fix-code-box, .item-fix-box {
+  background: #090d16 !important;
+  border-radius: 14px !important;
+  padding: 14px 18px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25) !important;
+  transition: all 0.2s ease;
+}
+
+.fix-code-box code, .item-fix-box code {
+  padding: 4px 6px !important;
+  line-height: 1.65 !important;
+  white-space: pre-wrap !important;
+  word-break: break-word !important;
+  font-family: 'JetBrains Mono', monospace !important;
+}
+
+.hover-glow-snippet:hover {
+  border-color: var(--neuron-orange) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(234, 88, 12, 0.15) !important;
+}
+
+/* Modal dark theme support */
+body.editor-page.dark-theme .modal-content {
+  background: var(--neuron-modal-bg) !important;
+  border-color: var(--neuron-modal-border) !important;
+  color: var(--neuron-modal-text) !important;
+}
+
+body.editor-page.dark-theme .modal-header {
+  border-bottom-color: var(--neuron-modal-border) !important;
+}
+
+body.editor-page.dark-theme .btn-close {
+  filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+/* Responsive adjustments for Mobile & Tablet */
+@media (max-width: 991px) {
+  .editor-container {
+    max-width: 98%;
+    width: 98%;
+    padding: 10px 6px;
+  }
+  .header-glass-card {
+    padding: 12px 16px !important;
+    margin-bottom: 12px;
+  }
+  .toolbar-glass-card {
+    padding: 6px 12px !important;
+    margin-bottom: 14px;
+  }
+  .toolbar-item-btn {
+    padding: 6px 10px;
+    font-size: 0.82rem;
+  }
+  #editor {
+    height: 400px;
+  }
+  .terminal-window, .visualizer-window, .ai-debug-window {
+    height: 400px;
+    padding: 14px 16px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-glass-card {
+    padding: 10px 12px !important;
+  }
+  .brand-title {
+    font-size: 1.15rem !important;
+  }
+  #brandSubtitle {
+    font-size: 0.72rem !important;
+  }
+  .glass-icon-box-orange {
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 12px !important;
+  }
+  .detection-pill {
+    height: 34px !important;
+    padding: 0 10px !important;
+    font-size: 0.78rem !important;
+    gap: 6px !important;
+  }
+  .flag-group-container {
+    height: 34px !important;
+    padding: 2px 6px !important;
+    gap: 4px !important;
+  }
+  .lang-flag-btn {
+    width: 26px !important;
+    height: 26px !important;
+  }
+  .btn-theme-toggle {
+    width: 34px !important;
+    height: 34px !important;
+    font-size: 0.95rem !important;
+  }
+  .editor-header-badge {
+    height: 26px !important;
+    padding: 0 8px !important;
+    font-size: 0.72rem !important;
+    gap: 4px !important;
+  }
+  .workspace-card-header {
+    padding: 10px 14px !important;
+  }
+  .output-nav-tabs .nav-link {
+    padding: 6px 10px !important;
+    font-size: 0.78rem !important;
+  }
+}
