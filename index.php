@@ -40,7 +40,7 @@
     <!-- 1. TOP HEADER BRAND & SETTINGS BAR (STICKY, SYMMETRICAL, ICONS ON MOBILE) -->
     <header class="header-glass-card neuron-glass-card d-flex align-items-center justify-content-between flex-nowrap gap-2">
       <!-- Left: Logo & Brand Name (Simetris & Bersih) -->
-      <div class="d-flex align-items-center gap-2 gap-sm-3 flex-shrink-0">
+      <div class="brand-header-left d-flex align-items-center gap-2 gap-sm-3">
         <div class="glass-icon-box glass-icon-box-orange">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ea580c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M9.5 2A4.5 4.5 0 0 0 5 6.5C5 7.3 5.2 8 5.6 8.6A4 4 0 0 0 4 12a4 4 0 0 0 1.2 2.8A4.5 4.5 0 0 0 9.5 19H10V2H9.5z"/>
@@ -59,9 +59,9 @@
       </div>
 
       <!-- Right: Auto-Detect Dropdown Pill, Circular Flag Switchers, Theme Toggle (Never wrapping) -->
-      <div class="header-controls-group d-flex align-items-center gap-1.5 gap-sm-2 flex-nowrap ms-auto flex-shrink-0">
+      <div class="header-controls-group d-flex align-items-center gap-1 gap-sm-2 flex-nowrap">
         <!-- Intelligent Auto-Detection Pill (Menu TIDAK terhalang, z-index 1065) -->
-        <div class="dropdown detection-pill-wrapper flex-shrink-0">
+        <div class="dropdown detection-pill-wrapper">
           <div class="detection-pill dropdown-toggle" id="detectorPill" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" title="Bahasa terdeteksi otomatis. Klik untuk mengganti secara manual jika perlu.">
             <span class="pulse-dot"></span>
             <span class="text-secondary small d-none d-md-inline" id="autoDetectLabel">Deteksi Otomatis:</span>
@@ -90,10 +90,10 @@
         </div>
 
         <!-- Circular Flag Switchers: Indonesia & UK (English) -->
-        <div class="flag-group-container flex-shrink-0">
+        <div class="flag-group-container">
           <!-- Flag Indonesia (Circular SVG) -->
           <button type="button" class="lang-flag-btn active" id="flagBtnId" onclick="setEditorLanguage('Indonesia')" title="Bahasa Indonesia">
-            <svg class="flex-shrink-0" width="22" height="22" viewBox="0 0 24 24" style="border-radius: 50%;">
+            <svg class="flag-icon-svg" width="22" height="22" viewBox="0 0 24 24" style="border-radius: 50%;">
               <rect width="24" height="12" fill="#e70011"/>
               <rect y="12" width="24" height="12" fill="#ffffff"/>
             </svg>
@@ -101,7 +101,7 @@
 
           <!-- Flag UK / English (Circular SVG) -->
           <button type="button" class="lang-flag-btn" id="flagBtnEn" onclick="setEditorLanguage('English')" title="English">
-            <svg class="flex-shrink-0" width="22" height="22" viewBox="0 0 24 24" style="border-radius: 50%;">
+            <svg class="flag-icon-svg" width="22" height="22" viewBox="0 0 24 24" style="border-radius: 50%;">
               <clipPath id="circleUkEditor"><circle cx="12" cy="12" r="12"/></clipPath>
               <g clip-path="url(#circleUkEditor)">
                 <rect width="24" height="24" fill="#00247d"/>
@@ -115,7 +115,7 @@
         </div>
 
         <!-- Light / Dark Theme Switcher -->
-        <button type="button" class="btn-theme-toggle flex-shrink-0" id="themeToggleBtn" title="Ganti Tema Editor (Gelap / Terang)">
+        <button type="button" class="btn-theme-toggle" id="themeToggleBtn" title="Ganti Tema Editor (Gelap / Terang)">
           <i class="bi bi-moon-stars-fill text-primary" id="themeToggleIcon"></i>
         </button>
       </div>

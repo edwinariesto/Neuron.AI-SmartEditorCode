@@ -106,9 +106,8 @@ body.editor-page {
 
 @media (max-width: 991px) {
   .editor-container {
-    max-width: 98%;
-    width: 98%;
-    padding: 12px 6px;
+    max-width: 100%;
+    width: 100%;
   }
 }
 
@@ -663,12 +662,13 @@ body.editor-page.dark-theme .btn-close {
 /* Responsive adjustments for Mobile & Tablet */
 @media (max-width: 991px) {
   .editor-container {
-    max-width: 98%;
-    width: 98%;
-    padding: 10px 6px;
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 12px 18px 28px !important;
+    box-sizing: border-box !important;
   }
   .header-glass-card {
-    padding: 12px 16px !important;
+    padding: 10px 16px !important;
     margin-bottom: 12px;
   }
   .toolbar-glass-card {
@@ -692,71 +692,149 @@ body.editor-page.dark-theme .btn-close {
   .editor-container {
     max-width: 100% !important;
     width: 100% !important;
-    padding: 6px 4px !important;
+    padding: 10px 14px 24px !important; /* Breathing room from device screen edges */
+    box-sizing: border-box !important;
   }
 
-  /* 1. Fluid Sticky Header: Scales Down Continuously */
+  /* 1. Fluid Sticky Header: Scales Down Continuously & Zero Overflow */
   .header-glass-card {
-    padding: clamp(5px, 1.5vw, 8px) clamp(6px, 2vw, 12px) !important;
+    padding: clamp(5px, 1.2vw, 8px) clamp(8px, 1.8vw, 12px) !important;
+    border-radius: clamp(14px, 3.2vw, 18px) !important;
     top: 4px !important;
     margin-bottom: 10px !important;
     flex-wrap: nowrap !important;
-    gap: clamp(3px, 1.2vw, 8px) !important;
+    gap: clamp(4px, 1.2vw, 8px) !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: visible !important;
   }
+
+  .brand-header-left {
+    min-width: 0 !important;
+    flex-shrink: 1 !important;
+    gap: clamp(4px, 1.2vw, 8px) !important;
+  }
+
   .brand-title {
-    font-size: clamp(0.92rem, 3.4vw, 1.15rem) !important;
-    letter-spacing: -0.3px !important;
+    font-size: clamp(0.78rem, 2.7vw, 0.95rem) !important;
+    letter-spacing: -0.2px !important;
     white-space: nowrap !important;
+    line-height: 1.1 !important;
   }
+
   #brandSubtitle {
     display: none !important;
   }
+
   .glass-icon-box-orange {
-    width: clamp(26px, 6.5vw, 32px) !important;
-    height: clamp(26px, 6.5vw, 32px) !important;
-    border-radius: 8px !important;
-  }
-  .glass-icon-box-orange svg {
-    width: clamp(14px, 3.8vw, 18px) !important;
-    height: clamp(14px, 3.8vw, 18px) !important;
-  }
-  .header-controls-group {
-    gap: clamp(2px, 0.8vw, 5px) !important;
-  }
-  .detection-pill {
-    height: clamp(26px, 6.2vw, 30px) !important;
-    padding: 0 clamp(4px, 1.2vw, 7px) !important;
-    font-size: clamp(0.68rem, 1.8vw, 0.76rem) !important;
-    gap: clamp(2px, 0.6vw, 4px) !important;
-  }
-  .detection-pill .pulse-dot {
-    width: 5px !important;
-    height: 5px !important;
-  }
-  .flag-group-container {
-    height: clamp(26px, 6.2vw, 30px) !important;
-    padding: 1px clamp(2px, 0.6vw, 4px) !important;
-    gap: clamp(1px, 0.5vw, 3px) !important;
-  }
-  .lang-flag-btn {
-    width: clamp(18px, 4.5vw, 22px) !important;
-    height: clamp(18px, 4.5vw, 22px) !important;
-  }
-  .lang-flag-btn svg {
-    width: clamp(15px, 4vw, 18px) !important;
-    height: clamp(15px, 4vw, 18px) !important;
-  }
-  .btn-theme-toggle {
-    width: clamp(26px, 6.2vw, 30px) !important;
-    height: clamp(26px, 6.2vw, 30px) !important;
-    font-size: clamp(0.72rem, 2vw, 0.85rem) !important;
+    width: clamp(24px, 5.5vw, 28px) !important;
+    height: clamp(24px, 5.5vw, 28px) !important;
+    min-width: clamp(24px, 5.5vw, 28px) !important;
+    border-radius: 7px !important;
     flex-shrink: 0 !important;
+  }
+
+  .glass-icon-box-orange svg {
+    width: clamp(13px, 3.2vw, 15px) !important;
+    height: clamp(13px, 3.2vw, 15px) !important;
+  }
+
+  .header-controls-group {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: clamp(2px, 0.7vw, 5px) !important;
+    flex-shrink: 0 !important;
+    min-width: 0 !important;
+    margin-left: auto !important;
+  }
+
+  .detection-pill-wrapper {
+    flex-shrink: 0 !important;
+  }
+
+  .detection-pill {
+    height: clamp(24px, 5.5vw, 28px) !important;
+    padding: 0 clamp(4px, 1vw, 7px) !important;
+    font-size: clamp(0.66rem, 1.6vw, 0.74rem) !important;
+    gap: clamp(2px, 0.5vw, 4px) !important;
+    border-radius: 999px !important;
+    white-space: nowrap !important;
+  }
+
+  .detection-pill .pulse-dot {
+    width: 4px !important;
+    height: 4px !important;
+  }
+
+  #detectedLangBadge {
+    display: inline-flex !important;
+    align-items: center !important;
+  }
+
+  #detectedLangIcon {
+    font-size: clamp(0.72rem, 1.8vw, 0.8rem) !important;
+    margin-right: 2px !important;
+  }
+
+  #detectedLangText {
+    font-size: clamp(0.66rem, 1.6vw, 0.74rem) !important;
+    max-width: clamp(36px, 9vw, 55px) !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    display: inline-block !important;
+    vertical-align: middle !important;
+  }
+
+  .detection-pill::after {
+    margin-left: 2px !important;
+    border-width: 3px 3px 0 !important;
+    vertical-align: 0.15em !important;
+  }
+
+  .flag-group-container {
+    height: clamp(24px, 5.5vw, 28px) !important;
+    padding: 1px clamp(2px, 0.5vw, 3px) !important;
+    gap: clamp(1px, 0.4vw, 2px) !important;
+    border-radius: 999px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .lang-flag-btn {
+    width: clamp(16px, 4vw, 19px) !important;
+    height: clamp(16px, 4vw, 19px) !important;
+    min-width: clamp(16px, 4vw, 19px) !important;
+    border-width: 1.5px !important;
+    padding: 0 !important;
+  }
+
+  .lang-flag-btn svg,
+  .flag-icon-svg {
+    width: clamp(13px, 3.4vw, 16px) !important;
+    height: clamp(13px, 3.4vw, 16px) !important;
+    display: block !important;
+  }
+
+  .lang-flag-btn.active {
+    transform: scale(1.04) !important;
+  }
+
+  .btn-theme-toggle {
+    width: clamp(24px, 5.5vw, 28px) !important;
+    height: clamp(24px, 5.5vw, 28px) !important;
+    min-width: clamp(24px, 5.5vw, 28px) !important;
+    font-size: clamp(0.68rem, 1.8vw, 0.78rem) !important;
+    flex-shrink: 0 !important;
+    padding: 0 !important;
   }
 
   /* 2. Fluid Toolbar: Scales Down Continuously */
   .toolbar-glass-card {
     padding: clamp(4px, 1vw, 6px) clamp(5px, 1.5vw, 8px) !important;
+    border-radius: clamp(14px, 3.2vw, 20px) !important;
     margin-bottom: 10px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
   .toolbar-btn-label {
     display: none !important;
@@ -779,6 +857,11 @@ body.editor-page.dark-theme .btn-close {
   }
 
   /* 3. Editor Header Badges: Clean, Fluid Inline, Anti-Overlap */
+  .workspace-card {
+    border-radius: clamp(16px, 3.5vw, 24px) !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
   .editor-header-badge {
     height: clamp(22px, 5.2vw, 26px) !important;
     padding: 0 clamp(4px, 1vw, 6px) !important;
@@ -789,6 +872,7 @@ body.editor-page.dark-theme .btn-close {
   }
   .workspace-card-header {
     padding: clamp(6px, 1.4vw, 8px) clamp(6px, 1.8vw, 10px) !important;
+    border-radius: clamp(16px, 3.5vw, 24px) clamp(16px, 3.5vw, 24px) 0 0 !important;
   }
 
   /* 4. Output Tabs: Symmetrical 3-Column Split (TOTAL 3 TABS, NEVER CUT-OFF) */
@@ -833,63 +917,94 @@ body.editor-page.dark-theme .btn-close {
   }
 }
 
+/* Compact Mobile Devices (<= 480px) */
+@media (max-width: 480px) {
+  .editor-container {
+    padding: 8px 12px 20px !important; /* 12px space on compact phones */
+  }
+  .header-glass-card {
+    padding: 5px 8px !important;
+  }
+  .brand-title {
+    font-size: 0.82rem !important;
+  }
+  .detection-pill {
+    padding: 0 5px !important;
+  }
+}
+
 /* Extra Tight Devices (<= 380px) */
 @media (max-width: 380px) {
+  .editor-container {
+    padding: 6px 10px 16px !important; /* 10px space on extra tight screens */
+  }
   .header-glass-card {
     padding: 5px 6px !important;
+    border-radius: 12px !important;
     gap: 3px !important;
   }
   .brand-title {
-    font-size: 0.88rem !important;
+    font-size: 0.74rem !important;
   }
   .glass-icon-box-orange {
-    width: 25px !important;
-    height: 25px !important;
-    border-radius: 7px !important;
+    width: 22px !important;
+    height: 22px !important;
+    min-width: 22px !important;
+    border-radius: 6px !important;
   }
   .glass-icon-box-orange svg {
-    width: 13px !important;
-    height: 13px !important;
+    width: 12px !important;
+    height: 12px !important;
   }
   .detection-pill {
-    height: 25px !important;
+    height: 22px !important;
     padding: 0 4px !important;
-    font-size: 0.68rem !important;
+    font-size: 0.62rem !important;
     gap: 2px !important;
   }
+  .detection-pill .pulse-dot {
+    display: none !important;
+  }
+  #detectedLangText {
+    max-width: 34px !important;
+    font-size: 0.62rem !important;
+  }
   .flag-group-container {
-    height: 25px !important;
+    height: 22px !important;
     padding: 1px 2px !important;
     gap: 1px !important;
   }
   .lang-flag-btn {
-    width: 17px !important;
-    height: 17px !important;
-  }
-  .lang-flag-btn svg {
     width: 14px !important;
     height: 14px !important;
+    min-width: 14px !important;
+  }
+  .lang-flag-btn svg,
+  .flag-icon-svg {
+    width: 12px !important;
+    height: 12px !important;
   }
   .btn-theme-toggle {
-    width: 25px !important;
-    height: 25px !important;
-    font-size: 0.72rem !important;
+    width: 22px !important;
+    height: 22px !important;
+    min-width: 22px !important;
+    font-size: 0.65rem !important;
   }
   .toolbar-item-btn {
-    width: 27px !important;
-    height: 27px !important;
-    min-width: 27px !important;
+    width: 26px !important;
+    height: 26px !important;
+    min-width: 26px !important;
   }
   .toolbar-item-btn i {
-    font-size: 0.85rem !important;
+    font-size: 0.8rem !important;
   }
   .editor-header-badge {
-    height: 22px !important;
-    padding: 0 4px !important;
-    font-size: 0.63rem !important;
+    height: 20px !important;
+    padding: 0 3px !important;
+    font-size: 0.6rem !important;
   }
   .output-nav-tabs .nav-link {
-    font-size: 0.62rem !important;
+    font-size: 0.6rem !important;
     padding: 4px 1px !important;
   }
 }
