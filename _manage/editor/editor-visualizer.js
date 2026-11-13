@@ -106,9 +106,9 @@
       wrap.className = 'visual-media-box p-2 text-center d-flex flex-column align-items-center justify-content-center h-100';
 
       wrap.innerHTML = `
-        <div class="visual-toolbar mb-2 d-flex align-items-center justify-content-between flex-nowrap w-100 px-2.5 py-1.5 rounded-4" style="background: var(--neuron-pill-bg); border: 1.5px solid var(--neuron-pill-border); box-shadow: 0 2px 8px rgba(0,0,0,0.04); min-width: 0;">
+        <div class="visual-toolbar mb-2 d-flex align-items-center justify-content-between flex-nowrap w-100 px-2 py-1 rounded-4" style="background: var(--neuron-pill-bg); border: 1.5px solid var(--neuron-pill-border); box-shadow: 0 2px 8px rgba(0,0,0,0.04); min-width: 0; min-height: 40px; padding: 6px 10px;">
           <div class="d-flex align-items-center gap-1.5 flex-shrink-0">
-            <span class="badge bg-warning text-dark fw-bold px-2.5 py-1 rounded-pill d-inline-flex align-items-center" style="font-size: 0.78rem;">
+            <span class="badge bg-warning text-dark fw-bold px-2 py-1 rounded-pill d-inline-flex align-items-center" style="font-size: 0.78rem;">
               <i class="bi bi-image me-1"></i> <span class="d-none d-sm-inline">${caption}</span><span class="d-inline d-sm-none">Citra</span>
             </span>
           </div>
@@ -153,9 +153,9 @@
       wrap.className = 'visual-media-box p-2 text-center d-flex flex-column align-items-center justify-content-center h-100';
 
       wrap.innerHTML = `
-        <div class="visual-toolbar mb-2 d-flex align-items-center justify-content-between flex-nowrap w-100 px-2.5 py-1.5 rounded-4" style="background: var(--neuron-pill-bg); border: 1.5px solid var(--neuron-pill-border); box-shadow: 0 2px 8px rgba(0,0,0,0.04); min-width: 0;">
+        <div class="visual-toolbar mb-2 d-flex align-items-center justify-content-between flex-nowrap w-100 px-2 py-1 rounded-4" style="background: var(--neuron-pill-bg); border: 1.5px solid var(--neuron-pill-border); box-shadow: 0 2px 8px rgba(0,0,0,0.04); min-width: 0; min-height: 40px; padding: 6px 10px;">
           <div class="d-flex align-items-center gap-1.5 flex-shrink-0">
-            <span class="badge bg-success text-white fw-bold px-2.5 py-1 rounded-pill d-inline-flex align-items-center" style="font-size: 0.78rem;">
+            <span class="badge bg-success text-white fw-bold px-2 py-1 rounded-pill d-inline-flex align-items-center" style="font-size: 0.78rem;">
               <i class="bi bi-bezier2 me-1"></i> <span class="d-none d-sm-inline">Vektor Grafis SVG</span><span class="d-inline d-sm-none">SVG</span>
             </span>
           </div>
@@ -187,9 +187,9 @@
       wrap.className = 'visual-table-box p-2 d-flex flex-column h-100';
 
       wrap.innerHTML = `
-        <div class="visual-toolbar mb-2 d-flex align-items-center justify-content-between flex-nowrap w-100 px-2.5 py-1.5 rounded-4" style="background: var(--neuron-pill-bg); border: 1.5px solid var(--neuron-pill-border); box-shadow: 0 2px 8px rgba(0,0,0,0.04); min-width: 0;">
+        <div class="visual-toolbar mb-2 d-flex align-items-center justify-content-between flex-nowrap w-100 px-2 py-1 rounded-4" style="background: var(--neuron-pill-bg); border: 1.5px solid var(--neuron-pill-border); box-shadow: 0 2px 8px rgba(0,0,0,0.04); min-width: 0; min-height: 40px; padding: 6px 10px;">
           <div class="d-flex align-items-center gap-1.5 flex-shrink-0">
-            <span class="badge bg-warning text-dark fw-bold px-2.5 py-1 rounded-pill d-inline-flex align-items-center" style="font-size: 0.78rem;">
+            <span class="badge bg-warning text-dark fw-bold px-2 py-1 rounded-pill d-inline-flex align-items-center" style="font-size: 0.78rem;">
               <i class="bi bi-table me-1"></i> <span class="d-none d-sm-inline">Tabel Data</span><span class="d-inline d-sm-none">Tabel</span>
             </span>
             <span class="badge bg-light text-secondary border px-2 py-0.5 rounded-pill small d-none d-sm-inline" style="font-size: 0.72rem;">${data.length} Baris</span>

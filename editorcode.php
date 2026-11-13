@@ -257,9 +257,7 @@
             <!-- TAB PANE 1: TERMINAL CONSOLE -->
             <div class="tab-pane fade show active h-100" id="tab-terminal" role="tabpanel">
               <div class="terminal-window" id="terminalOutput">
-                <div class="terminal-line out-meta">
-                  [Neuron.AI Runner Siap] Tulis kode Anda di sebelah kiri, lalu klik "Jalankan Kode" untuk melihat output.
-                </div>
+                <div class="terminal-line out-meta" id="terminalReadyLine">[Neuron.AI Runner Siap] Tulis kode Anda di sebelah kiri, lalu klik "Jalankan Kode" untuk melihat output.</div>
               </div>
             </div>
 
@@ -329,7 +327,7 @@
       <div class="modal-content neuron-glass-card border-secondary border-opacity-25 shadow-lg">
         <div class="modal-header border-bottom border-secondary border-opacity-25 pb-3">
           <div class="d-flex align-items-center gap-2">
-            <span class="glass-icon-box-orange" style="width: 36px; height: 36px; border-radius: 12px;">
+            <span class="glass-icon-box-orange rounded-circle" style="width: 36px; height: 36px; min-width: 36px; max-width: 36px; min-height: 36px; max-height: 36px; aspect-ratio: 1/1; border-radius: 50% !important;">
               <i class="bi bi-key-fill" style="color: #ea580c;"></i>
             </span>
             <h5 class="modal-title fw-bold fs-6 mb-0" id="apiKeyModalLabel" style="color: var(--neuron-text-primary);">Konfigurasi AI Provider & API Key</h5>
@@ -337,29 +335,159 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body p-3 p-md-4">
-          <p class="small mb-3" style="color: var(--neuron-text-secondary); line-height: 1.55;">
+          <p class="small mb-3" id="apiKeyModalDesc" style="color: var(--neuron-text-secondary); line-height: 1.55;">
             Pilih model AI dan tempelkan API Key Anda untuk mengaktifkan <strong>AI Runtime Simulation</strong> (menjalankan segala bahasa seperti MATLAB, Java, C++) dan audit kode online. Jika belum diisi, sistem otomatis menggunakan <strong>Audit Koding Lokal Cerdas</strong>.
           </p>
 
-          <!-- 1. AI Provider Selection Combobox -->
+          <!-- 1. AI Provider Selection Combobox with Search & Rich Icons -->
           <div class="mb-3">
-            <label class="form-label small fw-bold" style="color: var(--neuron-text-secondary);">PILIH PROVIDER / MODEL AI</label>
-            <select id="aiProviderSelect" class="form-select fw-semibold" style="background: var(--neuron-input-bg); color: var(--neuron-text-primary); border: 1.5px solid var(--neuron-input-border); border-radius: 12px; padding: 10px 14px;">
+            <label class="form-label small fw-bold" id="lblAiProvider" style="color: var(--neuron-text-secondary);">PILIH PROVIDER / MODEL AI</label>
+            
+            <!-- Hidden native select for form/state compatibility -->
+            <select id="aiProviderSelect" class="d-none">
               <option value="gemini-2.5-flash">Google Gemini (Gemini 2.5 Flash — Tercepat & Rekomendasi)</option>
               <option value="gemini-1.5-pro">Google Gemini (Gemini 1.5 Pro — Analisa Mendalam)</option>
               <option value="openai-gpt-4o">OpenAI ChatGPT (GPT-4o Omni)</option>
               <option value="openai-gpt-4o-mini">OpenAI ChatGPT (GPT-4o Mini)</option>
               <option value="claude-3.5-sonet">Anthropic Claude (Claude 3.5 Sonnet)</option>
-              <option value="deepseek-chat">DeepSeek AI (DeepSeek-V3 / R1)</option>
+              <option value="deepseek-chat">DeepSeek AI (DeepSeek-V3 Chat)</option>
+              <option value="deepseek-reasoner">DeepSeek AI (DeepSeek-R1 Reasoner)</option>
             </select>
+
+            <!-- Custom Searchable Combobox Trigger -->
+            <div class="dropdown custom-ai-select-dropdown w-100 position-relative">
+              <button type="button" class="form-select custom-ai-select-btn d-flex align-items-center justify-content-between w-100 fw-semibold text-start shadow-sm" id="customAiSelectBtn" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
+                <div class="d-flex align-items-center gap-2 text-truncate" id="customAiSelectedDisplay">
+                  <span class="ai-provider-badge-icon flex-shrink-0" id="customAiSelectedIcon" style="background: rgba(234, 88, 12, 0.15); color: #ea580c;">
+                    <i class="bi bi-stars"></i>
+                  </span>
+                  <span class="fw-semibold small text-truncate" id="customAiSelectedText">Google Gemini (Gemini 2.5 Flash)</span>
+                </div>
+                <i class="bi bi-chevron-down ms-2 text-secondary flex-shrink-0" style="font-size: 0.8rem;"></i>
+              </button>
+
+              <!-- Custom Dropdown Menu with Search Box & Rich Model List -->
+              <div class="dropdown-menu custom-ai-dropdown-menu w-100 p-2 shadow-lg" id="customAiDropdownMenu">
+                <!-- Search Box inside Dropdown -->
+                <div class="px-1 pt-1 pb-2 sticky-top" style="background: inherit;">
+                  <div class="input-group input-group-sm">
+                    <span class="input-group-text border-end-0 bg-transparent" style="color: var(--neuron-orange); border-color: var(--neuron-input-border);">
+                      <i class="bi bi-search"></i>
+                    </span>
+                    <input type="text" id="aiModelSearchInput" class="form-control border-start-0" placeholder="Cari provider atau model AI..." style="background: var(--neuron-input-bg); color: var(--neuron-text-primary); border-color: var(--neuron-input-border);" autocomplete="off" />
+                  </div>
+                </div>
+                <div class="dropdown-divider my-1"></div>
+                <!-- Model List Items with Icons -->
+                <div class="ai-model-list-container" id="aiModelListContainer">
+                  <!-- Option 1: Gemini 2.5 Flash -->
+                  <div class="ai-model-item d-flex align-items-center justify-content-between active" data-value="gemini-2.5-flash" data-provider="gemini" data-label="Google Gemini (Gemini 2.5 Flash)" data-icon="bi-stars" data-icon-color="#ea580c" data-icon-bg="rgba(234, 88, 12, 0.15)">
+                    <div class="d-flex align-items-center gap-2 text-truncate">
+                      <span class="ai-provider-badge-icon flex-shrink-0" style="background: rgba(234, 88, 12, 0.15); color: #ea580c;">
+                        <i class="bi bi-stars"></i>
+                      </span>
+                      <div class="text-truncate">
+                        <div class="fw-bold small">Google Gemini</div>
+                        <div class="text-secondary small font-monospace text-truncate" style="font-size: 0.72rem;">Gemini 2.5 Flash — Tercepat & Rekomendasi</div>
+                      </div>
+                    </div>
+                    <i class="bi bi-check-circle-fill text-success fs-6 check-indicator flex-shrink-0 ms-2"></i>
+                  </div>
+
+                  <!-- Option 2: Gemini 1.5 Pro -->
+                  <div class="ai-model-item d-flex align-items-center justify-content-between" data-value="gemini-1.5-pro" data-provider="gemini" data-label="Google Gemini (Gemini 1.5 Pro)" data-icon="bi-stars" data-icon-color="#6366f1" data-icon-bg="rgba(99, 102, 241, 0.15)">
+                    <div class="d-flex align-items-center gap-2 text-truncate">
+                      <span class="ai-provider-badge-icon flex-shrink-0" style="background: rgba(99, 102, 241, 0.15); color: #6366f1;">
+                        <i class="bi bi-stars"></i>
+                      </span>
+                      <div class="text-truncate">
+                        <div class="fw-bold small">Google Gemini</div>
+                        <div class="text-secondary small font-monospace text-truncate" style="font-size: 0.72rem;">Gemini 1.5 Pro — Analisa Mendalam</div>
+                      </div>
+                    </div>
+                    <i class="bi bi-check-circle-fill text-success fs-6 check-indicator flex-shrink-0 ms-2 d-none"></i>
+                  </div>
+
+                  <!-- Option 3: OpenAI GPT-4o -->
+                  <div class="ai-model-item d-flex align-items-center justify-content-between" data-value="openai-gpt-4o" data-provider="openai" data-label="OpenAI ChatGPT (GPT-4o Omni)" data-icon="bi-robot" data-icon-color="#10b981" data-icon-bg="rgba(16, 185, 129, 0.15)">
+                    <div class="d-flex align-items-center gap-2 text-truncate">
+                      <span class="ai-provider-badge-icon flex-shrink-0" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">
+                        <i class="bi bi-robot"></i>
+                      </span>
+                      <div class="text-truncate">
+                        <div class="fw-bold small">OpenAI ChatGPT</div>
+                        <div class="text-secondary small font-monospace text-truncate" style="font-size: 0.72rem;">GPT-4o Omni — Multimodal Flagship</div>
+                      </div>
+                    </div>
+                    <i class="bi bi-check-circle-fill text-success fs-6 check-indicator flex-shrink-0 ms-2 d-none"></i>
+                  </div>
+
+                  <!-- Option 4: OpenAI GPT-4o Mini -->
+                  <div class="ai-model-item d-flex align-items-center justify-content-between" data-value="openai-gpt-4o-mini" data-provider="openai" data-label="OpenAI ChatGPT (GPT-4o Mini)" data-icon="bi-lightning-charge-fill" data-icon-color="#14b8a6" data-icon-bg="rgba(20, 184, 166, 0.15)">
+                    <div class="d-flex align-items-center gap-2 text-truncate">
+                      <span class="ai-provider-badge-icon flex-shrink-0" style="background: rgba(20, 184, 166, 0.15); color: #14b8a6;">
+                        <i class="bi bi-lightning-charge-fill"></i>
+                      </span>
+                      <div class="text-truncate">
+                        <div class="fw-bold small">OpenAI ChatGPT</div>
+                        <div class="text-secondary small font-monospace text-truncate" style="font-size: 0.72rem;">GPT-4o Mini — Cepat & Efisien</div>
+                      </div>
+                    </div>
+                    <i class="bi bi-check-circle-fill text-success fs-6 check-indicator flex-shrink-0 ms-2 d-none"></i>
+                  </div>
+
+                  <!-- Option 5: Claude 3.5 Sonnet -->
+                  <div class="ai-model-item d-flex align-items-center justify-content-between" data-value="claude-3.5-sonet" data-provider="claude" data-label="Anthropic Claude (Claude 3.5 Sonnet)" data-icon="bi-chat-heart-fill" data-icon-color="#d97706" data-icon-bg="rgba(217, 119, 6, 0.15)">
+                    <div class="d-flex align-items-center gap-2 text-truncate">
+                      <span class="ai-provider-badge-icon flex-shrink-0" style="background: rgba(217, 119, 6, 0.15); color: #d97706;">
+                        <i class="bi bi-chat-heart-fill"></i>
+                      </span>
+                      <div class="text-truncate">
+                        <div class="fw-bold small">Anthropic Claude</div>
+                        <div class="text-secondary small font-monospace text-truncate" style="font-size: 0.72rem;">Claude 3.5 Sonnet — Penalaran Superior</div>
+                      </div>
+                    </div>
+                    <i class="bi bi-check-circle-fill text-success fs-6 check-indicator flex-shrink-0 ms-2 d-none"></i>
+                  </div>
+
+                  <!-- Option 6: DeepSeek-V3 Chat -->
+                  <div class="ai-model-item d-flex align-items-center justify-content-between" data-value="deepseek-chat" data-provider="deepseek" data-label="DeepSeek AI (DeepSeek-V3 Chat)" data-icon="bi-cpu-fill" data-icon-color="#0284c7" data-icon-bg="rgba(2, 132, 199, 0.15)">
+                    <div class="d-flex align-items-center gap-2 text-truncate">
+                      <span class="ai-provider-badge-icon flex-shrink-0" style="background: rgba(2, 132, 199, 0.15); color: #0284c7;">
+                        <i class="bi bi-cpu-fill"></i>
+                      </span>
+                      <div class="text-truncate">
+                        <div class="fw-bold small">DeepSeek AI</div>
+                        <div class="text-secondary small font-monospace text-truncate" style="font-size: 0.72rem;">DeepSeek-V3 Chat — Hemat & Cepat</div>
+                      </div>
+                    </div>
+                    <i class="bi bi-check-circle-fill text-success fs-6 check-indicator flex-shrink-0 ms-2 d-none"></i>
+                  </div>
+
+                  <!-- Option 7: DeepSeek-R1 Reasoner -->
+                  <div class="ai-model-item d-flex align-items-center justify-content-between" data-value="deepseek-reasoner" data-provider="deepseek" data-label="DeepSeek AI (DeepSeek-R1 Reasoner)" data-icon="bi-lightbulb-fill" data-icon-color="#38bdf8" data-icon-bg="rgba(56, 189, 248, 0.15)">
+                    <div class="d-flex align-items-center gap-2 text-truncate">
+                      <span class="ai-provider-badge-icon flex-shrink-0" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8;">
+                        <i class="bi bi-lightbulb-fill"></i>
+                      </span>
+                      <div class="text-truncate">
+                        <div class="fw-bold small">DeepSeek AI</div>
+                        <div class="text-secondary small font-monospace text-truncate" style="font-size: 0.72rem;">DeepSeek-R1 Reasoner — Deep Thinking</div>
+                      </div>
+                    </div>
+                    <i class="bi bi-check-circle-fill text-success fs-6 check-indicator flex-shrink-0 ms-2 d-none"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
           <!-- 2. API Key Input with Paste & Visibility Toggle -->
           <div class="mb-3">
             <div class="d-flex align-items-center justify-content-between mb-1">
-              <label class="form-label small fw-bold m-0" id="apiKeyProviderLabel" style="color: var(--neuron-text-secondary);">TEMPEL API KEY</label>
-              <button type="button" class="btn btn-sm text-primary p-0 text-decoration-none small fw-semibold" id="pasteApiKeyBtn">
-                <i class="bi bi-clipboard-plus me-1"></i> Tempel dari Clipboard
+              <label class="form-label small fw-bold m-0" id="lblApiKeyInput" style="color: var(--neuron-text-secondary);">TEMPEL API KEY</label>
+              <button type="button" class="btn btn-sm text-primary p-0 text-decoration-none small fw-semibold d-inline-flex align-items-center" id="pasteApiKeyBtn">
+                <i class="bi bi-clipboard-plus me-1"></i> <span id="pasteApiKeyBtnText">Tempel dari Clipboard</span>
               </button>
             </div>
             <div class="input-group">
@@ -369,7 +497,7 @@
               </button>
             </div>
             <div class="form-text small mt-1.5 d-flex align-items-center justify-content-between" style="color: var(--neuron-text-secondary);">
-              <span><i class="bi bi-shield-lock-fill text-success me-1"></i> Tersimpan lokal di browser (localStorage)</span>
+              <span id="lblApiKeyStored"><i class="bi bi-shield-lock-fill text-success me-1"></i> Tersimpan lokal di browser (localStorage)</span>
               <span id="apiKeyStatusBadge" class="badge bg-secondary bg-opacity-25 text-secondary">Belum Terhubung</span>
             </div>
           </div>
@@ -381,10 +509,10 @@
             </a>
             <div class="d-flex align-items-center gap-2">
               <button type="button" class="btn btn-sm btn-outline-danger px-3 py-1.5 rounded-pill d-none" id="clearApiKeyModalBtn" title="Hapus Kunci Tersimpan">
-                <i class="bi bi-trash3 me-1"></i> Hapus
+                <i class="bi bi-trash3 me-1"></i> <span id="clearApiKeyModalBtnText">Hapus</span>
               </button>
               <button type="button" class="btn btn-exec-action px-3.5 py-1.5 fs-6" id="saveApiKeyModalBtn">
-                <i class="bi bi-check-circle me-1"></i> Simpan
+                <i class="bi bi-check-circle me-1"></i> <span id="saveApiKeyModalBtnText">Simpan</span>
               </button>
             </div>
           </div>

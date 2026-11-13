@@ -466,7 +466,28 @@ SELECT * FROM users;`
       charCount: '%n Karakter',
       readyMsg: 'Terminal siap. Tulis kode lalu klik "Jalankan Kode" atau "AI Debug".',
       themeDark: 'Mode Gelap',
-      themeLight: 'Mode Terang'
+      themeLight: 'Mode Terang',
+      // API Key Modal
+      modalApiKeyTitle: 'Konfigurasi AI Provider & API Key',
+      modalApiKeyDesc: 'Pilih model AI dan tempelkan API Key Anda untuk mengaktifkan AI Runtime Simulation (menjalankan segala bahasa seperti MATLAB, Java, C++) dan audit kode online. Jika belum diisi, sistem otomatis menggunakan Audit Koding Lokal Cerdas.',
+      lblAiProvider: 'PILIH PROVIDER / MODEL AI',
+      aiModelSearchPlaceholder: 'Cari provider atau model AI...',
+      lblApiKeyInput: 'TEMPEL API KEY',
+      pasteApiKeyBtnText: 'Tempel dari Clipboard',
+      lblApiKeyStored: 'Tersimpan lokal di browser (localStorage)',
+      statusConnected: 'Terhubung',
+      statusNotConnected: 'Belum Terhubung',
+      clearApiKeyBtnText: 'Hapus',
+      saveApiKeyBtnText: 'Simpan',
+      portalGemini: 'Dapatkan Gemini API Key Gratis',
+      portalOpenAI: 'Buka OpenAI API Keys',
+      portalClaude: 'Buka Anthropic Console',
+      portalDeepSeek: 'Buka DeepSeek Platform',
+      placeholderGemini: 'Tempel Gemini API Key (AIzaSy...)',
+      placeholderOpenAI: 'Tempel OpenAI Key (sk-proj-...)',
+      placeholderClaude: 'Tempel Claude Key (sk-ant-...)',
+      placeholderDeepSeek: 'Tempel DeepSeek Key (sk-...)',
+      terminalReadyMsg: '[Neuron.AI Runner Siap] Tulis kode Anda di sebelah kiri, lalu klik "Jalankan Kode" untuk melihat output.'
     },
     English: {
       brandSub: 'Smart Code Editor & Debugger',
@@ -485,7 +506,28 @@ SELECT * FROM users;`
       charCount: '%n Characters',
       readyMsg: 'Terminal ready. Write code and click "Run Code" or "AI Debug".',
       themeDark: 'Dark Mode',
-      themeLight: 'Light Mode'
+      themeLight: 'Light Mode',
+      // API Key Modal
+      modalApiKeyTitle: 'AI Provider & API Key Configuration',
+      modalApiKeyDesc: 'Select an AI model and paste your API Key to enable AI Runtime Simulation (running any languages like MATLAB, Java, C++) and online code audit. If empty, system automatically uses Smart Local Code Auditor.',
+      lblAiProvider: 'SELECT AI PROVIDER / MODEL',
+      aiModelSearchPlaceholder: 'Search AI provider or model...',
+      lblApiKeyInput: 'PASTE API KEY',
+      pasteApiKeyBtnText: 'Paste from Clipboard',
+      lblApiKeyStored: 'Stored locally in browser (localStorage)',
+      statusConnected: 'Connected',
+      statusNotConnected: 'Not Connected',
+      clearApiKeyBtnText: 'Remove',
+      saveApiKeyBtnText: 'Save',
+      portalGemini: 'Get Free Gemini API Key',
+      portalOpenAI: 'Open OpenAI API Keys',
+      portalClaude: 'Open Anthropic Console',
+      portalDeepSeek: 'Open DeepSeek Platform',
+      placeholderGemini: 'Paste Gemini API Key (AIzaSy...)',
+      placeholderOpenAI: 'Paste OpenAI Key (sk-proj-...)',
+      placeholderClaude: 'Paste Claude Key (sk-ant-...)',
+      placeholderDeepSeek: 'Paste DeepSeek Key (sk-...)',
+      terminalReadyMsg: '[Neuron.AI Runner Ready] Write your code on the left, then click "Run Code" to view execution output.'
     }
   };
 
@@ -817,14 +859,15 @@ SELECT * FROM users;`
       if (providerSelect) providerSelect.value = savedProvider;
 
       const updateStatusUI = () => {
+        const dict = this.getDict();
         const hasKey = Boolean(keyInput && keyInput.value.trim());
         if (statusBadge) {
           if (hasKey) {
             statusBadge.className = 'badge bg-success bg-opacity-25 text-success fw-bold';
-            statusBadge.innerHTML = '<i class="bi bi-check-circle-fill me-1"></i> Terhubung';
+            statusBadge.innerHTML = `<i class="bi bi-check-circle-fill me-1"></i> ${dict.statusConnected || 'Terhubung'}`;
           } else {
             statusBadge.className = 'badge bg-secondary bg-opacity-25 text-secondary';
-            statusBadge.textContent = 'Belum Terhubung';
+            statusBadge.textContent = dict.statusNotConnected || 'Belum Terhubung';
           }
         }
         if (clearBtn) {
@@ -834,24 +877,25 @@ SELECT * FROM users;`
       updateStatusUI();
 
       const updateProviderHelp = () => {
+        const dict = this.getDict();
         const prov = providerSelect ? providerSelect.value : 'gemini-2.5-flash';
         if (portalLink && portalText) {
           if (prov.includes('openai')) {
             portalLink.href = 'https://platform.openai.com/api-keys';
-            portalText.textContent = 'Buka OpenAI API Keys';
-            if (keyInput) keyInput.placeholder = 'Tempel OpenAI Key (sk-proj-...)';
+            portalText.textContent = dict.portalOpenAI || 'Buka OpenAI API Keys';
+            if (keyInput) keyInput.placeholder = dict.placeholderOpenAI || 'Tempel OpenAI Key (sk-proj-...)';
           } else if (prov.includes('claude')) {
             portalLink.href = 'https://console.anthropic.com/settings/keys';
-            portalText.textContent = 'Buka Anthropic Console';
-            if (keyInput) keyInput.placeholder = 'Tempel Claude Key (sk-ant-...)';
+            portalText.textContent = dict.portalClaude || 'Buka Anthropic Console';
+            if (keyInput) keyInput.placeholder = dict.placeholderClaude || 'Tempel Claude Key (sk-ant-...)';
           } else if (prov.includes('deepseek')) {
             portalLink.href = 'https://platform.deepseek.com/api_keys';
-            portalText.textContent = 'Buka DeepSeek Platform';
-            if (keyInput) keyInput.placeholder = 'Tempel DeepSeek Key (sk-...)';
+            portalText.textContent = dict.portalDeepSeek || 'Buka DeepSeek Platform';
+            if (keyInput) keyInput.placeholder = dict.placeholderDeepSeek || 'Tempel DeepSeek Key (sk-...)';
           } else {
             portalLink.href = 'https://aistudio.google.com/app/api-keys';
-            portalText.textContent = 'Dapatkan Gemini API Key Gratis';
-            if (keyInput) keyInput.placeholder = 'Tempel Gemini API Key (AIzaSy...)';
+            portalText.textContent = dict.portalGemini || 'Dapatkan Gemini API Key Gratis';
+            if (keyInput) keyInput.placeholder = dict.placeholderGemini || 'Tempel Gemini API Key (AIzaSy...)';
           }
         }
       };
@@ -859,6 +903,96 @@ SELECT * FROM users;`
         providerSelect.onchange = updateProviderHelp;
         updateProviderHelp();
       }
+
+      this.updateApiKeyModalUI = () => {
+        updateStatusUI();
+        updateProviderHelp();
+      };
+
+      // Custom Searchable Combobox with Rich Icons
+      const searchInput = document.getElementById('aiModelSearchInput');
+      const modelListContainer = document.getElementById('aiModelListContainer');
+      const customAiDropdown = document.getElementById('customAiSelectDropdown');
+
+      const updateCustomSelectUI = (val) => {
+        const items = document.querySelectorAll('.ai-model-item');
+        items.forEach((item) => {
+          const isMatch = (item.dataset.value === val);
+          item.classList.toggle('active', isMatch);
+          const check = item.querySelector('.check-indicator');
+          if (check) check.classList.toggle('d-none', !isMatch);
+          if (isMatch) {
+            const iconEl = document.getElementById('customAiSelectedIcon');
+            const textEl = document.getElementById('customAiSelectedText');
+            if (iconEl) {
+              iconEl.style.background = item.dataset.iconBg || 'rgba(234, 88, 12, 0.15)';
+              iconEl.style.color = item.dataset.iconColor || '#ea580c';
+              iconEl.innerHTML = `<i class="bi ${item.dataset.icon || 'bi-stars'}"></i>`;
+            }
+            if (textEl) {
+              textEl.textContent = item.dataset.label || val;
+            }
+          }
+        });
+      };
+
+      // Handle item click in custom combobox
+      document.querySelectorAll('.ai-model-item').forEach((item) => {
+        item.addEventListener('click', (e) => {
+          e.preventDefault();
+          const val = item.dataset.value;
+          if (providerSelect) {
+            providerSelect.value = val;
+            updateProviderHelp();
+          }
+          updateCustomSelectUI(val);
+          localStorage.setItem('neuron_ai_model', val);
+
+          const btn = document.getElementById('customAiSelectBtn');
+          if (btn && window.bootstrap && window.bootstrap.Dropdown) {
+            const dd = bootstrap.Dropdown.getInstance(btn) || new bootstrap.Dropdown(btn);
+            if (dd) dd.hide();
+          }
+        });
+      });
+
+      // Real-time search filter for AI models
+      if (searchInput && modelListContainer) {
+        searchInput.addEventListener('input', (e) => {
+          const q = e.target.value.toLowerCase().trim();
+          const items = modelListContainer.querySelectorAll('.ai-model-item');
+          let count = 0;
+          items.forEach((item) => {
+            const text = (item.textContent || '').toLowerCase();
+            const val = (item.dataset.value || '').toLowerCase();
+            const match = text.includes(q) || val.includes(q);
+            item.style.setProperty('display', match ? 'flex' : 'none', 'important');
+            if (match) count++;
+          });
+          let noRes = modelListContainer.querySelector('.no-models-msg');
+          if (count === 0) {
+            if (!noRes) {
+              noRes = document.createElement('div');
+              noRes.className = 'no-models-msg text-center text-secondary small py-3 font-monospace';
+              modelListContainer.appendChild(noRes);
+            }
+            const isEn = (localStorage.getItem('neuron_ai_lang') === 'English');
+            noRes.textContent = isEn ? 'No models match your search.' : 'Tidak ada model yang cocok.';
+          } else if (noRes) {
+            noRes.remove();
+          }
+        });
+      }
+
+      // Auto-focus search input when dropdown opens
+      if (customAiDropdown && searchInput) {
+        customAiDropdown.addEventListener('shown.bs.dropdown', () => {
+          searchInput.focus();
+        });
+      }
+
+      // Sync initial selection
+      updateCustomSelectUI(savedProvider);
 
       if (pasteBtn && keyInput) {
         pasteBtn.onclick = async () => {
@@ -903,7 +1037,8 @@ SELECT * FROM users;`
 
           updateStatusUI();
           const origHtml = saveBtn.innerHTML;
-          saveBtn.innerHTML = '<i class="bi bi-check2 me-1"></i> Tersimpan!';
+          const dict = this.getDict();
+          saveBtn.innerHTML = `<i class="bi bi-check2 me-1"></i> ${dict.statusConnected ? 'Tersimpan!' : 'Saved!'}`;
           saveBtn.classList.add('btn-success');
           setTimeout(() => {
             saveBtn.innerHTML = origHtml;
@@ -1041,6 +1176,25 @@ SELECT * FROM users;`
       setText('tabVisualText', dict.tabVisual);
       setText('tabAiDebugText', dict.tabAiDebug);
       setText('autoDetectLabel', dict.autoDetectBadge);
+      setText('terminalReadyLine', dict.terminalReadyMsg);
+
+      // Modal API Key Elements
+      setText('apiKeyModalLabel', dict.modalApiKeyTitle);
+      setText('apiKeyModalDesc', dict.modalApiKeyDesc);
+      setText('lblAiProvider', dict.lblAiProvider);
+      const searchBox = document.getElementById('aiModelSearchInput');
+      if (searchBox) searchBox.placeholder = dict.aiModelSearchPlaceholder;
+      setText('lblApiKeyInput', dict.lblApiKeyInput);
+      setText('pasteApiKeyBtnText', dict.pasteApiKeyBtnText);
+      const storedBox = document.getElementById('lblApiKeyStored');
+      if (storedBox) storedBox.innerHTML = `<i class="bi bi-shield-lock-fill text-success me-1"></i> ${dict.lblApiKeyStored}`;
+      setText('clearApiKeyModalBtnText', dict.clearApiKeyBtnText);
+      setText('saveApiKeyModalBtnText', dict.saveApiKeyBtnText);
+
+      // Update provider portal & status
+      if (typeof this.updateApiKeyModalUI === 'function') {
+        this.updateApiKeyModalUI();
+      }
 
       // Flag active states
       const idFlag = document.getElementById('flagBtnId');

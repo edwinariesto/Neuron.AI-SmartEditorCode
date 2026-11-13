@@ -152,8 +152,13 @@ body.editor-page.dark-theme .neuron-glass-card {
 }
 
 .glass-icon-box-orange {
-  width: 46px !important;
-  height: 46px !important;
+  width: 44px !important;
+  height: 44px !important;
+  min-width: 44px !important;
+  max-width: 44px !important;
+  min-height: 44px !important;
+  max-height: 44px !important;
+  aspect-ratio: 1 / 1 !important;
   border-radius: 50% !important; /* Bulat sempurna (Circular) */
   background: var(--neuron-orange-light) !important;
   border: 1.5px solid rgba(234, 88, 12, 0.35) !important;
@@ -503,10 +508,12 @@ body.editor-page.dark-theme .output-nav-tabs .nav-link:hover {
 
 .terminal-line.out-meta {
   color: #38bdf8;
-  font-size: 0.82rem;
+  font-size: 0.84rem;
   border-top: 1px dashed rgba(255, 255, 255, 0.15);
-  margin-top: 10px;
+  margin-top: 8px;
   padding-top: 8px;
+  line-height: 1.6;
+  text-align: left !important;
 }
 
 /* Visualizer Window */
@@ -588,8 +595,11 @@ body.editor-page.dark-theme .vis-tool-separator {
   border-radius: 0 0 24px 24px;
   height: 560px;
   overflow-y: auto;
+  overflow-x: hidden !important;
   padding: 22px 24px;
   transition: background 0.3s ease;
+  word-wrap: break-word;
+  word-break: break-word;
 }
 
 .debug-results-box .issue-item-card {
@@ -597,6 +607,102 @@ body.editor-page.dark-theme .vis-tool-separator {
   border: 1.5px solid var(--neuron-debug-card-border) !important;
   color: var(--neuron-debug-card-text) !important;
   transition: all 0.2s ease;
+}
+
+.issue-where-badge {
+  padding: 4px 10px !important;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  background: rgba(148, 163, 184, 0.12);
+  color: var(--neuron-text-secondary);
+  font-size: 0.74rem;
+  max-width: 100%;
+  word-break: break-all;
+  white-space: normal;
+  line-height: 1.35;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Custom Searchable AI Model Combobox */
+.custom-ai-select-btn {
+  background: var(--neuron-input-bg) !important;
+  color: var(--neuron-text-primary) !important;
+  border: 1.5px solid var(--neuron-input-border) !important;
+  border-radius: 12px !important;
+  padding: 10px 14px !important;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.custom-ai-select-btn:hover,
+.custom-ai-select-btn:focus {
+  border-color: var(--neuron-orange) !important;
+  box-shadow: 0 0 0 3px var(--neuron-orange-soft) !important;
+}
+
+.custom-ai-dropdown-menu {
+  background: var(--neuron-card-bg) !important;
+  border: 1.5px solid var(--neuron-card-border) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.15) !important;
+  max-height: 320px;
+  overflow: hidden;
+  z-index: 1085 !important;
+}
+
+body.editor-page.dark-theme .custom-ai-dropdown-menu {
+  background: #0f172a !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5) !important;
+}
+
+.ai-model-list-container {
+  max-height: 230px;
+  overflow-y: auto;
+  padding: 4px;
+}
+
+.ai-model-item {
+  color: var(--neuron-text-primary) !important;
+  border-radius: 10px !important;
+  padding: 8px 10px !important;
+  margin-bottom: 2px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-decoration: none;
+}
+
+.ai-model-item:hover {
+  background: var(--neuron-orange-soft) !important;
+  color: var(--neuron-orange-dark) !important;
+}
+
+body.editor-page.dark-theme .ai-model-item:hover {
+  background: rgba(234, 88, 12, 0.2) !important;
+  color: var(--neuron-orange) !important;
+}
+
+.ai-model-item.active {
+  background: var(--neuron-orange-light) !important;
+  color: var(--neuron-orange-dark) !important;
+  font-weight: 600;
+}
+
+body.editor-page.dark-theme .ai-model-item.active {
+  background: rgba(234, 88, 12, 0.28) !important;
+  color: var(--neuron-orange) !important;
+}
+
+.ai-provider-badge-icon {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.82rem;
 }
 
 /* Symmetrical Header Badges (Anti-Overlap & Clean Line) */
@@ -727,9 +833,13 @@ body.editor-page.dark-theme .btn-close {
   }
 
   .glass-icon-box-orange {
-    width: clamp(24px, 5.5vw, 28px) !important;
-    height: clamp(24px, 5.5vw, 28px) !important;
-    min-width: clamp(24px, 5.5vw, 28px) !important;
+    width: clamp(26px, 6vw, 30px) !important;
+    height: clamp(26px, 6vw, 30px) !important;
+    min-width: clamp(26px, 6vw, 30px) !important;
+    max-width: clamp(26px, 6vw, 30px) !important;
+    min-height: clamp(26px, 6vw, 30px) !important;
+    max-height: clamp(26px, 6vw, 30px) !important;
+    aspect-ratio: 1 / 1 !important;
     border-radius: 50% !important;
     flex-shrink: 0 !important;
   }
@@ -900,20 +1010,31 @@ body.editor-page.dark-theme .btn-close {
 
   /* 5. Visualizer Toolbar on Mobile: Compact & Never Overflow */
   .visual-toolbar {
-    padding: 3px 5px !important;
+    min-height: 40px !important;
+    padding: 6px 8px !important;
+    border-radius: 12px !important;
+    gap: 6px !important;
   }
   .vis-tool-btn {
-    padding: clamp(2px, 0.6vw, 3px) clamp(4px, 1vw, 6px) !important;
-    font-size: clamp(0.66rem, 1.7vw, 0.74rem) !important;
+    height: 28px !important;
+    min-width: 28px !important;
+    padding: 0 6px !important;
+    font-size: 0.74rem !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
   .vis-tool-separator {
-    height: 12px !important;
-    margin: 0 1px !important;
+    height: 14px !important;
+    margin: 0 2px !important;
   }
 
   #editor, .terminal-window, .visualizer-window, .ai-debug-window {
     height: 380px !important;
     padding: clamp(10px, 2.5vw, 16px) !important;
+  }
+  .ai-debug-window {
+    overflow-x: hidden !important;
   }
 }
 
@@ -947,9 +1068,13 @@ body.editor-page.dark-theme .btn-close {
     font-size: 0.74rem !important;
   }
   .glass-icon-box-orange {
-    width: 22px !important;
-    height: 22px !important;
-    min-width: 22px !important;
+    width: 24px !important;
+    height: 24px !important;
+    min-width: 24px !important;
+    max-width: 24px !important;
+    min-height: 24px !important;
+    max-height: 24px !important;
+    aspect-ratio: 1 / 1 !important;
     border-radius: 50% !important;
   }
   .glass-icon-box-orange svg {

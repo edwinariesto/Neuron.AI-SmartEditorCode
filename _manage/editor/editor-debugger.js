@@ -39,9 +39,10 @@
       if (seenLines.has(`${lineNo}:${cause}`)) return;
       seenLines.add(`${lineNo}:${cause}`);
       const rawLine = (lines[lineNo - 1] || '').trim();
+      const compactLine = rawLine.length > 32 ? rawLine.substring(0, 30) + '...' : rawLine;
       issues.push({
         line: lineNo,
-        where: whereText || (isEn ? `Line ${lineNo} (\`${rawLine}\`)` : `Baris ${lineNo} (\`${rawLine}\`)`),
+        where: whereText || (compactLine ? (isEn ? `Line ${lineNo} (\`${compactLine}\`)` : `Baris ${lineNo} (\`${compactLine}\`)`) : (isEn ? `Line ${lineNo}` : `Baris ${lineNo}`)),
         cause,
         fix
       });
@@ -419,15 +420,15 @@
       } else {
         // TAMPILAN ERROR DITEMUKAN (Simetris, Terstruktur, Jelas)
         const headerCard = document.createElement('div');
-        headerCard.className = 'p-3.5 p-md-4 rounded-4 border border-danger-subtle bg-danger bg-opacity-10 shadow-sm';
+        headerCard.className = 'p-3 p-md-3.5 rounded-4 border border-danger-subtle bg-danger bg-opacity-10 shadow-sm';
         headerCard.innerHTML = `
           <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-2">
-            <div class="d-flex align-items-center gap-2">
-              <span class="badge bg-danger py-1.5 px-3 rounded-pill fw-semibold shadow-sm" style="font-size: 0.84rem;">
+            <div class="d-flex align-items-center flex-wrap gap-2">
+              <span class="badge bg-danger py-1.5 px-3 rounded-pill fw-semibold shadow-sm" style="font-size: 0.82rem;">
                 <i class="bi bi-exclamation-octagon-fill me-1.5"></i>
                 ${isEn ? `${issues.length || 1} Issue(s) Detected` : `${issues.length || 1} Bagian Perlu Diperbaiki`}
               </span>
-              ${explanation.where && !/tidak ada/i.test(explanation.where) ? `<span class="badge bg-white text-dark border border-secondary border-opacity-25 px-2.5 py-1 rounded-pill font-monospace small">${escapeHtml(explanation.where)}</span>` : ''}
+              ${explanation.where && !/tidak ada/i.test(explanation.where) ? `<span class="badge bg-white text-dark border border-secondary border-opacity-25 px-2.5 py-1 rounded-pill font-monospace small text-truncate" style="max-width: clamp(120px, 35vw, 220px);">${escapeHtml(explanation.where)}</span>` : ''}
             </div>
             ${modelBadgeHtml}
           </div>
@@ -469,7 +470,7 @@
                 <button type="button" class="btn btn-sm btn-outline-danger py-1 px-3 rounded-pill font-monospace fw-bold line-jump-btn d-inline-flex align-items-center gap-1" data-line="${lineNo}" title="${isEn ? 'Jump to Line' : 'Lompat ke Baris ini'}">
                   <i class="bi bi-arrow-right-circle"></i> ${isEn ? `Line ${lineNo}` : `Baris ${lineNo}`}
                 </button>
-                ${it.where ? `<span class="small font-monospace px-2.5 py-1 rounded-pill bg-secondary bg-opacity-10" style="color: var(--neuron-text-secondary); font-size: 0.78rem;">${escapeHtml(it.where)}</span>` : ''}
+                ${it.where ? `<span class="issue-where-badge small font-monospace">${escapeHtml(it.where)}</span>` : ''}
               </div>
               <div class="small my-2" style="color: var(--neuron-text-primary); line-height: 1.6;">
                 <i class="bi bi-info-circle-fill text-danger me-1"></i> ${escapeHtml(it.cause || '')}
