@@ -22,7 +22,7 @@ $action   = trim($_POST['action'] ?? 'run');
 $language = trim($_POST['language'] ?? 'PHP');
 $code     = trim($_POST['code'] ?? '');
 $bahasa   = trim($_POST['bahasa'] ?? 'Indonesia');
-$provider = trim($_POST['provider'] ?? 'gemini-2.5-flash');
+$provider = trim($_POST['provider'] ?? 'gemini-3.5-flash');
 
 function parseJsonObjectLenient($txt) {
     $raw = trim((string)$txt);
@@ -41,7 +41,7 @@ function parseJsonObjectLenient($txt) {
     return null;
 }
 
-function callGeminiJsonHelper($apiKey, $promptText, $maxTokens = 4096, $provider = 'gemini-3.8-flash') {
+function callGeminiJsonHelper($apiKey, $promptText, $maxTokens = 4096, $provider = 'gemini-3.5-flash') {
     global $apiKeyOpenAI, $apiKeyClaude;
     $effTokens = max(2048, (int)$maxTokens);
 
@@ -106,9 +106,9 @@ function callGeminiJsonHelper($apiKey, $promptText, $maxTokens = 4096, $provider
         }
     }
 
-    $candidates = ($provider === 'gemini-pro')
-        ? ['gemini-2.5-pro', 'gemini-2.5-flash', 'gemini-2.0-flash']
-        : ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-1.5-flash'];
+    $preferred = (!empty($provider) && strpos($provider, 'gemini-') === 0) ? $provider : 'gemini-3.5-flash';
+    $baseCandidates = ['gemini-3.5-flash', 'gemini-3.5-flash-lite', 'gemini-3-flash-preview', 'gemini-3.8-flash', 'gemini-2.5-flash'];
+    $candidates = array_values(array_unique(array_merge([$preferred], $baseCandidates)));
 
     $lastApiErr = '';
     foreach ($candidates as $modelName) {
@@ -226,7 +226,7 @@ if ($action === 'detect_language') {
                 break;
             }
         }
-        $usedModel = $parsed['_meta_model'] ?? 'gemini-2.5-flash';
+        $usedModel = $parsed['_meta_model'] ?? 'gemini-3.5-flash';
         echo json_encode([
             'status' => 'ok',
             'language' => $cleanLang,
@@ -344,7 +344,7 @@ if ($action === 'explain_error') {
 
     $parsed = callGeminiJsonHelper($apiKey, $prompt, 4096, $provider);
     if ($parsed && (!empty($parsed['issues']) || !empty($parsed['cause']) || !empty($parsed['fix']))) {
-        $usedModel = $parsed['_meta_model'] ?? ($provider === 'claude-3.5-sonet' ? 'claude-3-5-sonnet' : (strpos($provider, 'openai') !== false ? $provider : 'gemini-2.5-flash'));
+        $usedModel = $parsed['_meta_model'] ?? ($provider === 'claude-3.5-sonet' ? 'claude-3-5-sonnet' : (strpos($provider, 'openai') !== false ? $provider : 'gemini-3.5-flash'));
         unset($parsed['_meta_model']);
         echo json_encode(['status' => 'ok', 'model' => $usedModel, 'explanation' => $parsed]);
         exit;

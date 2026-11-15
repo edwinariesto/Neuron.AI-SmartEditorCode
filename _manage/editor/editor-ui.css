@@ -1334,3 +1334,157 @@ body.editor-page.dark-theme .btn-close {
   text-align: center;
   letter-spacing: 0.5px;
 }
+
+/* =========================================================================
+   SWEETALERT2 GLASSMORPHIC THEME (NEURON.AI ORANGE ACCENT)
+   ========================================================================= */
+.swal2-container {
+  z-index: 10000 !important;
+  backdrop-filter: blur(8px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(8px) saturate(150%) !important;
+}
+
+.neuron-swal-popup {
+  border-radius: 24px !important;
+  border: 1.5px solid rgba(255, 107, 0, 0.3) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25), 0 0 25px rgba(249, 115, 22, 0.15) !important;
+  padding: 24px 20px !important;
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  background: rgba(255, 255, 255, 0.96) !important;
+  color: #0f172a !important;
+}
+
+body.editor-page.dark-theme .neuron-swal-popup,
+.neuron-swal-popup.neuron-swal-dark {
+  background: rgba(15, 23, 42, 0.96) !important;
+  border: 1.5px solid rgba(249, 115, 22, 0.45) !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), 0 0 30px rgba(249, 115, 22, 0.2) !important;
+  color: #f8fafc !important;
+}
+
+.neuron-swal-title {
+  font-size: 1.22rem !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.3px !important;
+  padding: 0 !important;
+  margin-bottom: 8px !important;
+  color: inherit !important;
+}
+
+.neuron-swal-html {
+  font-size: 0.92rem !important;
+  line-height: 1.6 !important;
+  margin: 10px 0 18px !important;
+  color: inherit !important;
+}
+
+.neuron-swal-confirm-btn {
+  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%) !important;
+  border: none !important;
+  border-radius: 12px !important;
+  padding: 10px 24px !important;
+  font-weight: 700 !important;
+  font-size: 0.92rem !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(234, 88, 12, 0.35) !important;
+  transition: all 0.2s ease !important;
+}
+
+.neuron-swal-confirm-btn:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 6px 18px rgba(234, 88, 12, 0.45) !important;
+}
+
+.neuron-swal-cancel-btn {
+  border-radius: 12px !important;
+  padding: 10px 20px !important;
+  font-weight: 600 !important;
+  font-size: 0.92rem !important;
+  background: rgba(148, 163, 184, 0.15) !important;
+  color: #64748b !important;
+  border: 1px solid rgba(148, 163, 184, 0.3) !important;
+  transition: all 0.2s ease !important;
+}
+
+body.editor-page.dark-theme .neuron-swal-cancel-btn,
+.neuron-swal-dark .neuron-swal-cancel-btn {
+  background: rgba(51, 65, 85, 0.6) !important;
+  color: #cbd5e1 !important;
+  border-color: rgba(71, 85, 105, 0.7) !important;
+}
+
+.neuron-swal-toast {
+  border-radius: 16px !important;
+  border: 1.5px solid rgba(255, 107, 0, 0.35) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25) !important;
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-size: 0.9rem !important;
+  font-weight: 600 !important;
+}
+
+/* =========================================================================
+   DARK THEME TEXT CONTRAST ENHANCEMENTS (GAMBAR 2 & GAMBAR 3)
+   ========================================================================= */
+.editor-header-title-text {
+  color: var(--neuron-text-primary, #0f172a);
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  transition: color 0.25s ease;
+}
+
+body.editor-page.dark-theme .editor-header-title-text,
+body.editor-page.dark-theme #editorHeaderTitle {
+  color: #f8fafc !important;
+}
+
+body.editor-page.dark-theme .text-dark {
+  color: #f8fafc !important;
+}
+
+body.editor-page.dark-theme .editor-header-badge {
+  background: rgba(30, 41, 59, 0.9) !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  color: #e2e8f0 !important;
+}
+
+body.editor-page.dark-theme .editor-header-badge i {
+  color: #f97316 !important;
+}
+
+.editor-footer {
+  transition: color 0.25s ease;
+}
+
+.footer-brand {
+  color: #ea580c !important;
+}
+
+.footer-author {
+  color: var(--neuron-text-primary, #0f172a);
+  font-weight: 700;
+}
+
+body.editor-page.dark-theme .footer-author {
+  color: #f8fafc !important;
+}
+
+body.editor-page.dark-theme .footer-brand {
+  color: #f97316 !important;
+}
+
+body.editor-page.dark-theme .editor-footer {
+  color: #94a3b8 !important;
+}
+
+/* Modal dark theme typography guarantee */
+body.editor-page.dark-theme .modal-title,
+body.editor-page.dark-theme .modal-header h5,
+body.editor-page.dark-theme .modal-header h6 {
+  color: #f8fafc !important;
+}
+
+body.editor-page.dark-theme .form-label {
+  color: #cbd5e1 !important;
+}

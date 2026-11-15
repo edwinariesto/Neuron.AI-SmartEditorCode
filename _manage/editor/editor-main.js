@@ -8,6 +8,118 @@
 (function (window) {
   'use strict';
 
+  // Global SweetAlert2 Bridge for Neuron.AI Soft Glassmorphic Aesthetic
+  window.NeuronSwal = {
+    isDark() {
+      return document.body.classList.contains('dark-theme');
+    },
+    baseConfig() {
+      const dark = this.isDark();
+      return {
+        background: dark ? '#0f172a' : '#ffffff',
+        color: dark ? '#f8fafc' : '#0f172a',
+        confirmButtonColor: '#f97316',
+        cancelButtonColor: dark ? '#334155' : '#94a3b8',
+        customClass: {
+          popup: 'neuron-swal-popup' + (dark ? ' neuron-swal-dark' : ''),
+          title: 'neuron-swal-title',
+          htmlContainer: 'neuron-swal-html',
+          confirmButton: 'neuron-swal-confirm-btn',
+          cancelButton: 'neuron-swal-cancel-btn'
+        }
+      };
+    },
+    alert(opts) {
+      if (typeof Swal === 'undefined') {
+        alert(opts.text || opts.title || '');
+        return Promise.resolve();
+      }
+      return Swal.fire({
+        ...this.baseConfig(),
+        icon: opts.icon || 'info',
+        title: opts.title || '',
+        html: opts.html || opts.text || '',
+        confirmButtonText: opts.confirmButtonText || 'OK'
+      });
+    },
+    confirm(opts) {
+      if (typeof Swal === 'undefined') {
+        const ok = confirm(opts.text || opts.title || '');
+        return Promise.resolve({ isConfirmed: ok });
+      }
+      return Swal.fire({
+        ...this.baseConfig(),
+        icon: opts.icon || 'warning',
+        title: opts.title || '',
+        html: opts.html || opts.text || '',
+        showCancelButton: true,
+        confirmButtonText: opts.confirmButtonText || 'Ya, Lanjutkan',
+        cancelButtonText: opts.cancelButtonText || 'Batal',
+        reverseButtons: true
+      });
+    },
+    toast(opts) {
+      if (typeof Swal === 'undefined') return;
+      const dark = this.isDark();
+      return Swal.fire({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: opts.timer || 2400,
+        timerProgressBar: true,
+        background: dark ? '#0f172a' : '#ffffff',
+        color: dark ? '#f8fafc' : '#0f172a',
+        icon: opts.icon || 'success',
+        title: opts.title || '',
+        customClass: {
+          popup: 'neuron-swal-toast' + (dark ? ' neuron-swal-dark' : '')
+        }
+      });
+    }
+  };
+
+  // Automatic AI Model Failover when Quota (429) or Server Spike (503) occurs
+  window.switchGeminiFallbackModel = function(reason = 'quota') {
+    const curModel = localStorage.getItem('neuron_ai_model') || 'gemini-3.5-flash';
+    let nextModel = 'gemini-3.5-flash-lite';
+    let nextName = 'Google Gemini 3.5 Flash-Lite';
+
+    if (curModel === 'gemini-3.5-flash-lite') {
+      nextModel = 'gemini-3.5-flash';
+      nextName = 'Google Gemini 3.5 Flash';
+    } else if (curModel === 'gemini-3.8-flash') {
+      nextModel = 'gemini-3.5-flash';
+      nextName = 'Google Gemini 3.5 Flash';
+    }
+
+    localStorage.setItem('neuron_ai_model', nextModel);
+
+    const providerSelect = document.getElementById('aiProviderSelect');
+    if (providerSelect) providerSelect.value = nextModel;
+
+    if (typeof window.updateCustomAiDropdownUI === 'function') {
+      window.updateCustomAiDropdownUI(nextModel);
+    }
+
+    const isEn = (localStorage.getItem('neuron_ai_lang') === 'English');
+    const msg = (reason === '503' || reason === 'spike')
+      ? (isEn
+          ? `Google Gemini server for <code>${curModel}</code> is busy (High Demand Spike). Automatically switched to <strong>${nextName}</strong>.`
+          : `Server Google untuk model <code>${curModel}</code> sedang mengalami antrean padat. Model AI otomatis dialihkan ke <strong>${nextName}</strong> agar proses Anda tetap lancar.`)
+      : (isEn
+          ? `Free quota limit for <code>${curModel}</code> reached (HTTP 429). Automatically switched to <strong>${nextName}</strong>.`
+          : `Batas kuota gratis model <code>${curModel}</code> telah tercapai (HTTP 429). Sistem otomatis mengalihkan model ke <strong>${nextName}</strong>.`);
+
+    if (window.NeuronSwal) {
+      window.NeuronSwal.alert({
+        icon: 'warning',
+        title: isEn ? 'AI Model Switched' : 'Peralihan Model AI Otomatis',
+        html: msg
+      });
+    }
+    return nextModel;
+  };
+
   // Snippets library: rich interactive templates (3D, 2D, Chart, Animation, MATLAB, Python, PHP, JS, SQL, HTML)
   const SNIPPETS = {
     visual3d: [
@@ -653,10 +765,24 @@ SELECT * FROM users;`
       // Copy Code
       const copyBtn = document.getElementById('copyBtn');
       if (copyBtn) {
-        copyBtn.onclick = () => {
-          navigator.clipboard.writeText(this.editor.getValue());
+        copyBtn.onclick = async () => {
+          const isEn = (this.currentLang === 'English');
+          const code = this.editor.getValue();
+          if (!code.trim()) {
+            NeuronSwal.alert({
+              icon: 'info',
+              title: isEn ? 'Editor is Empty' : 'Kode Masih Kosong',
+              html: isEn ? 'There is no code in the editor to copy.' : 'Belum ada kode di editor yang bisa disalin.'
+            });
+            return;
+          }
+          await navigator.clipboard.writeText(code);
           const orig = copyBtn.innerHTML;
-          copyBtn.innerHTML = '<i class="bi bi-check2 me-1"></i> Tersalin!';
+          copyBtn.innerHTML = '<i class="bi bi-check2 text-success me-1"></i> ' + (isEn ? 'Copied!' : 'Tersalin!');
+          NeuronSwal.toast({
+            icon: 'success',
+            title: isEn ? 'Code copied to clipboard!' : 'Kode berhasil disalin ke clipboard!'
+          });
           setTimeout(() => { copyBtn.innerHTML = orig; }, 1500);
         };
       }
@@ -671,12 +797,27 @@ SELECT * FROM users;`
       const clearBtn = document.getElementById('clearBtn');
       if (clearBtn) {
         clearBtn.onclick = () => {
-          if (confirm('Bersihkan kode di editor dan riwayat terminal?')) {
-            this.editor.setValue('', -1);
-            this.clearTerminal();
-            NeuronVisualizer.clear();
-            NeuronDebugger.clear();
-          }
+          const isEn = (this.currentLang === 'English');
+          NeuronSwal.confirm({
+            title: isEn ? 'Clear Editor & Terminal?' : 'Bersihkan Editor & Terminal?',
+            html: isEn
+              ? 'All code in the editor and terminal output history will be wiped. Do you want to proceed?'
+              : 'Kode di editor dan riwayat output terminal akan dihapus bersih. Anda yakin ingin melanjutkan?',
+            confirmButtonText: isEn ? 'Yes, Clear All' : 'Ya, Bersihkan',
+            cancelButtonText: isEn ? 'Cancel' : 'Batal',
+            icon: 'warning'
+          }).then((res) => {
+            if (res && res.isConfirmed) {
+              this.editor.setValue('', -1);
+              this.clearTerminal();
+              NeuronVisualizer.clear();
+              NeuronDebugger.clear();
+              NeuronSwal.toast({
+                icon: 'success',
+                title: isEn ? 'Editor & Terminal Cleared' : 'Editor & Terminal Dibersihkan'
+              });
+            }
+          });
         };
       }
 
@@ -725,7 +866,12 @@ SELECT * FROM users;`
     async handleRun() {
       const code = this.editor.getValue().trim();
       if (!code) {
-        alert('Tuliskan atau tempel kode terlebih dahulu.');
+        const isEn = (this.currentLang === 'English');
+        NeuronSwal.alert({
+          icon: 'warning',
+          title: isEn ? 'Editor is Empty' : 'Kode Masih Kosong',
+          html: isEn ? 'Please write or paste code in the editor before running.' : 'Tuliskan atau tempel kode di editor terlebih dahulu sebelum dijalankan.'
+        });
         return;
       }
 
@@ -795,7 +941,12 @@ SELECT * FROM users;`
     async handleAiDebug() {
       const code = this.editor.getValue().trim();
       if (!code) {
-        alert('Tuliskan kode terlebih dahulu untuk diaudit.');
+        const isEn = (this.currentLang === 'English');
+        NeuronSwal.alert({
+          icon: 'warning',
+          title: isEn ? 'Editor is Empty' : 'Kode Masih Kosong',
+          html: isEn ? 'Please write or paste code in the editor first to inspect errors.' : 'Tuliskan kode terlebih dahulu untuk diaudit dan diperiksa oleh AI.'
+        });
         return;
       }
 
@@ -910,7 +1061,7 @@ SELECT * FROM users;`
       const portalText = document.getElementById('apiKeyPortalText');
 
       const savedKey = localStorage.getItem('neuron_ai_key_local') || '';
-      const savedProvider = localStorage.getItem('neuron_ai_model') || 'gemini-2.5-flash';
+      const savedProvider = localStorage.getItem('neuron_ai_model') || 'gemini-3.5-flash';
 
       if (keyInput) keyInput.value = savedKey;
       if (providerSelect) providerSelect.value = savedProvider;
@@ -935,25 +1086,11 @@ SELECT * FROM users;`
 
       const updateProviderHelp = () => {
         const dict = this.getDict();
-        const prov = providerSelect ? providerSelect.value : 'gemini-2.5-flash';
+        const prov = providerSelect ? providerSelect.value : 'gemini-3.5-flash';
         if (portalLink && portalText) {
-          if (prov.includes('openai')) {
-            portalLink.href = 'https://platform.openai.com/api-keys';
-            portalText.textContent = dict.portalOpenAI || 'Buka OpenAI API Keys';
-            if (keyInput) keyInput.placeholder = dict.placeholderOpenAI || 'Tempel OpenAI Key (sk-proj-...)';
-          } else if (prov.includes('claude')) {
-            portalLink.href = 'https://console.anthropic.com/settings/keys';
-            portalText.textContent = dict.portalClaude || 'Buka Anthropic Console';
-            if (keyInput) keyInput.placeholder = dict.placeholderClaude || 'Tempel Claude Key (sk-ant-...)';
-          } else if (prov.includes('deepseek')) {
-            portalLink.href = 'https://platform.deepseek.com/api_keys';
-            portalText.textContent = dict.portalDeepSeek || 'Buka DeepSeek Platform';
-            if (keyInput) keyInput.placeholder = dict.placeholderDeepSeek || 'Tempel DeepSeek Key (sk-...)';
-          } else {
-            portalLink.href = 'https://aistudio.google.com/app/api-keys';
-            portalText.textContent = dict.portalGemini || 'Dapatkan Gemini API Key Gratis';
-            if (keyInput) keyInput.placeholder = dict.placeholderGemini || 'Tempel Gemini API Key (AIzaSy...)';
-          }
+          portalLink.href = 'https://aistudio.google.com/app/api-keys';
+          portalText.textContent = dict.portalGemini || 'Dapatkan Gemini API Key Gratis';
+          if (keyInput) keyInput.placeholder = dict.placeholderGemini || 'Tempel Gemini API Key (AQ... atau AIzaSy...)';
         }
       };
       if (providerSelect) {
@@ -992,6 +1129,7 @@ SELECT * FROM users;`
           }
         });
       };
+      window.updateCustomAiDropdownUI = updateCustomSelectUI;
 
       // Handle item click in custom combobox
       document.querySelectorAll('.ai-model-item').forEach((item) => {
@@ -1082,21 +1220,31 @@ SELECT * FROM users;`
           keyInput.value = '';
           localStorage.removeItem('neuron_ai_key_local');
           updateStatusUI();
+          const isEn = (localStorage.getItem('neuron_ai_lang') === 'English');
+          NeuronSwal.toast({
+            icon: 'info',
+            title: isEn ? 'API Key removed' : 'API Key berhasil dihapus'
+          });
         };
       }
 
       if (saveBtn && keyInput) {
         saveBtn.onclick = () => {
           const val = keyInput.value.trim();
-          const prov = providerSelect ? providerSelect.value : 'gemini-2.5-flash';
+          const prov = providerSelect ? providerSelect.value : 'gemini-3.5-flash';
           localStorage.setItem('neuron_ai_key_local', val);
           localStorage.setItem('neuron_ai_model', prov);
 
           updateStatusUI();
           const origHtml = saveBtn.innerHTML;
           const dict = this.getDict();
+          const isEn = (localStorage.getItem('neuron_ai_lang') === 'English');
           saveBtn.innerHTML = `<i class="bi bi-check2 me-1"></i> ${dict.statusConnected ? 'Tersimpan!' : 'Saved!'}`;
           saveBtn.classList.add('btn-success');
+          NeuronSwal.toast({
+            icon: 'success',
+            title: isEn ? 'AI Settings & Model Saved!' : 'Pengaturan API & Model AI Berhasil Disimpan!'
+          });
           setTimeout(() => {
             saveBtn.innerHTML = origHtml;
             saveBtn.classList.remove('btn-success');

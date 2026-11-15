@@ -175,7 +175,7 @@
       const currentLang = localStorage.getItem('neuron_ai_lang') || 'Indonesia';
       const cleanLang = lang.toUpperCase();
       const apiKey = localStorage.getItem('neuron_ai_key_local') || '';
-      const provider = localStorage.getItem('neuron_ai_model') || 'gemini-2.5-flash';
+      const provider = localStorage.getItem('neuron_ai_model') || 'gemini-3.5-flash';
 
       const resp = await fetch('execute_code.php', {
         method: 'POST',
@@ -191,10 +191,20 @@
       });
 
       if (!resp.ok) {
+        if (resp.status === 429 || resp.status === 503) {
+          if (typeof window.switchGeminiFallbackModel === 'function') {
+            window.switchGeminiFallbackModel('quota');
+          }
+        }
         throw new Error(`Server runner HTTP ${resp.status}`);
       }
 
       const res = await resp.json();
+      if (res && res.error && (String(res.error).includes('429') || String(res.error).toLowerCase().includes('quota') || String(res.error).includes('RESOURCE_EXHAUSTED'))) {
+        if (typeof window.switchGeminiFallbackModel === 'function') {
+          window.switchGeminiFallbackModel('quota');
+        }
+      }
       return {
         status: res.status || (res.error ? 'error' : 'success'),
         output: res.output || res.message || '(Eksekusi selesai tanpa output)',

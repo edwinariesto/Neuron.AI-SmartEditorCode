@@ -72,7 +72,7 @@ export default async function handler(req, res) {
     const action = (body.action || 'run').trim();
     const language = body.language || 'PHP';
     const bahasa = body.bahasa || 'Indonesia';
-    const provider = (body.provider || 'gemini-2.5-flash').trim();
+    const provider = (body.provider || 'gemini-3.5-flash').trim();
     const code = (body.code || '').trim();
     const apiKeyIn = (body.apiKey && body.apiKey.trim() !== '') ? body.apiKey.trim() : '';
     const apiKey = apiKeyIn || (process.env.GEMINI_API_KEY || '');
@@ -154,9 +154,9 @@ export default async function handler(req, res) {
         lastAiError = 'missing_api_key';
         return '';
       }
-      const models = (provider === 'gemini-pro')
-        ? ['gemini-2.5-pro', 'gemini-2.5-flash', 'gemini-2.0-flash']
-        : ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-1.5-flash'];
+      const preferred = (provider && provider.startsWith('gemini-')) ? provider : 'gemini-3.5-flash';
+      const baseCandidates = ['gemini-3.5-flash', 'gemini-3.5-flash-lite', 'gemini-3-flash-preview', 'gemini-3.8-flash', 'gemini-2.5-flash'];
+      const models = Array.from(new Set([preferred, ...baseCandidates]));
 
       const mimeModes = wantJson ? [true, false] : [false];
       for (const modelName of models) {

@@ -172,7 +172,14 @@
 
       wrap.querySelector('#visSvgCopy').onclick = () => {
         navigator.clipboard.writeText(svgCode);
-        alert('Kode SVG berhasil disalin ke clipboard!');
+        if (window.NeuronSwal) {
+          window.NeuronSwal.toast({
+            icon: 'success',
+            title: 'Kode SVG berhasil disalin ke clipboard!'
+          });
+        } else {
+          alert('Kode SVG berhasil disalin ke clipboard!');
+        }
       };
     }
 

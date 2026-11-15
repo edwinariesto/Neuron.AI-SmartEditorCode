@@ -319,7 +319,7 @@
 
       // 2. Prepare API Key & Provider from Local Storage
       const apiKey = localStorage.getItem('neuron_ai_key_local') || '';
-      const provider = localStorage.getItem('neuron_ai_model') || 'gemini-2.5-flash';
+      let provider = localStorage.getItem('neuron_ai_model') || 'gemini-3.5-flash';
 
       try {
         const resp = await fetch('execute_code.php', {
@@ -340,8 +340,41 @@
         if (resp.ok) {
           const data = await resp.json();
           if (data && data.status === 'ok' && data.explanation) {
-            this.renderResults(data.explanation, data.model || 'Gemini AI', isEn, true);
+            this.renderResults(data.explanation, data.model || 'Google Gemini AI', isEn, true);
             return;
+          }
+
+          // Cek apakah kuota habis (HTTP 429) atau server sibuk (HTTP 503) untuk failover otomatis
+          const rawDetail = String(data?.detail || data?.reason || '').toLowerCase();
+          if (rawDetail.includes('429') || rawDetail.includes('quota') || rawDetail.includes('resource_exhausted') || rawDetail.includes('503') || rawDetail.includes('demand')) {
+            const fallbackModel = (typeof window.switchGeminiFallbackModel === 'function')
+              ? window.switchGeminiFallbackModel(rawDetail.includes('503') ? '503' : 'quota')
+              : (provider === 'gemini-3.5-flash' ? 'gemini-3.5-flash-lite' : 'gemini-3.5-flash');
+
+            // Coba sekali lagi secara otomatis dengan model cadangan
+            try {
+              const retryResp = await fetch('execute_code.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams({
+                  action: 'explain_error',
+                  code: trimmedCode,
+                  language: language || 'PHP',
+                  errorText: errorText,
+                  bahasa: currentLang,
+                  apiKey: apiKey,
+                  provider: fallbackModel,
+                  localAudit: JSON.stringify(localResult.issues)
+                })
+              });
+              if (retryResp.ok) {
+                const retryData = await retryResp.json();
+                if (retryData && retryData.status === 'ok' && retryData.explanation) {
+                  this.renderResults(retryData.explanation, retryData.model || 'Google Gemini (Auto-Failover)', isEn, true);
+                  return;
+                }
+              }
+            } catch (_retryErr) {}
           }
         }
       } catch (_e) {

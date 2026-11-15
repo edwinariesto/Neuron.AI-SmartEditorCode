@@ -21,6 +21,9 @@
   <!-- Ace Editor -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/ace.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+  <!-- SweetAlert2 (Glassmorphic Theme Custom) -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
   <!-- Ambient Background & Glass Stylesheets -->
   <link rel="stylesheet" href="./_manage/css/animasi-neuron.css?v=<?= time() ?>">
   <link rel="stylesheet" href="./_manage/css/card-tranparan.css?v=<?= time() ?>">
@@ -196,7 +199,7 @@
               <span class="badge rounded-circle p-2 d-flex align-items-center justify-content-center" style="background: #ffedd5; color: #ea580c; width: 34px; height: 34px;">
                 <i class="bi bi-code-slash fs-6"></i>
               </span>
-              <span class="fw-bold text-dark small" id="editorHeaderTitle">Editor Kode</span>
+              <span class="fw-bold small editor-header-title-text" id="editorHeaderTitle">Editor Kode</span>
             </div>
             <div class="d-flex align-items-center gap-1.5 gap-sm-2 flex-nowrap ms-auto flex-shrink-0">
               <span class="editor-header-badge" id="charCountInfo">
@@ -294,8 +297,8 @@
     </div>
 
     <!-- FOOTER -->
-    <footer class="mt-4 pt-3 pb-3 text-center text-secondary small">
-      © 2025-2026 <strong class="text-dark">Neuron.AI</strong> · Soft Glassmorphic Code Intelligence Engine · Developed by <strong class="text-dark">Edwin Al-Syatrie</strong> | S3 UAJY
+    <footer class="mt-4 pt-3 pb-3 text-center text-secondary small editor-footer">
+      © 2025–2026 <strong class="footer-brand">Neuron.AI</strong> · Smart Programming Editor with Generative AI · Developed by <strong class="footer-author">Edwin Al-Syatrie</strong>
     </footer>
 
   </div>
@@ -345,13 +348,9 @@
             
             <!-- Hidden native select for form/state compatibility -->
             <select id="aiProviderSelect" class="d-none">
-              <option value="gemini-2.5-flash">Google Gemini (Gemini 2.5 Flash — Tercepat & Rekomendasi)</option>
-              <option value="gemini-1.5-pro">Google Gemini (Gemini 1.5 Pro — Analisa Mendalam)</option>
-              <option value="openai-gpt-4o">OpenAI ChatGPT (GPT-4o Omni)</option>
-              <option value="openai-gpt-4o-mini">OpenAI ChatGPT (GPT-4o Mini)</option>
-              <option value="claude-3.5-sonet">Anthropic Claude (Claude 3.5 Sonnet)</option>
-              <option value="deepseek-chat">DeepSeek AI (DeepSeek-V3 Chat)</option>
-              <option value="deepseek-reasoner">DeepSeek AI (DeepSeek-R1 Reasoner)</option>
+              <option value="gemini-3.5-flash" selected>Google Gemini (Gemini 3.5 Flash — Tercepat & Rekomendasi Utama)</option>
+              <option value="gemini-3.5-flash-lite">Google Gemini (Gemini 3.5 Flash-Lite — Super Cepat & Hemat Kuota)</option>
+              <option value="gemini-3.8-flash">Google Gemini (Gemini 3.8 Flash — Generasi Terkini)</option>
             </select>
 
             <!-- Custom Searchable Combobox Trigger -->
@@ -361,7 +360,7 @@
                   <span class="ai-provider-badge-icon flex-shrink-0" id="customAiSelectedIcon" style="background: rgba(234, 88, 12, 0.15); color: #ea580c;">
                     <i class="bi bi-stars"></i>
                   </span>
-                  <span class="fw-semibold small text-truncate" id="customAiSelectedText">Google Gemini (Gemini 2.5 Flash)</span>
+                  <span class="fw-semibold small text-truncate" id="customAiSelectedText">Google Gemini (Gemini 3.5 Flash)</span>
                 </div>
                 <i class="bi bi-chevron-down ms-2 text-secondary flex-shrink-0" style="font-size: 0.8rem;"></i>
               </button>
@@ -374,105 +373,49 @@
                     <span class="input-group-text border-end-0 bg-transparent" style="color: var(--neuron-orange); border-color: var(--neuron-input-border);">
                       <i class="bi bi-search"></i>
                     </span>
-                    <input type="text" id="aiModelSearchInput" class="form-control border-start-0" placeholder="Cari provider atau model AI..." style="background: var(--neuron-input-bg); color: var(--neuron-text-primary); border-color: var(--neuron-input-border);" autocomplete="off" />
+                    <input type="text" id="aiModelSearchInput" class="form-control border-start-0" placeholder="Cari model Gemini..." style="background: var(--neuron-input-bg); color: var(--neuron-text-primary); border-color: var(--neuron-input-border);" autocomplete="off" />
                   </div>
                 </div>
                 <div class="dropdown-divider my-1"></div>
-                <!-- Model List Items with Icons -->
+                <!-- Model List Items with Icons (KHUSUS GEMINI) -->
                 <div class="ai-model-list-container" id="aiModelListContainer">
-                  <!-- Option 1: Gemini 2.5 Flash -->
-                  <div class="ai-model-item d-flex align-items-center justify-content-between active" data-value="gemini-2.5-flash" data-provider="gemini" data-label="Google Gemini (Gemini 2.5 Flash)" data-icon="bi-stars" data-icon-color="#ea580c" data-icon-bg="rgba(234, 88, 12, 0.15)">
+                  <!-- Option 1: Gemini 3.5 Flash -->
+                  <div class="ai-model-item d-flex align-items-center justify-content-between active" data-value="gemini-3.5-flash" data-provider="gemini" data-label="Google Gemini (Gemini 3.5 Flash)" data-icon="bi-stars" data-icon-color="#ea580c" data-icon-bg="rgba(234, 88, 12, 0.15)">
                     <div class="d-flex align-items-center gap-2 text-truncate">
                       <span class="ai-provider-badge-icon flex-shrink-0" style="background: rgba(234, 88, 12, 0.15); color: #ea580c;">
                         <i class="bi bi-stars"></i>
                       </span>
                       <div class="text-truncate">
                         <div class="fw-bold small">Google Gemini</div>
-                        <div class="text-secondary small font-monospace text-truncate" style="font-size: 0.72rem;">Gemini 2.5 Flash — Tercepat & Rekomendasi</div>
+                        <div class="text-secondary small font-monospace text-truncate" style="font-size: 0.72rem;">Gemini 3.5 Flash — Tercepat & Rekomendasi Utama</div>
                       </div>
                     </div>
                     <i class="bi bi-check-circle-fill text-success fs-6 check-indicator flex-shrink-0 ms-2"></i>
                   </div>
 
-                  <!-- Option 2: Gemini 1.5 Pro -->
-                  <div class="ai-model-item d-flex align-items-center justify-content-between" data-value="gemini-1.5-pro" data-provider="gemini" data-label="Google Gemini (Gemini 1.5 Pro)" data-icon="bi-stars" data-icon-color="#6366f1" data-icon-bg="rgba(99, 102, 241, 0.15)">
+                  <!-- Option 2: Gemini 3.5 Flash-Lite -->
+                  <div class="ai-model-item d-flex align-items-center justify-content-between" data-value="gemini-3.5-flash-lite" data-provider="gemini" data-label="Google Gemini (Gemini 3.5 Flash-Lite)" data-icon="bi-lightning-charge-fill" data-icon-color="#f59e0b" data-icon-bg="rgba(245, 158, 11, 0.15)">
                     <div class="d-flex align-items-center gap-2 text-truncate">
-                      <span class="ai-provider-badge-icon flex-shrink-0" style="background: rgba(99, 102, 241, 0.15); color: #6366f1;">
-                        <i class="bi bi-stars"></i>
-                      </span>
-                      <div class="text-truncate">
-                        <div class="fw-bold small">Google Gemini</div>
-                        <div class="text-secondary small font-monospace text-truncate" style="font-size: 0.72rem;">Gemini 1.5 Pro — Analisa Mendalam</div>
-                      </div>
-                    </div>
-                    <i class="bi bi-check-circle-fill text-success fs-6 check-indicator flex-shrink-0 ms-2 d-none"></i>
-                  </div>
-
-                  <!-- Option 3: OpenAI GPT-4o -->
-                  <div class="ai-model-item d-flex align-items-center justify-content-between" data-value="openai-gpt-4o" data-provider="openai" data-label="OpenAI ChatGPT (GPT-4o Omni)" data-icon="bi-robot" data-icon-color="#10b981" data-icon-bg="rgba(16, 185, 129, 0.15)">
-                    <div class="d-flex align-items-center gap-2 text-truncate">
-                      <span class="ai-provider-badge-icon flex-shrink-0" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">
-                        <i class="bi bi-robot"></i>
-                      </span>
-                      <div class="text-truncate">
-                        <div class="fw-bold small">OpenAI ChatGPT</div>
-                        <div class="text-secondary small font-monospace text-truncate" style="font-size: 0.72rem;">GPT-4o Omni — Multimodal Flagship</div>
-                      </div>
-                    </div>
-                    <i class="bi bi-check-circle-fill text-success fs-6 check-indicator flex-shrink-0 ms-2 d-none"></i>
-                  </div>
-
-                  <!-- Option 4: OpenAI GPT-4o Mini -->
-                  <div class="ai-model-item d-flex align-items-center justify-content-between" data-value="openai-gpt-4o-mini" data-provider="openai" data-label="OpenAI ChatGPT (GPT-4o Mini)" data-icon="bi-lightning-charge-fill" data-icon-color="#14b8a6" data-icon-bg="rgba(20, 184, 166, 0.15)">
-                    <div class="d-flex align-items-center gap-2 text-truncate">
-                      <span class="ai-provider-badge-icon flex-shrink-0" style="background: rgba(20, 184, 166, 0.15); color: #14b8a6;">
+                      <span class="ai-provider-badge-icon flex-shrink-0" style="background: rgba(245, 158, 11, 0.15); color: #f59e0b;">
                         <i class="bi bi-lightning-charge-fill"></i>
                       </span>
                       <div class="text-truncate">
-                        <div class="fw-bold small">OpenAI ChatGPT</div>
-                        <div class="text-secondary small font-monospace text-truncate" style="font-size: 0.72rem;">GPT-4o Mini — Cepat & Efisien</div>
+                        <div class="fw-bold small">Google Gemini</div>
+                        <div class="text-secondary small font-monospace text-truncate" style="font-size: 0.72rem;">Gemini 3.5 Flash-Lite — Super Cepat & Hemat Kuota</div>
                       </div>
                     </div>
                     <i class="bi bi-check-circle-fill text-success fs-6 check-indicator flex-shrink-0 ms-2 d-none"></i>
                   </div>
 
-                  <!-- Option 5: Claude 3.5 Sonnet -->
-                  <div class="ai-model-item d-flex align-items-center justify-content-between" data-value="claude-3.5-sonet" data-provider="claude" data-label="Anthropic Claude (Claude 3.5 Sonnet)" data-icon="bi-chat-heart-fill" data-icon-color="#d97706" data-icon-bg="rgba(217, 119, 6, 0.15)">
+                  <!-- Option 3: Gemini 3.8 Flash -->
+                  <div class="ai-model-item d-flex align-items-center justify-content-between" data-value="gemini-3.8-flash" data-provider="gemini" data-label="Google Gemini (Gemini 3.8 Flash)" data-icon="bi-google" data-icon-color="#3b82f6" data-icon-bg="rgba(59, 130, 246, 0.15)">
                     <div class="d-flex align-items-center gap-2 text-truncate">
-                      <span class="ai-provider-badge-icon flex-shrink-0" style="background: rgba(217, 119, 6, 0.15); color: #d97706;">
-                        <i class="bi bi-chat-heart-fill"></i>
+                      <span class="ai-provider-badge-icon flex-shrink-0" style="background: rgba(59, 130, 246, 0.15); color: #3b82f6;">
+                        <i class="bi bi-google"></i>
                       </span>
                       <div class="text-truncate">
-                        <div class="fw-bold small">Anthropic Claude</div>
-                        <div class="text-secondary small font-monospace text-truncate" style="font-size: 0.72rem;">Claude 3.5 Sonnet — Penalaran Superior</div>
-                      </div>
-                    </div>
-                    <i class="bi bi-check-circle-fill text-success fs-6 check-indicator flex-shrink-0 ms-2 d-none"></i>
-                  </div>
-
-                  <!-- Option 6: DeepSeek-V3 Chat -->
-                  <div class="ai-model-item d-flex align-items-center justify-content-between" data-value="deepseek-chat" data-provider="deepseek" data-label="DeepSeek AI (DeepSeek-V3 Chat)" data-icon="bi-cpu-fill" data-icon-color="#0284c7" data-icon-bg="rgba(2, 132, 199, 0.15)">
-                    <div class="d-flex align-items-center gap-2 text-truncate">
-                      <span class="ai-provider-badge-icon flex-shrink-0" style="background: rgba(2, 132, 199, 0.15); color: #0284c7;">
-                        <i class="bi bi-cpu-fill"></i>
-                      </span>
-                      <div class="text-truncate">
-                        <div class="fw-bold small">DeepSeek AI</div>
-                        <div class="text-secondary small font-monospace text-truncate" style="font-size: 0.72rem;">DeepSeek-V3 Chat — Hemat & Cepat</div>
-                      </div>
-                    </div>
-                    <i class="bi bi-check-circle-fill text-success fs-6 check-indicator flex-shrink-0 ms-2 d-none"></i>
-                  </div>
-
-                  <!-- Option 7: DeepSeek-R1 Reasoner -->
-                  <div class="ai-model-item d-flex align-items-center justify-content-between" data-value="deepseek-reasoner" data-provider="deepseek" data-label="DeepSeek AI (DeepSeek-R1 Reasoner)" data-icon="bi-lightbulb-fill" data-icon-color="#38bdf8" data-icon-bg="rgba(56, 189, 248, 0.15)">
-                    <div class="d-flex align-items-center gap-2 text-truncate">
-                      <span class="ai-provider-badge-icon flex-shrink-0" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8;">
-                        <i class="bi bi-lightbulb-fill"></i>
-                      </span>
-                      <div class="text-truncate">
-                        <div class="fw-bold small">DeepSeek AI</div>
-                        <div class="text-secondary small font-monospace text-truncate" style="font-size: 0.72rem;">DeepSeek-R1 Reasoner — Deep Thinking</div>
+                        <div class="fw-bold small">Google Gemini</div>
+                        <div class="text-secondary small font-monospace text-truncate" style="font-size: 0.72rem;">Gemini 3.8 Flash — Generasi Terkini</div>
                       </div>
                     </div>
                     <i class="bi bi-check-circle-fill text-success fs-6 check-indicator flex-shrink-0 ms-2 d-none"></i>
