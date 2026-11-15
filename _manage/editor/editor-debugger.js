@@ -425,13 +425,13 @@
       wrap.className = 'debug-results-box p-2.5 p-sm-3 p-md-4 d-flex flex-column gap-3';
 
       const modelBadgeHtml = isOnlineAi
-        ? `<span class="badge bg-white text-dark border border-secondary border-opacity-25 shadow-sm px-2.5 py-1.5 rounded-pill d-inline-flex align-items-center"><i class="bi bi-stars me-1" style="color: #ea580c;"></i> <span class="d-none d-sm-inline">${escapeHtml(model)} (Online AI)</span><span class="d-inline d-sm-none">AI Online</span></span>`
-        : `<span class="badge bg-white text-dark border border-secondary border-opacity-25 shadow-sm px-2.5 py-1.5 rounded-pill d-inline-flex align-items-center"><i class="bi bi-shield-check me-1" style="color: #ea580c;"></i> <span class="d-none d-sm-inline">${escapeHtml(model)}</span><span class="d-inline d-sm-none">Audit Lokal</span></span>`;
+        ? `<span class="badge eval-badge-pill shadow-sm px-2.5 py-1.5 rounded-pill d-inline-flex align-items-center"><i class="bi bi-stars me-1" style="color: #ea580c;"></i> <span class="d-none d-sm-inline">${escapeHtml(model)} (Online AI)</span><span class="d-inline d-sm-none">AI Online</span></span>`
+        : `<span class="badge eval-badge-pill shadow-sm px-2.5 py-1.5 rounded-pill d-inline-flex align-items-center"><i class="bi bi-shield-check me-1" style="color: #ea580c;"></i> <span class="d-none d-sm-inline">${escapeHtml(model)}</span><span class="d-inline d-sm-none">Audit Lokal</span></span>`;
 
       if (!hasIssues) {
         // TAMPILAN BERSIH & SEMPURNA (100% Simetris, Elegan, Tanpa Box Perbaikan Kosong)
         const successCard = document.createElement('div');
-        successCard.className = 'p-3.5 p-md-4 rounded-4 border border-success-subtle bg-success bg-opacity-10 text-center d-flex flex-column align-items-center justify-content-center shadow-sm';
+        successCard.className = 'eval-header-card eval-header-success p-3.5 p-md-4 rounded-4 text-center d-flex flex-column align-items-center justify-content-center shadow-sm';
         successCard.innerHTML = `
           <div class="d-flex align-items-center justify-content-between w-100 flex-wrap gap-2 mb-3 pb-2.5 border-bottom border-success border-opacity-20">
             <span class="badge bg-success py-1.5 px-3 rounded-pill fw-semibold shadow-sm d-inline-flex align-items-center" style="font-size: 0.84rem;">
@@ -442,10 +442,10 @@
           <div class="my-2 d-inline-flex p-3 rounded-circle bg-success bg-opacity-15 text-success">
             <i class="bi bi-shield-check display-5" style="color: #10b981;"></i>
           </div>
-          <h5 class="fw-bold mb-1.5 text-dark" style="font-size: 1.15rem;">
+          <h5 class="fw-bold mb-1.5 eval-success-title" style="font-size: 1.15rem;">
             ${isEn ? 'Excellent! No Syntax Bugs Found.' : 'Luar Biasa! Tidak Ditemukan Bug Sintaks.'}
           </h5>
-          <p class="small m-0 text-secondary" style="max-width: 440px; line-height: 1.6;">
+          <p class="small m-0 eval-success-desc" style="max-width: 440px; line-height: 1.6;">
             ${escapeHtml(explanation.cause || (isEn ? 'Your code complies with language grammar rules and is ready to run.' : 'Kode Anda sudah sesuai kaidah bahasa pemrograman dan siap dijalankan dengan lancar.'))}
           </p>
         `;
@@ -453,7 +453,7 @@
       } else {
         // TAMPILAN ERROR DITEMUKAN (Simetris, Terstruktur, Jelas)
         const headerCard = document.createElement('div');
-        headerCard.className = 'p-3 p-md-3.5 rounded-4 border border-danger-subtle bg-danger bg-opacity-10 shadow-sm';
+        headerCard.className = 'eval-header-card eval-header-error p-3 p-md-3.5 rounded-4 shadow-sm';
         headerCard.innerHTML = `
           <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-2">
             <div class="d-flex align-items-center flex-wrap gap-2">
@@ -461,18 +461,18 @@
                 <i class="bi bi-exclamation-octagon-fill me-1.5"></i>
                 ${isEn ? `${issues.length || 1} Issue(s) Detected` : `${issues.length || 1} Bagian Perlu Diperbaiki`}
               </span>
-              ${explanation.where && !/tidak ada/i.test(explanation.where) ? `<span class="badge bg-white text-dark border border-secondary border-opacity-25 px-2.5 py-1 rounded-pill font-monospace small text-truncate" style="max-width: clamp(120px, 35vw, 220px);">${escapeHtml(explanation.where)}</span>` : ''}
+              ${explanation.where && !/tidak ada/i.test(explanation.where) ? `<span class="badge eval-where-pill px-2.5 py-1 rounded-pill font-monospace small text-truncate" style="max-width: clamp(120px, 35vw, 220px);">${escapeHtml(explanation.where)}</span>` : ''}
             </div>
             ${modelBadgeHtml}
           </div>
-          <p class="mb-0 fw-semibold small mt-2" style="color: var(--neuron-text-primary); line-height: 1.6;">
+          <p class="eval-cause-text mb-0 fw-semibold small mt-2" style="line-height: 1.6;">
             ${escapeHtml(explanation.cause || (isEn ? 'Found several code segments that need correction.' : 'Ditemukan beberapa bagian kode yang perlu diperbaiki.'))}
           </p>
           ${explanation.fix && !/tidak ada perbaikan/i.test(explanation.fix) ? `
             <div class="mt-3 pt-3 border-top border-secondary border-opacity-25">
               <div class="d-flex align-items-center gap-2 mb-2">
                 <i class="bi bi-lightbulb-fill text-warning"></i>
-                <strong style="color: #ea580c; font-size: 0.88rem;">${isEn ? 'Key Fix Suggestion:' : 'Saran Perbaikan Utama:'}</strong>
+                <strong class="eval-key-fix-label" style="font-size: 0.88rem;">${isEn ? 'Key Fix Suggestion:' : 'Saran Perbaikan Utama:'}</strong>
               </div>
               <div class="fix-code-box p-3 p-md-3.5 rounded-4">
                 <code class="d-block font-monospace" style="color: #fde047; font-size: 0.88rem; line-height: 1.65; white-space: pre-wrap; word-break: break-word;">${escapeHtml(explanation.fix)}</code>
@@ -485,7 +485,7 @@
         // 2. Itemized issues list
         if (issues.length > 0) {
           const listHeader = document.createElement('div');
-          listHeader.className = 'd-flex align-items-center justify-content-between flex-wrap gap-2 text-secondary small fw-bold text-uppercase mt-2 px-1';
+          listHeader.className = 'eval-list-header d-flex align-items-center justify-content-between flex-wrap gap-2 small fw-bold text-uppercase mt-2 px-1';
           listHeader.innerHTML = `
             <span><i class="bi bi-list-check me-1" style="color: #ea580c;"></i> ${isEn ? 'Line-by-Line Breakdown' : 'Rincian Kesalahan Per Baris'}</span>
             ${!isOnlineAi ? `<button class="btn btn-sm btn-outline-warning py-1 px-3 rounded-pill" data-bs-toggle="modal" data-bs-target="#apiKeyModal"><i class="bi bi-key-fill me-1"></i> ${isEn ? 'Connect AI Key' : 'Hubungkan API Key AI'}</button>` : ''}
@@ -505,7 +505,7 @@
                 </button>
                 ${it.where ? `<span class="issue-where-badge small font-monospace">${escapeHtml(it.where)}</span>` : ''}
               </div>
-              <div class="small my-2" style="color: var(--neuron-text-primary); line-height: 1.6;">
+              <div class="eval-item-cause-text small my-2" style="line-height: 1.6;">
                 <i class="bi bi-info-circle-fill text-danger me-1"></i> ${escapeHtml(it.cause || '')}
               </div>
               ${it.fix ? `

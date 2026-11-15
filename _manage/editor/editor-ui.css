@@ -1425,8 +1425,11 @@ body.editor-page.dark-theme .neuron-swal-cancel-btn,
 }
 
 /* =========================================================================
-   DARK THEME TEXT CONTRAST ENHANCEMENTS (GAMBAR 2 & GAMBAR 3)
+   COMPREHENSIVE DARK & LIGHT THEME CONTRAST SYSTEM (EVALUASI TAB, VISUALIZER, MODALS)
+   Guarantees high contrast, accessible text, and beautiful glassmorphism in both modes
    ========================================================================= */
+
+/* Header & Typography */
 .editor-header-title-text {
   color: var(--neuron-text-primary, #0f172a);
   font-weight: 700;
@@ -1439,8 +1442,33 @@ body.editor-page.dark-theme #editorHeaderTitle {
   color: #f8fafc !important;
 }
 
-body.editor-page.dark-theme .text-dark {
+body.editor-page.dark-theme .text-dark:not(.btn-warning):not(.badge-warning):not([class*="bg-warning"]) {
   color: #f8fafc !important;
+}
+
+/* Yellow Elements (Warning Badges & Buttons) MUST always maintain dark text */
+.badge.bg-warning,
+.btn-warning,
+.alert-warning,
+[class*="bg-warning"],
+body.editor-page.dark-theme .badge.bg-warning,
+body.editor-page.dark-theme .btn-warning,
+body.editor-page.dark-theme .btn-warning.text-dark,
+body.editor-page.dark-theme .badge.bg-warning.text-dark {
+  color: #0f172a !important;
+}
+
+/* Secondary & Muted Text Contrast in Dark Mode */
+body.editor-page.dark-theme .text-secondary {
+  color: #94a3b8 !important;
+}
+
+body.editor-page.dark-theme .text-muted {
+  color: #94a3b8 !important;
+}
+
+body.editor-page.dark-theme .border-secondary {
+  border-color: rgba(71, 85, 105, 0.6) !important;
 }
 
 body.editor-page.dark-theme .editor-header-badge {
@@ -1453,6 +1481,7 @@ body.editor-page.dark-theme .editor-header-badge i {
   color: #f97316 !important;
 }
 
+/* Footer Typography & Brand Contrast */
 .editor-footer {
   transition: color 0.25s ease;
 }
@@ -1478,7 +1507,7 @@ body.editor-page.dark-theme .editor-footer {
   color: #94a3b8 !important;
 }
 
-/* Modal dark theme typography guarantee */
+/* Modal Dark Theme Typography Guarantee */
 body.editor-page.dark-theme .modal-title,
 body.editor-page.dark-theme .modal-header h5,
 body.editor-page.dark-theme .modal-header h6 {
@@ -1487,4 +1516,219 @@ body.editor-page.dark-theme .modal-header h6 {
 
 body.editor-page.dark-theme .form-label {
   color: #cbd5e1 !important;
+}
+
+/* Empty State / Placeholder Typography */
+.editor-panel-placeholder-title {
+  color: var(--neuron-text-primary, #0f172a);
+  transition: color 0.25s ease;
+}
+
+body.editor-page.dark-theme .editor-panel-placeholder-title {
+  color: #f8fafc !important;
+}
+
+.editor-panel-placeholder-desc {
+  color: var(--neuron-text-secondary, #64748b);
+  transition: color 0.25s ease;
+}
+
+body.editor-page.dark-theme .editor-panel-placeholder-desc {
+  color: #94a3b8 !important;
+}
+
+/* =========================================================================
+   TAB EVALUASI AI (DEBUGGER TAB) DYNAMIC ADAPTIVE STYLES
+   ========================================================================= */
+
+/* Model & Where Badges */
+.eval-badge-pill {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border: 1px solid rgba(203, 213, 225, 0.85) !important;
+  font-size: 0.78rem !important;
+  font-weight: 600 !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04) !important;
+  transition: all 0.2s ease;
+}
+
+.eval-badge-pill i {
+  color: #ea580c !important;
+}
+
+body.editor-page.dark-theme .eval-badge-pill {
+  background: rgba(30, 41, 59, 0.85) !important;
+  color: #f8fafc !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+}
+
+body.editor-page.dark-theme .eval-badge-pill i {
+  color: #fb923c !important;
+}
+
+.eval-where-pill {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border: 1px solid rgba(203, 213, 225, 0.9) !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 0.76rem !important;
+  font-weight: 600 !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04) !important;
+  transition: all 0.2s ease;
+}
+
+body.editor-page.dark-theme .eval-where-pill {
+  background: rgba(30, 41, 59, 0.9) !important;
+  color: #f8fafc !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35) !important;
+}
+
+/* Header Issue Card */
+.eval-header-card.eval-header-error {
+  background: rgba(254, 242, 242, 0.9) !important;
+  border: 1.5px solid rgba(254, 202, 202, 0.8) !important;
+  color: #0f172a !important;
+  transition: all 0.25s ease;
+}
+
+body.editor-page.dark-theme .eval-header-card.eval-header-error {
+  background: rgba(69, 10, 10, 0.35) !important;
+  border: 1.5px solid rgba(239, 68, 68, 0.35) !important;
+  color: #f8fafc !important;
+}
+
+.eval-cause-text {
+  color: #0f172a !important;
+  line-height: 1.6;
+}
+
+body.editor-page.dark-theme .eval-cause-text {
+  color: #f1f5f9 !important;
+}
+
+.eval-key-fix-label {
+  color: #ea580c !important;
+}
+
+body.editor-page.dark-theme .eval-key-fix-label {
+  color: #fb923c !important;
+}
+
+.eval-list-header {
+  color: #475569 !important;
+  letter-spacing: 0.5px;
+}
+
+body.editor-page.dark-theme .eval-list-header {
+  color: #94a3b8 !important;
+}
+
+.eval-item-cause-text {
+  color: #1e293b !important;
+}
+
+body.editor-page.dark-theme .eval-item-cause-text {
+  color: #f1f5f9 !important;
+}
+
+/* Success Card */
+.eval-header-card.eval-header-success {
+  background: rgba(240, 253, 244, 0.95) !important;
+  border: 1.5px solid rgba(134, 239, 172, 0.65) !important;
+  transition: all 0.25s ease;
+}
+
+body.editor-page.dark-theme .eval-header-card.eval-header-success {
+  background: rgba(6, 78, 59, 0.25) !important;
+  border: 1.5px solid rgba(16, 185, 129, 0.35) !important;
+}
+
+.eval-success-title {
+  color: #065f46 !important;
+}
+
+body.editor-page.dark-theme .eval-success-title {
+  color: #6ee7b7 !important;
+}
+
+.eval-success-desc {
+  color: #475569 !important;
+}
+
+body.editor-page.dark-theme .eval-success-desc {
+  color: #94a3b8 !important;
+}
+
+/* =========================================================================
+   TAB VISUALISASI & MEDIA ADAPTIVE STYLES
+   ========================================================================= */
+
+.visual-mode-badge {
+  background: #fff7ed !important;
+  color: #ea580c !important;
+  border: 1px solid rgba(249, 115, 22, 0.35) !important;
+  font-weight: 700 !important;
+  transition: all 0.2s ease;
+}
+
+body.editor-page.dark-theme .visual-mode-badge {
+  background: rgba(249, 115, 22, 0.18) !important;
+  color: #fb923c !important;
+  border: 1px solid rgba(249, 115, 22, 0.45) !important;
+}
+
+.visual-image-wrapper,
+.visual-svg-stage {
+  background: #ffffff !important;
+  border: 1.5px solid rgba(203, 213, 225, 0.7) !important;
+  transition: all 0.25s ease;
+}
+
+body.editor-page.dark-theme .visual-image-wrapper,
+body.editor-page.dark-theme .visual-svg-stage {
+  background: #0f172a !important;
+  border: 1.5px solid rgba(51, 65, 85, 0.8) !important;
+}
+
+.vis-table-wrapper {
+  background: #ffffff !important;
+  border: 1.5px solid rgba(203, 213, 225, 0.7) !important;
+  transition: all 0.25s ease;
+}
+
+.vis-table-head {
+  background: #f8fafc !important;
+  color: #0f172a !important;
+  border-bottom: 2px solid rgba(203, 213, 225, 0.8) !important;
+}
+
+.vis-table-search-input {
+  color: #0f172a !important;
+}
+
+body.editor-page.dark-theme .vis-table-wrapper {
+  background: #0f172a !important;
+  border: 1.5px solid rgba(51, 65, 85, 0.8) !important;
+}
+
+body.editor-page.dark-theme .vis-table-head {
+  background: #1e293b !important;
+  color: #f8fafc !important;
+  border-bottom: 2px solid rgba(51, 65, 85, 0.8) !important;
+}
+
+body.editor-page.dark-theme .vis-table-search-input {
+  color: #f8fafc !important;
+}
+
+body.editor-page.dark-theme #visDataTable tbody tr {
+  color: #e2e8f0 !important;
+  border-color: rgba(51, 65, 85, 0.6) !important;
+}
+
+body.editor-page.dark-theme #visDataTable tbody tr:hover {
+  background: rgba(30, 41, 59, 0.6) !important;
+  color: #ffffff !important;
 }

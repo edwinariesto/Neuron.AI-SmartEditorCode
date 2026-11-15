@@ -269,7 +269,7 @@
               <div class="visualizer-window d-flex flex-column h-100" id="visualizerContainer">
                 <div class="p-4 text-center text-secondary d-flex flex-column align-items-center justify-content-center h-100">
                   <i class="bi bi-boxes display-4 text-secondary opacity-50 mb-3"></i>
-                  <h6 class="fw-bold text-dark mb-1">Visualisasi Gambar, Tabel, 2D & 3D</h6>
+                  <h6 class="fw-bold editor-panel-placeholder-title mb-1">Visualisasi Gambar, Tabel, 2D & 3D</h6>
                   <p class="small text-secondary m-0" style="max-width: 380px;">
                     Panel ini secara otomatis menampilkan hasil eksekusi dalam bentuk citra/gambar (Base64/SVG), tabel data interaktif, visual grafis 2D Canvas, 3D WebGL (Three.js), atau pratinjau halaman web HTML live.
                   </p>
@@ -282,7 +282,7 @@
               <div id="aiDebugOutput" class="ai-debug-window h-100">
                 <div class="p-4 text-center text-secondary d-flex flex-column align-items-center justify-content-center h-100">
                   <i class="bi bi-robot display-4 text-secondary opacity-50 mb-3"></i>
-                  <h6 class="fw-bold text-dark mb-1">Deteksi Error & Audit Baris demi Baris</h6>
+                  <h6 class="fw-bold editor-panel-placeholder-title mb-1">Deteksi Error & Audit Baris demi Baris</h6>
                   <p class="small text-secondary m-0" style="max-width: 380px;">
                     Klik tombol <strong>"AI Debug & Periksa"</strong> di atas. AI akan membaca kode Anda baris demi baris, menemukan kesalahan sintaks/logika, dan memberikan saran perbaikan dalam bahasa awam.
                   </p>
@@ -312,7 +312,7 @@
             <span class="badge rounded-circle p-2" style="background: #ffedd5; color: #ea580c;">
               <i class="bi bi-lightning-fill"></i>
             </span>
-            <h5 class="modal-title fw-bold text-dark fs-6" id="snippetModalLabel">Template & Contoh Kode Siap Pakai</h5>
+            <h5 class="modal-title fw-bold fs-6" id="snippetModalLabel">Template & Contoh Kode Siap Pakai</h5>
           </div>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>

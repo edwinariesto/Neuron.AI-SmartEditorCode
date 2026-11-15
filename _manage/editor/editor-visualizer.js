@@ -108,7 +108,7 @@
       wrap.innerHTML = `
         <div class="visual-toolbar mb-2 d-flex align-items-center justify-content-between flex-nowrap w-100 px-2 py-1 rounded-4" style="background: var(--neuron-pill-bg); border: 1.5px solid var(--neuron-pill-border); box-shadow: 0 2px 8px rgba(0,0,0,0.04); min-width: 0; min-height: 40px; padding: 6px 10px;">
           <div class="d-flex align-items-center gap-1.5 flex-shrink-0">
-            <span class="badge bg-warning text-dark fw-bold px-2 py-1 rounded-pill d-inline-flex align-items-center" style="font-size: 0.78rem;">
+            <span class="badge visual-mode-badge fw-bold px-2 py-1 rounded-pill d-inline-flex align-items-center" style="font-size: 0.78rem;">
               <i class="bi bi-image me-1"></i> <span class="d-none d-sm-inline">${caption}</span><span class="d-inline d-sm-none">Citra</span>
             </span>
           </div>
@@ -123,7 +123,7 @@
             <a href="${src}" download="neuron-visual.png" class="vis-tool-btn text-decoration-none" title="Unduh"><i class="bi bi-download"></i></a>
           </div>
         </div>
-        <div class="visual-image-wrapper overflow-auto w-100 d-flex align-items-center justify-content-center p-3 bg-white rounded-4 border border-secondary border-opacity-25 shadow-sm flex-grow-1" style="max-height: 480px;">
+        <div class="visual-image-wrapper overflow-auto w-100 d-flex align-items-center justify-content-center p-3 rounded-4 shadow-sm flex-grow-1" style="max-height: 480px;">
           <img id="visTargetImg" src="${src}" alt="Hasil Visual" class="img-fluid rounded-3 shadow-sm transition-all" style="max-height: 420px; object-fit: contain; transform: scale(1);" />
         </div>
       `;
@@ -163,7 +163,7 @@
             <button class="vis-tool-btn" id="visSvgCopy" title="Salin SVG"><i class="bi bi-clipboard"></i> <span class="d-none d-sm-inline">Salin</span></button>
           </div>
         </div>
-        <div class="visual-svg-stage p-3 rounded-4 bg-white border border-secondary border-opacity-25 shadow-sm w-100 d-flex align-items-center justify-content-center flex-grow-1" style="min-height: 320px;">
+        <div class="visual-svg-stage p-3 rounded-4 shadow-sm w-100 d-flex align-items-center justify-content-center flex-grow-1" style="min-height: 320px;">
           ${svgCode}
         </div>
       `;
@@ -196,7 +196,7 @@
       wrap.innerHTML = `
         <div class="visual-toolbar mb-2 d-flex align-items-center justify-content-between flex-nowrap w-100 px-2 py-1 rounded-4" style="background: var(--neuron-pill-bg); border: 1.5px solid var(--neuron-pill-border); box-shadow: 0 2px 8px rgba(0,0,0,0.04); min-width: 0; min-height: 40px; padding: 6px 10px;">
           <div class="d-flex align-items-center gap-1.5 flex-shrink-0">
-            <span class="badge bg-warning text-dark fw-bold px-2 py-1 rounded-pill d-inline-flex align-items-center" style="font-size: 0.78rem;">
+            <span class="badge visual-mode-badge fw-bold px-2 py-1 rounded-pill d-inline-flex align-items-center" style="font-size: 0.78rem;">
               <i class="bi bi-table me-1"></i> <span class="d-none d-sm-inline">Tabel Data</span><span class="d-inline d-sm-none">Tabel</span>
             </span>
             <span class="badge bg-light text-secondary border px-2 py-0.5 rounded-pill small d-none d-sm-inline" style="font-size: 0.72rem;">${data.length} Baris</span>
@@ -206,7 +206,7 @@
           <div class="visual-btn-group d-flex align-items-center flex-nowrap ms-auto flex-shrink-0">
             <div class="d-flex align-items-center px-1">
               <i class="bi bi-search text-secondary small me-1"></i>
-              <input type="text" id="visTableSearch" class="form-control form-control-sm border-0 bg-transparent p-0 text-dark" placeholder="Cari..." style="max-width: 90px; font-size: 0.78rem; box-shadow: none;" />
+              <input type="text" id="visTableSearch" class="form-control form-control-sm border-0 bg-transparent p-0 vis-table-search-input" placeholder="Cari..." style="max-width: 90px; font-size: 0.78rem; box-shadow: none;" />
             </div>
             <span class="vis-tool-separator"></span>
             <button class="vis-tool-btn text-success" id="visExportCsv" title="Export CSV">
@@ -214,9 +214,9 @@
             </button>
           </div>
         </div>
-        <div class="table-responsive rounded-4 border border-secondary border-opacity-25 bg-white flex-grow-1 shadow-sm" style="max-height: 420px;">
+        <div class="table-responsive rounded-4 border border-secondary border-opacity-25 vis-table-wrapper flex-grow-1 shadow-sm" style="max-height: 420px;">
           <table class="table table-hover table-sm m-0 align-middle" id="visDataTable">
-            <thead class="table-light text-dark sticky-top">
+            <thead class="vis-table-head sticky-top">
               <tr>
                 <th style="width: 50px;">#</th>
                 ${keys.map(k => `<th>${escapeHtml(k)}</th>`).join('')}
@@ -274,7 +274,7 @@
         <div class="visual-toolbar mb-2 d-flex align-items-center justify-content-between flex-nowrap w-100 px-2.5 py-1.5 rounded-4" style="background: var(--neuron-pill-bg); border: 1.5px solid var(--neuron-pill-border); box-shadow: 0 2px 8px rgba(0,0,0,0.04); min-width: 0;">
           <!-- Left: Label -->
           <div class="d-flex align-items-center gap-1.5 flex-shrink-0">
-            <span class="badge bg-warning text-dark fw-bold px-2.5 py-1 rounded-pill d-inline-flex align-items-center" style="font-size: 0.78rem;">
+            <span class="badge visual-mode-badge fw-bold px-2.5 py-1 rounded-pill d-inline-flex align-items-center" style="font-size: 0.78rem;">
               <i class="bi bi-browser-chrome me-1"></i> <span class="d-none d-sm-inline">Web Preview</span><span class="d-inline d-sm-none">Web</span>
             </span>
           </div>
@@ -434,7 +434,7 @@
 
       wrap.innerHTML = `
         <div class="visual-toolbar mb-2 d-flex align-items-center justify-content-between bg-dark bg-opacity-75 px-3 py-1.5 rounded border border-secondary border-opacity-25">
-          <span class="badge bg-warning text-dark"><i class="bi bi-palette me-1"></i> Canvas 2D Graphics</span>
+          <span class="badge visual-mode-badge"><i class="bi bi-palette me-1"></i> Canvas 2D Graphics</span>
           <button class="btn btn-sm btn-outline-light border-0" id="vis2dRedraw" title="Gambar Ulang"><i class="bi bi-arrow-clockwise"></i></button>
         </div>
         <div class="flex-grow-1 rounded overflow-hidden d-flex align-items-center justify-content-center bg-dark" style="min-height: 400px;">
