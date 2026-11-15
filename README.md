@@ -1,5 +1,19 @@
 # Neuron.AI Editor Code
 
+<div align="center">
+
+| <a href="#indonesian-version"><img src="./_manage/img/flag-id.svg" width="22" height="22" valign="middle" alt="Indonesia" /> <b>Bahasa Indonesia</b></a> | <a href="#english-version"><img src="./_manage/img/flag-en.svg" width="22" height="22" valign="middle" alt="English" /> <b>English Version</b></a> |
+| :---: | :---: |
+
+</div>
+
+<details open id="indonesian-version">
+<summary>
+  <img src="./_manage/img/flag-id.svg" width="20" height="20" valign="middle" alt="ID" /> <b>Bahasa Indonesia</b> (Klik untuk Ciutkan / Buka Tab)
+</summary>
+
+<br>
+
 Smart Programming Editor with Generative AI untuk eksekusi multibahasa cepat, deteksi kode otomatis, serta audit logika baris demi baris secara jelas.
 
 ## Visi dan Keunggulan Utama
@@ -85,3 +99,100 @@ Dilarang keras menduplikasi, menjiplak, mengkloning, mendistribusikan ulang, ata
 
 3. Kemitraan dan Kolaborasi Terbuka
 Pengembang menyambut baik kolaborasi penelitian akademik, integrasi edukasi, serta kontribusi teknis yang membangun. Pihak yang berminat menjalin kerja sama riset komputasi kognitif atau pengembangan bersama dapat mengajukan permohonan kolaborasi resmi melalui kanal repositori GitHub atau komunikasi langsung dengan pemilik proyek.
+
+</details>
+
+<details id="english-version">
+<summary>
+  <img src="./_manage/img/flag-en.svg" width="20" height="20" valign="middle" alt="EN" /> <b>English Version</b> (Click to Expand / Collapse Tab)
+</summary>
+
+<br>
+
+Smart Programming Editor with Generative AI for fast multi-language execution, automated code detection, and plain line-by-line logic audit.
+
+## Vision and Core Advantages
+
+Neuron.AI Editor Code delivers a modern interactive programming environment combining standalone execution speed with generative artificial intelligence. The platform is purpose-built to eliminate technical friction frequently encountered by novice learners and seasoned developers while exploring codebases. Through intelligent inference engines and intuitive visual interfaces, every written line of code can be immediately analyzed, executed, and visualized without complicated local environment configurations.
+
+## Automated Programming Language Detection
+
+A hallmark capability of the system is real-time automated programming language recognition, freeing users from manual dropdown selections.
+
+1. Real Time Syntax Pattern Analysis
+The system scans code structure, unique syntax tokens, and punctuation fingerprints within milliseconds as users type or paste snippets.
+
+2. Dynamic Editor Mode Adaptation
+Once the language is identified, Ace editor dynamically configures appropriate syntax highlighting, auto-completion, and structural grammar rules for PHP, Python, JavaScript, TypeScript, HTML, SQL, and other languages.
+
+3. Instant Execution Readiness
+With language recognition operating instantaneously, users can press run right away, allowing the system to route code to the correct runtime engine without manual intervention.
+
+## Artificial Intelligence Architecture and Engine Models
+
+The platform is powered by Google Gemini official models, offering an optimal balance of fast inference speed, quota efficiency, and deep semantic code reasoning.
+
+1. Primary Model Google Gemini 3.5 Flash
+Acts as the main inference engine for rapid code evaluation, line-by-line diagnosis, and beginner-friendly remedial suggestions.
+
+2. Lightweight Model Google Gemini 3.5 Flash Lite
+Provides ultra-low latency execution and minimal token consumption for quick audits and bandwidth-constrained devices.
+
+3. Advanced Model Google Gemini 3.8 Flash
+Dedicated to complex algorithmic calculations, multi-branch control flow analysis, and large data structures.
+
+4. Automated Quota Failover Mechanism
+The system features self-monitoring response logic. If free-tier quotas are reached or upstream servers face traffic spikes, the platform seamlessly migrates requests to alternative models without disrupting active user workflows.
+
+5. Future Model Upgrade Readiness
+The backend gateway is built modularly. When future generations of Gemini models are released, developers can update configuration endpoints centrally without altering frontend code or core logic.
+
+## Evaluation of Intelligent Capabilities and Core Features
+
+1. Unified Multi-Language Execution Environment
+Provides direct client-side execution for browser-supported stacks such as JavaScript, TypeScript with auto-transpilation, JSON, and live HTML. For server-side languages like PHP and Python, execution is securely delegated to sandboxed backend runners.
+
+2. Comprehensive Line-by-Line Code Audit
+Unlike traditional console outputs with cryptic compiler traces, the intelligent audit module parses all code lines and explains root causes in plain language. Users receive line numbers, technical rationales, and one-click code fix actions.
+
+3. Rich Multimedia and Interactive Visualizations
+The output workspace presents results in versatile interactive formats:
+a. Live responsive web previews with desktop, tablet, and mobile viewport frames.
+b. Crisp vector SVG rendering with instant source code copying.
+c. Interactive data tables with keyword search filtering and CSV export capabilities.
+d. Two-dimensional Canvas rendering and Three.js WebGL three-dimensional simulations.
+
+4. Ergonomic Responsive Soft Glassmorphic Interface
+The aesthetic incorporates soft glassmorphism with an orange, dark slate, and clean white palette. Desktop screens enjoy a wide symmetrical layout, while mobile devices feature an ergonomic floating bottom navigation bar with prominent thumb-friendly run buttons.
+
+5. High Contrast Adaptive Dark and Light Themes
+Every title, badge, indicator, and status text adapts dynamically across dark and light modes, ensuring optimal contrast and strain-free readability under all ambient conditions.
+
+6. Modern Interactive Dialog System
+Confirmation modals and system notifications use custom glassmorphic modal dialogues matching the design language, replacing rigid native browser popups.
+
+## Deployment and Hosting Architecture
+
+The platform architecture is built flexibly to support both traditional server environments and modern serverless cloud infrastructures.
+
+1. Traditional PHP Server Hosting
+Runs directly on Apache or Nginx with PHP 8.2 or newer with curl and json extensions enabled.
+
+2. Serverless Cloud Deployment on Vercel
+Dedicated serverless functions in the api directory allow seamless execution and AI communication on Vercel without maintaining physical servers.
+
+3. GitHub Repository Management
+Version tracking and source control are organized via the official GitHub repository for continuous integration and structured maintenance.
+
+## Intellectual Property, Licensing Restrictions and Collaboration Opportunities
+
+1. Exclusive Copyright Ownership
+All source code, visual interfaces, system architecture, and intelligent logic in Neuron.AI Editor Code are the proprietary intellectual property of Edwin Al Syatrie. All rights reserved.
+
+2. Usage Restrictions and Anti-Plagiarism Policy
+Duplicating, copying, redistributing, or claiming unauthorized ownership of this project in whole or in part for commercial use or private gain is strictly prohibited without explicit written consent. This project is published strictly for educational demonstration and scientific peer evaluation.
+
+3. Open Partnership and Academic Collaboration
+The author warmly welcomes research collaborations, educational integrations, and constructive technical partnerships. Interested institutions and researchers may submit formal collaboration inquiries through GitHub or direct contact with the project owner.
+
+</details>
