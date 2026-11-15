@@ -350,9 +350,10 @@ MANDATORY LINE-BY-LINE ${language.toUpperCase()} AUDIT (CHECK EVERY SINGLE LINE 
 4. Variables, Data Types & Order: catch undeclared variables, variables used BEFORE they are created, name mismatches (\`cas\` vs \`$cars\`), and incompatible types/operators (\`echo $array\`, \`"a" + $b\` in PHP, \`strlen($array)\`, reversed \`=>\`/\`=< \`, dividing by \`0\`).
 5. Logic Check: verify conditions, loop bounds, and whether the code can actually produce the intended result.
 6. Keep EVERY explanation SHORT, PLAIN, and EASY for a non-programmer to understand (1-2 short everyday sentences, NO jargon), split multiple bugs on the same line into separate items in \`issues[]\`, and wrap EVERY code token/symbol in backticks \`...\`.
+7. MANDATORY OUTPUT LANGUAGE: All text in 'cause', 'where', and 'issues[].cause' MUST be written 100% strictly in clear, natural, grammatically correct ENGLISH. Even if the code uses Indonesian words, variables, or comments, NEVER answer in Indonesian!
 
 Reply ONLY with valid JSON with exact keys:
-{"where":"Lines e.g. 1, 2","cause":"1 short plain sentence summarizing all issues","fix":"short complete fix in \`...\`","issues":[{"line":1,"where":"Line 1 (\`...\`)","cause":"1-2 short plain beginner sentences (what is missing/wrong/unrecognized/extra or missing letter)","fix":"exact fix for this line in \`...\`"}]}`
+{"where":"Lines e.g. 1, 2","cause":"1 short plain sentence summarizing all issues in English","fix":"short complete fix in \`...\`","issues":[{"line":1,"where":"Line 1 (\`...\`)","cause":"1-2 short plain beginner sentences in English (what is missing/wrong/unrecognized/extra or missing letter)","fix":"exact fix for this line in \`...\`"}]}`
         : `Kamu adalah pemeriksa kode ${language} yang super teliti sekaligus tutor ramah untuk orang awam yang baru pertama kali belajar koding. Periksa KODE BARIS DEMI BARIS dari Baris 1 sampai terakhir dan laporkan SEMUA kesalahan sekaligus dalam bahasa yang sangat sederhana dan ringkas.
 KODE (bernomor baris):
 ${numbered}${errBlock}${localAuditBlock}
@@ -363,6 +364,7 @@ ATURAN AUDIT WAJIB BARIS-PER-BARIS KHUSUS ${language.toUpperCase()} (JANGAN PERN
 4. Variabel, Tipe Data & Urutan: tangkap variabel yang belum dibuat tapi sudah dipakai, variabel yang baru diisi di baris bawahnya, salah eja variabel (\`cas\` vs \`$cars\`), tipe data tidak cocok (\`echo $array\` di PHP, \`+\` untuk menggabung teks di PHP, \`strlen($array)\`), salah tanda (\`=>\`/\`=< \`, \`=\` di dalam \`if\`), atau membagi dengan \`0\`.
 5. Logika Alur Kode: cek apakah syarat \`if\`, batas perulangan, dan rumus kodenya masuk akal serta sesuai tujuan program.
 6. BAHASA RINGKAS & AWAM: jelaskan tiap poin dalam 1-2 kalimat pendek yang gampang dimengerti orang awam (hindari istilah rumit). Jika 1 baris punya beberapa kesalahan, PECAH jadi item terpisah di \`issues[]\`! Bungkus SEMUA kata kode/simbol pakai backtick \`...\`.
+7. ATURAN BAHASA WAJIB: Seluruh penjelasan, ringkasan penyebab masalah, dan saran perbaikan HARUS ditulis lengkap dalam Bahasa Indonesia yang ramah dan mudah dimengerti pemula!
 
 Balas HANYA JSON valid (key persis):
 {"where":"ringkasan baris bermasalah, misal Baris 1, 2","cause":"1 kalimat pendek jumlah & jenis masalahnya","fix":"ringkasan perbaikan utuh di dalam \`...\`","issues":[{"line":1,"where":"Baris 1 (\`...\`)","cause":"1-2 kalimat pendek berbahasa awam (apa yang salah, kurang, tidak dikenal, atau kelebihan/kurang huruf)","fix":"contoh perbaikan untuk baris ini di dalam \`...\`"}]}`;

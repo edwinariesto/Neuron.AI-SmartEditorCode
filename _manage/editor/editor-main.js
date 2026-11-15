@@ -559,7 +559,7 @@ SELECT * FROM users;`
     ]
   };
 
-  // i18n Dictionary
+  // i18n Dictionary (Comprehensive Indonesian & English support)
   const i18n = {
     Indonesia: {
       brandSub: 'Tutor Coding & Peningkat Beban Kognitif berbasis Generative A.I',
@@ -569,16 +569,49 @@ SELECT * FROM users;`
       btnCopy: 'Salin',
       btnDownload: 'Unduh',
       btnClear: 'Bersihkan',
+      btnApiKey: 'API Key',
       tabTerminal: 'Konsol Terminal',
+      tabTerminalMobile: 'Konsol',
       tabVisual: 'Visualisasi & Media',
+      tabVisualMobile: 'Visual',
       tabAiDebug: 'Hasil Evaluasi AI',
+      tabAiDebugMobile: 'Evaluasi AI',
       autoDetectBadge: 'Deteksi Otomatis:',
-      editorTitle: 'Editor Kode Interaktif',
-      lineCol: 'Baris %l, Kolom %c',
-      charCount: '%n Karakter',
+      autoDetectTitle: 'Bahasa terdeteksi otomatis. Klik untuk mengganti secara manual jika perlu.',
+      detectModeHeader: 'MODE DETEKSI',
+      autoDetectMenuItem: 'Otomatis (Rekomendasi)',
+      manualSelectHeader: 'PILIH MANUAL',
+      editorHeaderTitle: 'Editor Kode',
+      charUnit: 'Karakter',
+      cursorLineLabel: 'Baris ',
+      cursorColLabel: ', Kolom ',
       readyMsg: 'Terminal siap. Tulis kode lalu klik "Jalankan Kode" atau "AI Debug".',
+      themeToggleTitle: 'Ganti Tema Editor (Gelap / Terang)',
       themeDark: 'Mode Gelap',
       themeLight: 'Mode Terang',
+      
+      // Toolbar Tooltips
+      titleRun: 'Jalankan Kode (Ctrl+Enter)',
+      titleAiDebug: 'AI Debug & Periksa Kode',
+      titleSnippets: 'Template & Contoh Kode',
+      titleCopy: 'Salin Kode ke Clipboard',
+      titleDownload: 'Unduh File Kode',
+      titleClear: 'Bersihkan Editor dan Terminal',
+      titleApiKey: 'Pengaturan AI Provider & API Key',
+
+      // Terminal & Placeholders
+      terminalReadyMsg: '[Neuron.AI Runner Siap] Tulis kode Anda di sebelah kiri, lalu klik "Jalankan Kode" untuk melihat output.',
+      terminalErrorPrompt: 'Ingin tahu mengapa baris kode ini error? Periksa baris demi baris secara awam.',
+      terminalErrorBtn: 'Periksa dengan AI',
+      visPlaceholderTitle: 'Visualisasi Gambar, Tabel, 2D & 3D',
+      visPlaceholderDesc: 'Panel ini secara otomatis menampilkan hasil eksekusi dalam bentuk citra/gambar (Base64/SVG), tabel data interaktif, visual grafis 2D Canvas, 3D WebGL (Three.js), atau pratinjau halaman web HTML live.',
+      aiDebugPlaceholderTitle: 'Deteksi Error & Audit Baris demi Baris',
+      aiDebugPlaceholderDesc: 'Klik tombol <strong>"AI Debug & Periksa"</strong> di atas. AI akan membaca kode Anda baris demi baris, menemukan kesalahan sintaks/logika, dan memberikan saran perbaikan dalam bahasa awam.',
+
+      // Snippets Modal
+      snippetModalTitle: 'Template & Contoh Kode Siap Pakai',
+      snippetModalDesc: 'Pilih salah satu contoh program di bawah ini untuk langsung dimuat ke dalam editor. Bahasa akan terdeteksi otomatis!',
+
       // API Key Modal
       modalApiKeyTitle: 'Konfigurasi AI Provider & API Key',
       modalApiKeyDesc: 'Pilih model AI dan tempelkan API Key Anda untuk mengaktifkan AI Runtime Simulation (menjalankan segala bahasa seperti MATLAB, Java, C++) dan audit kode online. Jika belum diisi, sistem otomatis menggunakan Audit Koding Lokal Cerdas.',
@@ -592,19 +625,35 @@ SELECT * FROM users;`
       clearApiKeyBtnText: 'Hapus',
       saveApiKeyBtnText: 'Simpan',
       portalGemini: 'Dapatkan Gemini API Key Gratis',
-      portalOpenAI: 'Buka OpenAI API Keys',
-      portalClaude: 'Buka Anthropic Console',
-      portalDeepSeek: 'Buka DeepSeek Platform',
-      placeholderGemini: 'Tempel Gemini API Key (AIzaSy...)',
-      placeholderOpenAI: 'Tempel OpenAI Key (sk-proj-...)',
-      placeholderClaude: 'Tempel Claude Key (sk-ant-...)',
-      placeholderDeepSeek: 'Tempel DeepSeek Key (sk-...)',
-      terminalReadyMsg: '[Neuron.AI Runner Siap] Tulis kode Anda di sebelah kiri, lalu klik "Jalankan Kode" untuk melihat output.',
+      placeholderGemini: 'Tempel Gemini API Key (AQ... atau AIzaSy...)',
+      modelDescGeminiFlash: 'Gemini 3.5 Flash — Tercepat & Rekomendasi Utama',
+      modelDescGeminiLite: 'Gemini 3.5 Flash-Lite — Super Cepat & Hemat Kuota',
+      modelDescGeminiPro: 'Gemini 3.8 Flash — Generasi Terkini',
+
+      // Dialogs & Toasts
+      clearConfirmTitle: 'Bersihkan Editor & Terminal?',
+      clearConfirmHtml: 'Semua kode yang Anda tulis dan riwayat log terminal akan dikosongkan. Anda yakin ingin melanjutkan?',
+      clearConfirmBtn: 'Ya, Bersihkan',
+      clearCancelBtn: 'Batal',
+      clearToast: 'Editor & Terminal telah dibersihkan!',
+      copyToast: 'Kode berhasil disalin ke clipboard!',
+      keySavedToast: 'API Key berhasil disimpan!',
+      keyRemovedToast: 'API Key berhasil dihapus!',
+      emptyCodeTitle: 'Kode Masih Kosong',
+      emptyCodeRunHtml: 'Tuliskan kode program terlebih dahulu di editor sebelum dijalankan.',
+      emptyCodeDebugHtml: 'Tuliskan kode terlebih dahulu untuk diaudit dan diperiksa oleh AI.',
+
+      // Floating Bottom Navigation Labels & Tooltips
       bnavAiDebug: 'Cek AI',
       bnavSnippets: 'Template',
       bnavRun: 'RUN',
       bnavDownload: 'Unduh',
-      bnavApiKey: 'API Key'
+      bnavApiKey: 'API Key',
+      bnavAiTitle: 'Cek AI / Evaluasi Kode',
+      bnavSnippetsTitle: 'Template & Contoh Kode',
+      bnavRunTitle: 'Jalankan Kode (Run)',
+      bnavDlTitle: 'Unduh File Kode',
+      bnavApiKeyTitle: 'Pengaturan AI Provider & API Key'
     },
     English: {
       brandSub: 'Coding Tutor & Cognitive Load Booster powered by Generative A.I',
@@ -614,16 +663,49 @@ SELECT * FROM users;`
       btnCopy: 'Copy',
       btnDownload: 'Download',
       btnClear: 'Clear',
+      btnApiKey: 'API Key',
       tabTerminal: 'Console Terminal',
+      tabTerminalMobile: 'Console',
       tabVisual: 'Visual & Media',
+      tabVisualMobile: 'Visual',
       tabAiDebug: 'AI Audit Results',
+      tabAiDebugMobile: 'AI Audit',
       autoDetectBadge: 'Auto Detected:',
-      editorTitle: 'Interactive Code Editor',
-      lineCol: 'Line %l, Col %c',
-      charCount: '%n Characters',
+      autoDetectTitle: 'Language detected automatically. Click to select manually if needed.',
+      detectModeHeader: 'DETECTION MODE',
+      autoDetectMenuItem: 'Automatic (Recommended)',
+      manualSelectHeader: 'SELECT MANUALLY',
+      editorHeaderTitle: 'Code Editor',
+      charUnit: 'Characters',
+      cursorLineLabel: 'Line ',
+      cursorColLabel: ', Col ',
       readyMsg: 'Terminal ready. Write code and click "Run Code" or "AI Debug".',
+      themeToggleTitle: 'Switch Editor Theme (Dark / Light)',
       themeDark: 'Dark Mode',
       themeLight: 'Light Mode',
+
+      // Toolbar Tooltips
+      titleRun: 'Run Code (Ctrl+Enter)',
+      titleAiDebug: 'AI Debug & Audit Code',
+      titleSnippets: 'Templates & Code Examples',
+      titleCopy: 'Copy Code to Clipboard',
+      titleDownload: 'Download Code File',
+      titleClear: 'Clear Editor and Terminal',
+      titleApiKey: 'AI Provider & API Key Settings',
+
+      // Terminal & Placeholders
+      terminalReadyMsg: '[Neuron.AI Runner Ready] Write your code on the left, then click "Run Code" to view execution output.',
+      terminalErrorPrompt: 'Want to know why this line failed? Inspect line by line in plain language.',
+      terminalErrorBtn: 'Inspect with AI',
+      visPlaceholderTitle: 'Image, Table, 2D & 3D Visualization',
+      visPlaceholderDesc: 'This panel automatically presents runtime output as images (Base64/SVG), interactive data tables, 2D Canvas graphics, 3D WebGL (Three.js), or live HTML web previews.',
+      aiDebugPlaceholderTitle: 'Error Detection & Line-by-Line Code Audit',
+      aiDebugPlaceholderDesc: 'Click the <strong>"AI Debug & Audit"</strong> button above. AI will inspect your code line by line, detect syntax and logic bugs, and provide plain-language suggestions.',
+
+      // Snippets Modal
+      snippetModalTitle: 'Templates & Ready-to-Use Code Snippets',
+      snippetModalDesc: 'Select any sample program below to load it into the editor. The language will be auto-detected!',
+
       // API Key Modal
       modalApiKeyTitle: 'AI Provider & API Key Configuration',
       modalApiKeyDesc: 'Select an AI model and paste your API Key to enable AI Runtime Simulation (running any languages like MATLAB, Java, C++) and online code audit. If empty, system automatically uses Smart Local Code Auditor.',
@@ -637,19 +719,35 @@ SELECT * FROM users;`
       clearApiKeyBtnText: 'Remove',
       saveApiKeyBtnText: 'Save',
       portalGemini: 'Get Free Gemini API Key',
-      portalOpenAI: 'Open OpenAI API Keys',
-      portalClaude: 'Open Anthropic Console',
-      portalDeepSeek: 'Open DeepSeek Platform',
-      placeholderGemini: 'Paste Gemini API Key (AIzaSy...)',
-      placeholderOpenAI: 'Paste OpenAI Key (sk-proj-...)',
-      placeholderClaude: 'Paste Claude Key (sk-ant-...)',
-      placeholderDeepSeek: 'Paste DeepSeek Key (sk-...)',
-      terminalReadyMsg: '[Neuron.AI Runner Ready] Write your code on the left, then click "Run Code" to view execution output.',
+      placeholderGemini: 'Paste Gemini API Key (AQ... or AIzaSy...)',
+      modelDescGeminiFlash: 'Gemini 3.5 Flash — Fastest & Recommended',
+      modelDescGeminiLite: 'Gemini 3.5 Flash-Lite — Ultra Fast & Quota Efficient',
+      modelDescGeminiPro: 'Gemini 3.8 Flash — Latest Generation',
+
+      // Dialogs & Toasts
+      clearConfirmTitle: 'Clear Editor & Terminal?',
+      clearConfirmHtml: 'All code in the editor and terminal output history will be wiped. Do you want to proceed?',
+      clearConfirmBtn: 'Yes, Clear All',
+      clearCancelBtn: 'Cancel',
+      clearToast: 'Editor & Terminal cleared!',
+      copyToast: 'Code copied to clipboard!',
+      keySavedToast: 'API Key saved successfully!',
+      keyRemovedToast: 'API Key removed!',
+      emptyCodeTitle: 'Editor is Empty',
+      emptyCodeRunHtml: 'Please write or paste code in the editor first to run.',
+      emptyCodeDebugHtml: 'Please write or paste code in the editor first to inspect errors.',
+
+      // Floating Bottom Navigation Labels & Tooltips
       bnavAiDebug: 'AI Audit',
       bnavSnippets: 'Templates',
       bnavRun: 'RUN',
       bnavDownload: 'Download',
-      bnavApiKey: 'API Key'
+      bnavApiKey: 'API Key',
+      bnavAiTitle: 'AI Audit / Inspect Code',
+      bnavSnippetsTitle: 'Templates & Code Examples',
+      bnavRunTitle: 'Run Code',
+      bnavDlTitle: 'Download Code File',
+      bnavApiKeyTitle: 'AI Provider & API Key Settings'
     }
   };
 
@@ -766,7 +864,7 @@ SELECT * FROM users;`
       const copyBtn = document.getElementById('copyBtn');
       if (copyBtn) {
         copyBtn.onclick = async () => {
-          const isEn = (this.currentLang === 'English');
+          const isEn = (localStorage.getItem('neuron_ai_lang') === 'English');
           const code = this.editor.getValue();
           if (!code.trim()) {
             NeuronSwal.alert({
@@ -797,7 +895,7 @@ SELECT * FROM users;`
       const clearBtn = document.getElementById('clearBtn');
       if (clearBtn) {
         clearBtn.onclick = () => {
-          const isEn = (this.currentLang === 'English');
+          const isEn = (localStorage.getItem('neuron_ai_lang') === 'English');
           NeuronSwal.confirm({
             title: isEn ? 'Clear Editor & Terminal?' : 'Bersihkan Editor & Terminal?',
             html: isEn
@@ -865,8 +963,8 @@ SELECT * FROM users;`
 
     async handleRun() {
       const code = this.editor.getValue().trim();
+      const isEn = (localStorage.getItem('neuron_ai_lang') === 'English');
       if (!code) {
-        const isEn = (this.currentLang === 'English');
         NeuronSwal.alert({
           icon: 'warning',
           title: isEn ? 'Editor is Empty' : 'Kode Masih Kosong',
@@ -876,7 +974,7 @@ SELECT * FROM users;`
       }
 
       this.clearTerminal();
-      this.logTerminal(`[Memulai eksekusi kode ${this.currentLang.toUpperCase()}...]`, 'meta');
+      this.logTerminal(isEn ? `[Starting execution of ${this.currentLang.toUpperCase()} code...]` : `[Memulai eksekusi kode ${this.currentLang.toUpperCase()}...]`, 'meta');
 
       // Switch to Console tab
       this.activateTab('tab-terminal-btn');
@@ -884,7 +982,7 @@ SELECT * FROM users;`
       const runBtn = document.getElementById('execBtn');
       const origHtml = runBtn ? runBtn.innerHTML : '';
       if (runBtn) {
-        runBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span> Menjalankan...';
+        runBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-1"></span> ${isEn ? 'Running...' : 'Menjalankan...'}`;
         runBtn.disabled = true;
       }
 
@@ -906,14 +1004,14 @@ SELECT * FROM users;`
         if (result.status === 'error') {
           this.lastError = result.output;
           this.logTerminal(result.output, 'err');
-          this.logTerminal(`[Gagal dieksekusi — Durasi: ${result.duration || 0} ms]`, 'meta');
+          this.logTerminal(isEn ? `[Execution Failed — Duration: ${result.duration || 0} ms]` : `[Gagal dieksekusi — Durasi: ${result.duration || 0} ms]`, 'meta');
 
           // Render one-click AI Debug suggestion card in terminal
           this.renderErrorPromptInTerminal(result.output);
         } else {
           this.lastError = '';
           this.logTerminal(result.output, 'ok');
-          this.logTerminal(`[Eksekusi Berhasil — Durasi: ${result.duration || 0} ms]`, 'meta');
+          this.logTerminal(isEn ? `[Execution Successful — Duration: ${result.duration || 0} ms]` : `[Eksekusi Berhasil — Durasi: ${result.duration || 0} ms]`, 'meta');
 
           // Process rich visuals (Images, Tables, 2D/3D, HTML)
           const visResult = NeuronVisualizer.processOutput(result);
@@ -922,7 +1020,7 @@ SELECT * FROM users;`
           }
         }
       } catch (err) {
-        this.logTerminal(`[Kesalahan]: ${err.message || err}`, 'err');
+        this.logTerminal(isEn ? `[Error]: ${err.message || err}` : `[Kesalahan]: ${err.message || err}`, 'err');
       } finally {
         if (runBtn) {
           runBtn.innerHTML = origHtml;
@@ -940,8 +1038,8 @@ SELECT * FROM users;`
 
     async handleAiDebug() {
       const code = this.editor.getValue().trim();
+      const isEn = (localStorage.getItem('neuron_ai_lang') === 'English');
       if (!code) {
-        const isEn = (this.currentLang === 'English');
         NeuronSwal.alert({
           icon: 'warning',
           title: isEn ? 'Editor is Empty' : 'Kode Masih Kosong',
@@ -958,15 +1056,16 @@ SELECT * FROM users;`
       const out = document.getElementById('terminalOutput');
       if (!out) return;
 
+      const isEn = (localStorage.getItem('neuron_ai_lang') === 'English');
       const promptDiv = document.createElement('div');
       promptDiv.className = 'mt-3 p-3 rounded bg-warning bg-opacity-10 border border-warning border-opacity-50 d-flex align-items-center justify-content-between gap-2';
 
       promptDiv.innerHTML = `
         <div class="small text-warning">
-          <i class="bi bi-lightbulb-fill me-1"></i> Ingin tahu mengapa baris kode ini error? Periksa baris demi baris secara awam.
+          <i class="bi bi-lightbulb-fill me-1"></i> ${isEn ? 'Want to know why this line failed? Inspect line by line in plain language.' : 'Ingin tahu mengapa baris kode ini error? Periksa baris demi baris secara awam.'}
         </div>
         <button class="btn btn-sm btn-warning text-dark fw-bold px-3 py-1 text-nowrap" id="terminalAiDebugTrigger">
-          <i class="bi bi-robot me-1"></i> Periksa dengan AI
+          <i class="bi bi-robot me-1"></i> ${isEn ? 'Inspect with AI' : 'Periksa dengan AI'}
         </button>
       `;
 
@@ -1288,18 +1387,19 @@ SELECT * FROM users;`
       if (!container) return;
 
       container.innerHTML = '';
+      const isEn = (localStorage.getItem('neuron_ai_lang') === 'English');
 
       const categoryMeta = {
-        visual3d: { title: 'Visualisasi 3D WebGL (Three.js)', icon: 'bi-box', color: '#8b5cf6' },
-        visual2d: { title: 'Visualisasi 2D Canvas (Matematika)', icon: 'bi-bezier2', color: '#10b981' },
-        chart: { title: 'Grafik Interaktif & Data Analytics', icon: 'bi-bar-chart-line-fill', color: '#f59e0b' },
-        animation: { title: 'Animasi Modern & Glassmorphism', icon: 'bi-play-circle-fill', color: '#ec4899' },
-        matlab: { title: 'MATLAB (Aljabar Linier & Sinyal)', icon: 'bi-calculator', color: '#ea580c' },
-        python: { title: 'Python Dasar & Struktur Data', icon: 'bi-filetype-py', color: '#0ea5e9' },
-        php: { title: 'PHP Pemrograman Web Backend', icon: 'bi-filetype-php', color: '#6366f1' },
-        javascript: { title: 'JavaScript Modern', icon: 'bi-filetype-js', color: '#eab308' },
-        html: { title: 'HTML5 & Desain Web', icon: 'bi-filetype-html', color: '#ea580c' },
-        sql: { title: 'SQL & Basis Data', icon: 'bi-database-fill', color: '#06b6d4' }
+        visual3d: { title: isEn ? '3D WebGL Visualization (Three.js)' : 'Visualisasi 3D WebGL (Three.js)', icon: 'bi-box', color: '#8b5cf6' },
+        visual2d: { title: isEn ? '2D Canvas Graphics (Math & Geometry)' : 'Visualisasi 2D Canvas (Matematika)', icon: 'bi-bezier2', color: '#10b981' },
+        chart: { title: isEn ? 'Interactive Charts & Data Analytics' : 'Grafik Interaktif & Data Analytics', icon: 'bi-bar-chart-line-fill', color: '#f59e0b' },
+        animation: { title: isEn ? 'Modern Animations & Glassmorphism' : 'Animasi Modern & Glassmorphism', icon: 'bi-play-circle-fill', color: '#ec4899' },
+        matlab: { title: isEn ? 'MATLAB (Linear Algebra & Signals)' : 'MATLAB (Aljabar Linier & Sinyal)', icon: 'bi-calculator', color: '#ea580c' },
+        python: { title: isEn ? 'Python Basics & Data Structures' : 'Python Dasar & Struktur Data', icon: 'bi-filetype-py', color: '#0ea5e9' },
+        php: { title: isEn ? 'PHP Web Backend Programming' : 'PHP Pemrograman Web Backend', icon: 'bi-filetype-php', color: '#6366f1' },
+        javascript: { title: isEn ? 'Modern JavaScript' : 'JavaScript Modern', icon: 'bi-filetype-js', color: '#eab308' },
+        html: { title: isEn ? 'HTML5 & Web Layouts' : 'HTML5 & Desain Web', icon: 'bi-filetype-html', color: '#ea580c' },
+        sql: { title: isEn ? 'SQL & Database Queries' : 'SQL & Basis Data', icon: 'bi-database-fill', color: '#06b6d4' }
       };
 
       Object.keys(SNIPPETS).forEach(langKey => {
@@ -1362,26 +1462,84 @@ SELECT * FROM users;`
     applyI18n() {
       const lang = localStorage.getItem('neuron_ai_lang') || 'Indonesia';
       const dict = i18n[lang] || i18n.Indonesia;
+      const isEn = (lang === 'English');
 
-      document.documentElement.lang = (lang === 'English') ? 'en' : 'id';
+      document.documentElement.lang = isEn ? 'en' : 'id';
 
       const setText = (id, text) => {
         const el = document.getElementById(id);
-        if (el) el.textContent = text;
+        if (el && text !== undefined) el.textContent = text;
       };
 
+      const setHtml = (id, html) => {
+        const el = document.getElementById(id);
+        if (el && html !== undefined) el.innerHTML = html;
+      };
+
+      const setAttr = (id, attr, val) => {
+        const el = document.getElementById(id);
+        if (el && val !== undefined) el.setAttribute(attr, val);
+      };
+
+      // Header Brand & Subtitle
       setText('brandSubtitle', dict.brandSub);
+      setText('editorHeaderTitle', dict.editorHeaderTitle);
+
+      // Main Toolbar Buttons & Labels
       setText('btnExecuteText', dict.btnRun);
       setText('btnAiDebugText', dict.btnAiDebug);
       setText('btnSnippetsText', dict.btnSnippets);
       setText('btnCopyText', dict.btnCopy);
       setText('btnDownloadText', dict.btnDownload);
       setText('btnClearText', dict.btnClear);
-      setText('tabTerminalText', dict.tabTerminal);
-      setText('tabVisualText', dict.tabVisual);
-      setText('tabAiDebugText', dict.tabAiDebug);
+      setText('btnApiKeyText', dict.btnApiKey);
+
+      // Toolbar Tooltips / Titles
+      setAttr('detectorPill', 'title', dict.autoDetectTitle);
+      setAttr('execBtn', 'title', dict.titleRun);
+      setAttr('aiDebugBtn', 'title', dict.titleAiDebug);
+      setAttr('snippetsBtn', 'title', dict.titleSnippets);
+      setAttr('copyBtn', 'title', dict.titleCopy);
+      setAttr('dlBtn', 'title', dict.titleDownload);
+      setAttr('clearBtn', 'title', dict.titleClear);
+      setAttr('btnApiKeyToolbar', 'title', dict.titleApiKey);
+      const isDark = (this.currentTheme === 'dark');
+      setAttr('themeToggleBtn', 'title', isDark ? dict.themeLight : dict.themeDark);
+
+      // Detection Menu Headers & Items
       setText('autoDetectLabel', dict.autoDetectBadge);
+      setText('detectModeHeader', dict.detectModeHeader);
+      setHtml('autoDetectMenuItem', `<i class="bi bi-magic me-2 text-warning"></i> ${dict.autoDetectMenuItem}`);
+      setText('manualSelectHeader', dict.manualSelectHeader);
+
+      // Editor Header Stats (Char count, Cursor line/col)
+      setText('charCountUnit', dict.charUnit);
+      setText('cursorLineLabel', dict.cursorLineLabel);
+      setText('cursorColLabel', dict.cursorColLabel);
+
+      // Tabs (Desktop & Mobile)
+      setText('tabTerminalText', dict.tabTerminal);
+      setText('tabTerminalMobile', dict.tabTerminalMobile);
+      setAttr('tab-terminal-btn', 'title', dict.tabTerminal);
+
+      setText('tabVisualText', dict.tabVisual);
+      setText('tabVisualMobile', dict.tabVisualMobile);
+      setAttr('tab-visual-btn', 'title', dict.tabVisual);
+
+      setText('tabAiDebugText', dict.tabAiDebug);
+      setText('tabAiDebugMobile', dict.tabAiDebugMobile);
+      setAttr('tab-aidebug-btn', 'title', dict.tabAiDebug);
+
+      // Terminal & Output Placeholders
       setText('terminalReadyLine', dict.terminalReadyMsg);
+      setText('visPlaceholderTitle', dict.visPlaceholderTitle);
+      setText('visPlaceholderDesc', dict.visPlaceholderDesc);
+      setText('aiDebugPlaceholderTitle', dict.aiDebugPlaceholderTitle);
+      setHtml('aiDebugPlaceholderDesc', dict.aiDebugPlaceholderDesc);
+
+      // Snippets Modal
+      setText('snippetModalLabel', dict.snippetModalTitle);
+      setText('snippetModalDesc', dict.snippetModalDesc);
 
       // Modal API Key Elements
       setText('apiKeyModalLabel', dict.modalApiKeyTitle);
@@ -1396,24 +1554,43 @@ SELECT * FROM users;`
       setText('clearApiKeyModalBtnText', dict.clearApiKeyBtnText);
       setText('saveApiKeyModalBtnText', dict.saveApiKeyBtnText);
 
-      // Floating Bottom Navigation Labels
+      // Model Descriptions in Custom Combobox
+      setText('modelDescGeminiFlash', dict.modelDescGeminiFlash);
+      setText('modelDescGeminiLite', dict.modelDescGeminiLite);
+      setText('modelDescGeminiPro', dict.modelDescGeminiPro);
+
+      // Floating Bottom Navigation Labels & Titles
       setText('bottomNavAiLabel', dict.bnavAiDebug);
       setText('bottomNavSnippetsLabel', dict.bnavSnippets);
       setText('bottomNavRunLabel', dict.bnavRun);
       setText('bottomNavDlLabel', dict.bnavDownload);
       setText('bottomNavApiKeyLabel', dict.bnavApiKey);
 
+      setAttr('bnavAiBtn', 'title', dict.titleAiDebug);
+      setAttr('bnavSnippetsBtn', 'title', dict.titleSnippets);
+      setAttr('bnavRunBtn', 'title', dict.titleRun);
+      setAttr('bnavDlBtn', 'title', dict.titleDownload);
+      setAttr('bnavKeyBtn', 'title', dict.titleApiKey);
+
       // Update provider portal & status
       if (typeof this.updateApiKeyModalUI === 'function') {
         this.updateApiKeyModalUI();
+      }
+
+      // Re-render snippets menu with localized titles
+      this.renderSnippetMenu();
+
+      // If AI debugger is in empty state, re-render its placeholder
+      if (window.NeuronDebugger && (!window.NeuronDebugger.lastResult || document.getElementById('aiDebugOutput')?.querySelector('.display-4'))) {
+        window.NeuronDebugger.renderEmptyState();
       }
 
       // Flag active states
       const idFlag = document.getElementById('flagBtnId');
       const enFlag = document.getElementById('flagBtnEn');
       if (idFlag && enFlag) {
-        idFlag.classList.toggle('active', lang !== 'English');
-        enFlag.classList.toggle('active', lang === 'English');
+        idFlag.classList.toggle('active', !isEn);
+        enFlag.classList.toggle('active', isEn);
       }
     }
 

@@ -74,10 +74,10 @@
             </span>
           </div>
           <ul class="dropdown-menu dropdown-menu-end detection-dropdown-menu" aria-labelledby="detectorPill">
-            <li><h6 class="dropdown-header">MODE DETEKSI</h6></li>
-            <li><a class="dropdown-item active" href="javascript:void(0)" onclick="NeuronDetector.resetToAuto(editor.getValue())"><i class="bi bi-magic me-2 text-warning"></i> Otomatis (Rekomendasi)</a></li>
+            <li><h6 class="dropdown-header" id="detectModeHeader">MODE DETEKSI</h6></li>
+            <li><a class="dropdown-item active" id="autoDetectMenuItem" href="javascript:void(0)" onclick="NeuronDetector.resetToAuto(editor.getValue())"><i class="bi bi-magic me-2 text-warning"></i> Otomatis (Rekomendasi)</a></li>
             <li><hr class="dropdown-divider my-1"></li>
-            <li><h6 class="dropdown-header">PILIH MANUAL</h6></li>
+            <li><h6 class="dropdown-header" id="manualSelectHeader">PILIH MANUAL</h6></li>
             <li><a class="dropdown-item" href="javascript:void(0)" onclick="NeuronDetector.setManualOverride('matlab')"><i class="bi bi-calculator me-2 text-warning"></i> MATLAB</a></li>
             <li><a class="dropdown-item" href="javascript:void(0)" onclick="NeuronDetector.setManualOverride('php')"><i class="bi bi-filetype-php me-2 text-primary"></i> PHP</a></li>
             <li><a class="dropdown-item" href="javascript:void(0)" onclick="NeuronDetector.setManualOverride('python')"><i class="bi bi-filetype-py me-2 text-info"></i> Python</a></li>
@@ -179,9 +179,9 @@
           <span class="toolbar-separator"></span>
 
           <!-- 7. API Key -->
-          <button type="button" class="toolbar-item-btn" data-bs-toggle="modal" data-bs-target="#apiKeyModal" title="Pengaturan AI Provider & API Key">
+          <button type="button" class="toolbar-item-btn" id="btnApiKeyToolbar" data-bs-toggle="modal" data-bs-target="#apiKeyModal" title="Pengaturan AI Provider & API Key">
             <i class="bi bi-key-fill text-warning"></i>
-            <span class="toolbar-btn-label">API Key</span>
+            <span class="toolbar-btn-label" id="btnApiKeyText">API Key</span>
           </button>
         </div>
       </div>
@@ -203,10 +203,10 @@
             </div>
             <div class="d-flex align-items-center gap-1.5 gap-sm-2 flex-nowrap ms-auto flex-shrink-0">
               <span class="editor-header-badge" id="charCountInfo">
-                <i class="bi bi-fonts text-secondary flex-shrink-0"></i> <span id="charCountNum">0</span><span class="badge-unit d-none d-sm-inline ms-1">Karakter</span>
+                <i class="bi bi-fonts text-secondary flex-shrink-0"></i> <span id="charCountNum">0</span><span class="badge-unit d-none d-sm-inline ms-1" id="charCountUnit">Karakter</span>
               </span>
               <span class="editor-header-badge" id="cursorPosInfo">
-                <i class="bi bi-cursor-fill text-secondary flex-shrink-0"></i> <span class="d-none d-sm-inline">Baris </span><span id="cursorLineNum">1</span><span class="d-none d-sm-inline">, Kolom </span><span class="d-inline d-sm-none">:</span><span id="cursorColNum">1</span>
+                <i class="bi bi-cursor-fill text-secondary flex-shrink-0"></i> <span class="d-none d-sm-inline" id="cursorLineLabel">Baris </span><span id="cursorLineNum">1</span><span class="d-none d-sm-inline" id="cursorColLabel">, Kolom </span><span class="d-inline d-sm-none">:</span><span id="cursorColNum">1</span>
               </span>
             </div>
           </div>
@@ -229,7 +229,7 @@
                 <button class="nav-link w-100 justify-content-center active text-truncate" id="tab-terminal-btn" data-bs-toggle="tab" data-bs-target="#tab-terminal" type="button" role="tab" title="Konsol Terminal">
                   <i class="bi bi-terminal me-1 text-success flex-shrink-0"></i>
                   <span class="d-none d-md-inline" id="tabTerminalText">Konsol Terminal</span>
-                  <span class="d-inline d-md-none">Konsol</span>
+                  <span class="d-inline d-md-none" id="tabTerminalMobile">Konsol</span>
                 </button>
               </li>
 
@@ -238,7 +238,7 @@
                 <button class="nav-link w-100 justify-content-center position-relative text-truncate" id="tab-visual-btn" data-bs-toggle="tab" data-bs-target="#tab-visual" type="button" role="tab" title="Visualisasi & Media">
                   <i class="bi bi-bar-chart-steps me-1 text-info flex-shrink-0"></i>
                   <span class="d-none d-md-inline" id="tabVisualText">Visualisasi & Media</span>
-                  <span class="d-inline d-md-none">Visual</span>
+                  <span class="d-inline d-md-none" id="tabVisualMobile">Visual</span>
                   <span class="badge rounded-circle bg-danger ms-1 d-none" id="visualTabBadge" style="width: 7px; height: 7px; padding: 0; display: inline-block; vertical-align: middle;"></span>
                 </button>
               </li>
@@ -248,7 +248,7 @@
                 <button class="nav-link w-100 justify-content-center text-truncate" id="tab-aidebug-btn" data-bs-toggle="tab" data-bs-target="#tab-aidebug" type="button" role="tab" title="Hasil Evaluasi AI">
                   <i class="bi bi-cpu me-1 text-purple flex-shrink-0" style="color: #9333ea;"></i>
                   <span class="d-none d-md-inline" id="tabAiDebugText">Hasil Evaluasi AI</span>
-                  <span class="d-inline d-md-none">Evaluasi AI</span>
+                  <span class="d-inline d-md-none" id="tabAiDebugMobile">Evaluasi AI</span>
                 </button>
               </li>
             </ul>
@@ -269,8 +269,8 @@
               <div class="visualizer-window d-flex flex-column h-100" id="visualizerContainer">
                 <div class="p-4 text-center text-secondary d-flex flex-column align-items-center justify-content-center h-100">
                   <i class="bi bi-boxes display-4 text-secondary opacity-50 mb-3"></i>
-                  <h6 class="fw-bold editor-panel-placeholder-title mb-1">Visualisasi Gambar, Tabel, 2D & 3D</h6>
-                  <p class="small text-secondary m-0" style="max-width: 380px;">
+                  <h6 class="fw-bold editor-panel-placeholder-title mb-1" id="visPlaceholderTitle">Visualisasi Gambar, Tabel, 2D & 3D</h6>
+                  <p class="small text-secondary m-0" id="visPlaceholderDesc" style="max-width: 380px;">
                     Panel ini secara otomatis menampilkan hasil eksekusi dalam bentuk citra/gambar (Base64/SVG), tabel data interaktif, visual grafis 2D Canvas, 3D WebGL (Three.js), atau pratinjau halaman web HTML live.
                   </p>
                 </div>
@@ -282,8 +282,8 @@
               <div id="aiDebugOutput" class="ai-debug-window h-100">
                 <div class="p-4 text-center text-secondary d-flex flex-column align-items-center justify-content-center h-100">
                   <i class="bi bi-robot display-4 text-secondary opacity-50 mb-3"></i>
-                  <h6 class="fw-bold editor-panel-placeholder-title mb-1">Deteksi Error & Audit Baris demi Baris</h6>
-                  <p class="small text-secondary m-0" style="max-width: 380px;">
+                  <h6 class="fw-bold editor-panel-placeholder-title mb-1" id="aiDebugPlaceholderTitle">Deteksi Error & Audit Baris demi Baris</h6>
+                  <p class="small text-secondary m-0" id="aiDebugPlaceholderDesc" style="max-width: 380px;">
                     Klik tombol <strong>"AI Debug & Periksa"</strong> di atas. AI akan membaca kode Anda baris demi baris, menemukan kesalahan sintaks/logika, dan memberikan saran perbaikan dalam bahasa awam.
                   </p>
                 </div>
@@ -317,7 +317,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body p-3 p-md-4" style="max-height: 480px; overflow-y: auto;">
-          <p class="text-secondary small mb-3">Pilih salah satu contoh program di bawah ini untuk langsung dimuat ke dalam editor. Bahasa akan terdeteksi otomatis!</p>
+          <p class="text-secondary small mb-3" id="snippetModalDesc">Pilih salah satu contoh program di bawah ini untuk langsung dimuat ke dalam editor. Bahasa akan terdeteksi otomatis!</p>
           <div id="snippetsListContainer"></div>
         </div>
       </div>
@@ -387,7 +387,7 @@
                       </span>
                       <div class="text-truncate">
                         <div class="fw-bold small">Google Gemini</div>
-                        <div class="text-secondary small font-monospace text-truncate" style="font-size: 0.72rem;">Gemini 3.5 Flash — Tercepat & Rekomendasi Utama</div>
+                        <div class="text-secondary small font-monospace text-truncate" id="modelDescGeminiFlash" style="font-size: 0.72rem;">Gemini 3.5 Flash — Tercepat & Rekomendasi Utama</div>
                       </div>
                     </div>
                     <i class="bi bi-check-circle-fill text-success fs-6 check-indicator flex-shrink-0 ms-2"></i>
@@ -401,7 +401,7 @@
                       </span>
                       <div class="text-truncate">
                         <div class="fw-bold small">Google Gemini</div>
-                        <div class="text-secondary small font-monospace text-truncate" style="font-size: 0.72rem;">Gemini 3.5 Flash-Lite — Super Cepat & Hemat Kuota</div>
+                        <div class="text-secondary small font-monospace text-truncate" id="modelDescGeminiLite" style="font-size: 0.72rem;">Gemini 3.5 Flash-Lite — Super Cepat & Hemat Kuota</div>
                       </div>
                     </div>
                     <i class="bi bi-check-circle-fill text-success fs-6 check-indicator flex-shrink-0 ms-2 d-none"></i>
@@ -415,7 +415,7 @@
                       </span>
                       <div class="text-truncate">
                         <div class="fw-bold small">Google Gemini</div>
-                        <div class="text-secondary small font-monospace text-truncate" style="font-size: 0.72rem;">Gemini 3.8 Flash — Generasi Terkini</div>
+                        <div class="text-secondary small font-monospace text-truncate" id="modelDescGeminiPro" style="font-size: 0.72rem;">Gemini 3.8 Flash — Generasi Terkini</div>
                       </div>
                     </div>
                     <i class="bi bi-check-circle-fill text-success fs-6 check-indicator flex-shrink-0 ms-2 d-none"></i>
