@@ -319,7 +319,7 @@
 
       // 2. Prepare API Key & Provider from Local Storage
       const apiKey = localStorage.getItem('neuron_ai_key_local') || '';
-      let provider = localStorage.getItem('neuron_ai_model') || 'gemini-3.5-flash';
+      let provider = localStorage.getItem('neuron_ai_model') || 'gemini-3.6-flash';
 
       try {
         const resp = await fetch('execute_code.php', {
@@ -349,7 +349,7 @@
           if (rawDetail.includes('429') || rawDetail.includes('quota') || rawDetail.includes('resource_exhausted') || rawDetail.includes('503') || rawDetail.includes('demand')) {
             const fallbackModel = (typeof window.switchGeminiFallbackModel === 'function')
               ? window.switchGeminiFallbackModel(rawDetail.includes('503') ? '503' : 'quota')
-              : (provider === 'gemini-3.5-flash' ? 'gemini-3.5-flash-lite' : 'gemini-3.5-flash');
+              : (provider === 'gemini-3.6-flash' ? 'gemini-3.5-flash' : 'gemini-3.6-flash');
 
             // Coba sekali lagi secara otomatis dengan model cadangan
             try {

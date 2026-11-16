@@ -348,7 +348,8 @@
             
             <!-- Hidden native select for form/state compatibility -->
             <select id="aiProviderSelect" class="d-none">
-              <option value="gemini-3.5-flash" selected>Google Gemini (Gemini 3.5 Flash — Tercepat & Rekomendasi Utama)</option>
+              <option value="gemini-3.6-flash" selected>Google Gemini (Gemini 3.6 Flash — Rekomendasi Utama & Cerdas)</option>
+              <option value="gemini-3.5-flash">Google Gemini (Gemini 3.5 Flash — Tercepat & Stabil)</option>
               <option value="gemini-3.5-flash-lite">Google Gemini (Gemini 3.5 Flash-Lite — Super Cepat & Hemat Kuota)</option>
               <option value="gemini-3.8-flash">Google Gemini (Gemini 3.8 Flash — Generasi Terkini)</option>
             </select>
@@ -360,7 +361,7 @@
                   <span class="ai-provider-badge-icon flex-shrink-0" id="customAiSelectedIcon" style="background: rgba(234, 88, 12, 0.15); color: #ea580c;">
                     <i class="bi bi-stars"></i>
                   </span>
-                  <span class="fw-semibold small text-truncate" id="customAiSelectedText">Google Gemini (Gemini 3.5 Flash)</span>
+                  <span class="fw-semibold small text-truncate" id="customAiSelectedText">Google Gemini (Gemini 3.6 Flash)</span>
                 </div>
                 <i class="bi bi-chevron-down ms-2 text-secondary flex-shrink-0" style="font-size: 0.8rem;"></i>
               </button>
@@ -379,18 +380,32 @@
                 <div class="dropdown-divider my-1"></div>
                 <!-- Model List Items with Icons (KHUSUS GEMINI) -->
                 <div class="ai-model-list-container" id="aiModelListContainer">
-                  <!-- Option 1: Gemini 3.5 Flash -->
-                  <div class="ai-model-item d-flex align-items-center justify-content-between active" data-value="gemini-3.5-flash" data-provider="gemini" data-label="Google Gemini (Gemini 3.5 Flash)" data-icon="bi-stars" data-icon-color="#ea580c" data-icon-bg="rgba(234, 88, 12, 0.15)">
+                  <!-- Option 0: Gemini 3.6 Flash -->
+                  <div class="ai-model-item d-flex align-items-center justify-content-between active" data-value="gemini-3.6-flash" data-provider="gemini" data-label="Google Gemini (Gemini 3.6 Flash)" data-icon="bi-stars" data-icon-color="#ea580c" data-icon-bg="rgba(234, 88, 12, 0.15)">
                     <div class="d-flex align-items-center gap-2 text-truncate">
                       <span class="ai-provider-badge-icon flex-shrink-0" style="background: rgba(234, 88, 12, 0.15); color: #ea580c;">
                         <i class="bi bi-stars"></i>
                       </span>
                       <div class="text-truncate">
                         <div class="fw-bold small">Google Gemini</div>
-                        <div class="text-secondary small font-monospace text-truncate" id="modelDescGeminiFlash" style="font-size: 0.72rem;">Gemini 3.5 Flash — Tercepat & Rekomendasi Utama</div>
+                        <div class="text-secondary small font-monospace text-truncate" id="modelDescGemini36" style="font-size: 0.72rem;">Gemini 3.6 Flash — Rekomendasi Utama & Cerdas</div>
                       </div>
                     </div>
                     <i class="bi bi-check-circle-fill text-success fs-6 check-indicator flex-shrink-0 ms-2"></i>
+                  </div>
+
+                  <!-- Option 1: Gemini 3.5 Flash -->
+                  <div class="ai-model-item d-flex align-items-center justify-content-between" data-value="gemini-3.5-flash" data-provider="gemini" data-label="Google Gemini (Gemini 3.5 Flash)" data-icon="bi-cpu" data-icon-color="#ea580c" data-icon-bg="rgba(234, 88, 12, 0.15)">
+                    <div class="d-flex align-items-center gap-2 text-truncate">
+                      <span class="ai-provider-badge-icon flex-shrink-0" style="background: rgba(234, 88, 12, 0.15); color: #ea580c;">
+                        <i class="bi bi-cpu"></i>
+                      </span>
+                      <div class="text-truncate">
+                        <div class="fw-bold small">Google Gemini</div>
+                        <div class="text-secondary small font-monospace text-truncate" id="modelDescGeminiFlash" style="font-size: 0.72rem;">Gemini 3.5 Flash — Tercepat & Stabil</div>
+                      </div>
+                    </div>
+                    <i class="bi bi-check-circle-fill text-success fs-6 check-indicator flex-shrink-0 ms-2 d-none"></i>
                   </div>
 
                   <!-- Option 2: Gemini 3.5 Flash-Lite -->

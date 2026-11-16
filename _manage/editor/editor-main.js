@@ -80,16 +80,22 @@
 
   // Automatic AI Model Failover when Quota (429) or Server Spike (503) occurs
   window.switchGeminiFallbackModel = function(reason = 'quota') {
-    const curModel = localStorage.getItem('neuron_ai_model') || 'gemini-3.5-flash';
-    let nextModel = 'gemini-3.5-flash-lite';
-    let nextName = 'Google Gemini 3.5 Flash-Lite';
+    const curModel = localStorage.getItem('neuron_ai_model') || 'gemini-3.6-flash';
+    let nextModel = 'gemini-3.5-flash';
+    let nextName = 'Google Gemini 3.5 Flash';
 
-    if (curModel === 'gemini-3.5-flash-lite') {
+    if (curModel === 'gemini-3.6-flash') {
       nextModel = 'gemini-3.5-flash';
       nextName = 'Google Gemini 3.5 Flash';
+    } else if (curModel === 'gemini-3.5-flash') {
+      nextModel = 'gemini-3.5-flash-lite';
+      nextName = 'Google Gemini 3.5 Flash-Lite';
+    } else if (curModel === 'gemini-3.5-flash-lite') {
+      nextModel = 'gemini-3.6-flash';
+      nextName = 'Google Gemini 3.6 Flash';
     } else if (curModel === 'gemini-3.8-flash') {
-      nextModel = 'gemini-3.5-flash';
-      nextName = 'Google Gemini 3.5 Flash';
+      nextModel = 'gemini-3.6-flash';
+      nextName = 'Google Gemini 3.6 Flash';
     }
 
     localStorage.setItem('neuron_ai_model', nextModel);
@@ -626,7 +632,8 @@ SELECT * FROM users;`
       saveApiKeyBtnText: 'Simpan',
       portalGemini: 'Dapatkan Gemini API Key Gratis',
       placeholderGemini: 'Tempel Gemini API Key (AQ... atau AIzaSy...)',
-      modelDescGeminiFlash: 'Gemini 3.5 Flash — Tercepat & Rekomendasi Utama',
+      modelDescGemini36: 'Gemini 3.6 Flash — Rekomendasi Utama & Cerdas',
+      modelDescGeminiFlash: 'Gemini 3.5 Flash — Tercepat & Stabil',
       modelDescGeminiLite: 'Gemini 3.5 Flash-Lite — Super Cepat & Hemat Kuota',
       modelDescGeminiPro: 'Gemini 3.8 Flash — Generasi Terkini',
 
@@ -720,7 +727,8 @@ SELECT * FROM users;`
       saveApiKeyBtnText: 'Save',
       portalGemini: 'Get Free Gemini API Key',
       placeholderGemini: 'Paste Gemini API Key (AQ... or AIzaSy...)',
-      modelDescGeminiFlash: 'Gemini 3.5 Flash — Fastest & Recommended',
+      modelDescGemini36: 'Gemini 3.6 Flash — Primary Recommendation & Agentic',
+      modelDescGeminiFlash: 'Gemini 3.5 Flash — Fastest & Stable',
       modelDescGeminiLite: 'Gemini 3.5 Flash-Lite — Ultra Fast & Quota Efficient',
       modelDescGeminiPro: 'Gemini 3.8 Flash — Latest Generation',
 
@@ -1160,7 +1168,7 @@ SELECT * FROM users;`
       const portalText = document.getElementById('apiKeyPortalText');
 
       const savedKey = localStorage.getItem('neuron_ai_key_local') || '';
-      const savedProvider = localStorage.getItem('neuron_ai_model') || 'gemini-3.5-flash';
+      const savedProvider = localStorage.getItem('neuron_ai_model') || 'gemini-3.6-flash';
 
       if (keyInput) keyInput.value = savedKey;
       if (providerSelect) providerSelect.value = savedProvider;
@@ -1185,7 +1193,7 @@ SELECT * FROM users;`
 
       const updateProviderHelp = () => {
         const dict = this.getDict();
-        const prov = providerSelect ? providerSelect.value : 'gemini-3.5-flash';
+        const prov = providerSelect ? providerSelect.value : 'gemini-3.6-flash';
         if (portalLink && portalText) {
           portalLink.href = 'https://aistudio.google.com/app/api-keys';
           portalText.textContent = dict.portalGemini || 'Dapatkan Gemini API Key Gratis';
@@ -1330,7 +1338,7 @@ SELECT * FROM users;`
       if (saveBtn && keyInput) {
         saveBtn.onclick = () => {
           const val = keyInput.value.trim();
-          const prov = providerSelect ? providerSelect.value : 'gemini-3.5-flash';
+          const prov = providerSelect ? providerSelect.value : 'gemini-3.6-flash';
           localStorage.setItem('neuron_ai_key_local', val);
           localStorage.setItem('neuron_ai_model', prov);
 
@@ -1555,6 +1563,7 @@ SELECT * FROM users;`
       setText('saveApiKeyModalBtnText', dict.saveApiKeyBtnText);
 
       // Model Descriptions in Custom Combobox
+      setText('modelDescGemini36', dict.modelDescGemini36);
       setText('modelDescGeminiFlash', dict.modelDescGeminiFlash);
       setText('modelDescGeminiLite', dict.modelDescGeminiLite);
       setText('modelDescGeminiPro', dict.modelDescGeminiPro);

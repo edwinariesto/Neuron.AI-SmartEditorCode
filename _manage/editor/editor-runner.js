@@ -175,7 +175,7 @@
       const currentLang = localStorage.getItem('neuron_ai_lang') || 'Indonesia';
       const cleanLang = lang.toUpperCase();
       const apiKey = localStorage.getItem('neuron_ai_key_local') || '';
-      const provider = localStorage.getItem('neuron_ai_model') || 'gemini-3.5-flash';
+      const provider = localStorage.getItem('neuron_ai_model') || 'gemini-3.6-flash';
 
       const resp = await fetch('execute_code.php', {
         method: 'POST',
